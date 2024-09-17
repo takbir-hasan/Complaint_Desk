@@ -1,3 +1,3 @@
-# JUST Complaint Desk
+# Complaint Desk
 
 **Comming Soon.....**
