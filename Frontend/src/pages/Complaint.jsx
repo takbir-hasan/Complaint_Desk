@@ -13,10 +13,10 @@ function Complaint() {
       };
       return (
 
-            <div className="flex flex-col h-screen text-black">
+         <div className="flex flex-col h-screen text-black">
                   <Navbar />
 
-                  <div className="flex flex-col items-center justify-center h-screen bg-gray-100"> 
+       <div className="flex flex-col items-center justify-center h-screen bg-gray-100"> 
 
       <div className="max-w-screen-md mx-auto px-4 md:px-20 py-8 text-center"> 
 

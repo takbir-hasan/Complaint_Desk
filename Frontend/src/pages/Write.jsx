@@ -25,7 +25,7 @@ function Write() {
         <Navbar />
         <div className="flex-grow p-4">
           <form onSubmit={handleSubmit} className="mx-auto p-6 bg-white rounded shadow-lg w-full sm:max-w-md md:max-w-lg lg:max-w-2xl">
-            <h2 className="text-2xl font-semibold mb-4 text-center ">Write your Complaint:</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-center ">Write your Complaint</h2>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {/* Name field */}
@@ -112,7 +112,7 @@ function Write() {
             <div className="flex items-center justify-center mt-6">
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-yellow-300 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Submit
               </button>

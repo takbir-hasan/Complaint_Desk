@@ -10,6 +10,8 @@ import Login from './pages/login';
 import AdminLogin from './pages/AdminLogin';
 import AdminProfile from './pages/AdminProfile';
 import AdminDashboard from './pages/AdminDashboard';
+import Feedback from './pages/Feedback';
+import FeedbackSuccess from './pages/FeedbackSuccess';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/write" element={<Write />} />
         <Route path="/complaint" element={<Complaint />} />
         <Route path="/donation" element={<Donation />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/feedbackSuccess" element={<FeedbackSuccess />} />
         <Route path="/Signup" element={<Signup/>} />
         <Route path="/Login" element={<Login/>} />
         <Route path="/AdminLogin" element={<AdminLogin/>} />

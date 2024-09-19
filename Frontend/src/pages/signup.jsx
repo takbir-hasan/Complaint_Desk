@@ -40,7 +40,7 @@ const Signup = () => {
                 id="name"
                 name="name"
                 placeholder="Enter full name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={formData.name}
                 onChange={handleChange}
             />
@@ -50,7 +50,7 @@ const Signup = () => {
             <select
                 id="department"
                 name="department"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
                 value={formData.department}
                 onChange={handleChange}
             >
@@ -71,7 +71,7 @@ const Signup = () => {
                 id="email"
                 name="email"
                 placeholder="example@just.edu.bd"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={formData.email}
                 onChange={handleChange}
             />
@@ -81,17 +81,17 @@ const Signup = () => {
             <select
                 id="designation"
                 name="designation"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
                 value={formData.designation}
                 onChange={handleChange}
             >
                 <option value="" disabled>
                 Select a designation
                 </option>
-                <option value="Chairman">Chairman</option>
+                {/* <option value="Chairman">Chairman</option> */}
                 <option value="Professor">Professor</option>
-                <option value="Assistant Professor">Assistant Professor</option>
-                <option value="Associate Professor">Associate Professor</option>
+                <option value="Associate Professor">Assistant Professor</option>
+                <option value="Assistant Professor">Associate Professor</option>
                 <option value="Lecturer">Lecturer</option>
             </select>
             </div>
@@ -102,7 +102,7 @@ const Signup = () => {
                 id="phone"
                 name="phone"
                 placeholder="Enter mobile number"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={formData.phone}
                 onChange={handleChange}
             />
@@ -114,7 +114,7 @@ const Signup = () => {
                 id="password"
                 name="password"
                 placeholder="********"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={formData.password}
                 onChange={handleChange}
             />
