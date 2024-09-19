@@ -16,7 +16,7 @@ function Check() {
               className="input input-bordered w-full max-w-xs mb-4 py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
             />
 
-            <button type="submit" className="btn btn-primary w-full max-w-xs mb-4">
+            <button type="submit" className="btn bg-yellow-300 hover:bg-yellow-500 text-black w-full max-w-xs mb-4">
               Check
             </button>
 

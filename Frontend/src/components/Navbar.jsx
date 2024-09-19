@@ -43,7 +43,7 @@ function Navbar() {
             </ul>
           </div>
           <div className="navbar-end">
-            <a className="btn bg-pink-200 text-black hover:bg-blue-200 px-2">Help Us Grow</a>
+            <a href='/donation' className="btn bg-pink-200 text-black hover:bg-blue-200 px-2">Help Us Grow</a>
           </div>
         </div>
       </div>
