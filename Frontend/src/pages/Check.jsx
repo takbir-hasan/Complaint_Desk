@@ -7,7 +7,7 @@ function Check() {
       <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center p-4">
-          <div className="bg-white p-8 rounded shadow-lg w-full max-w-md">
+          <div className="bg-white p-8 rounded text-center shadow-lg w-full max-w-md">
             <h2 className="font-bold text-2xl md:text-3xl mb-6">Check your complaint status</h2>
 
             <input
