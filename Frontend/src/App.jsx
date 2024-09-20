@@ -13,6 +13,9 @@ import AdminDashboard from './pages/AdminDashboard';
 import Feedback from './pages/Feedback';
 import FeedbackSuccess from './pages/FeedbackSuccess';
 import TeacherProfile from './pages/TeacherProfile';
+import CommitteDashboard from './pages/CommitteDashboard';
+import ChairmanDashboard from './pages/ChairmanDashboard';
+
 
 function App() {
   return (
@@ -34,7 +37,9 @@ function App() {
         <Route path="/AdminProfile" element={<AdminProfile/>} />
         <Route path="/AdminDashboard" element={<AdminDashboard/>} />
         <Route path="/TeacherProfile" element={<TeacherProfile/>} />
-        
+        <Route path="/CommitteDashboard" element={<CommitteDashboard/>} />
+        <Route path="/ChairmanDashboard" element={<ChairmanDashboard/>} />
+
         {/* ... other routes ... */}
       </Routes>
     </BrowserRouter>
