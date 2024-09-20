@@ -12,6 +12,7 @@ import AdminProfile from './pages/AdminProfile';
 import AdminDashboard from './pages/AdminDashboard';
 import Feedback from './pages/Feedback';
 import FeedbackSuccess from './pages/FeedbackSuccess';
+import TeacherProfile from './pages/TeacherProfile';
 
 function App() {
   return (
@@ -32,7 +33,8 @@ function App() {
         <Route path="/AdminLogin" element={<AdminLogin/>} />
         <Route path="/AdminProfile" element={<AdminProfile/>} />
         <Route path="/AdminDashboard" element={<AdminDashboard/>} />
-
+        <Route path="/TeacherProfile" element={<TeacherProfile/>} />
+        
         {/* ... other routes ... */}
       </Routes>
     </BrowserRouter>
