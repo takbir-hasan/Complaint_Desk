@@ -2,6 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose';
 
+import comSubmit from "./route/complaint.route.js";
+
 dotenv.config();
 
 const app = express()
@@ -15,13 +17,16 @@ try {
   
 } catch (error) {
   console.log("Error",error);
-  
 }
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// })
+
+
+app.use("/complaint",comSubmit);
+
 
 
 
