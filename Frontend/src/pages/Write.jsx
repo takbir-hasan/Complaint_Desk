@@ -13,10 +13,34 @@ function Write() {
   const [complaintDept, setComplaintDept] = useState('');
   const [complaintText, setComplaintText] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Form data:', { name, department, id, complaintDept, complaintText });
-    navigate('/complaint')
+    try {
+    
+      const response = await fetch('/complaint', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, dept: department, id, cdept: complaintDept, complaint: complaintText }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+
+        // Navigate to the '/complaint' page with the token in the state
+        navigate('/complaint', { state: { token } }); 
+      } else {
+
+        console.error('Error submitting complaint:', response.statusText);
+
+      }
+    } catch (err) {
+      console.error('Error submitting complaint:', err);
+      
+    }
   };
 
   return (
