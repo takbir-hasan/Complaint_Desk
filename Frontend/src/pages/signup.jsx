@@ -43,6 +43,7 @@ const Signup = () => {
                 className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={formData.name}
                 onChange={handleChange}
+                required
             />
             </div>
             <div className="mb-4">
@@ -53,6 +54,7 @@ const Signup = () => {
                 className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
                 value={formData.department}
                 onChange={handleChange}
+                required
             >
                 <option value="" disabled>
                 Select a department
@@ -62,6 +64,7 @@ const Signup = () => {
                 <option value="BME">BME</option>
                 <option value="PHARM">PHARM</option>
                 {/* Add more options as needed */}
+                
             </select>
             </div>
             <div className="mb-4">
@@ -84,6 +87,7 @@ const Signup = () => {
                 className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
                 value={formData.designation}
                 onChange={handleChange}
+                required
             >
                 <option value="" disabled>
                 Select a designation
@@ -105,6 +109,7 @@ const Signup = () => {
                 className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={formData.phone}
                 onChange={handleChange}
+                required
             />
             </div>
             <div className="mb-4">
@@ -117,6 +122,7 @@ const Signup = () => {
                 className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={formData.password}
                 onChange={handleChange}
+                required
             />
             </div>
             <label className="block text-gray-700 text-sm font-semibold mb-2">Profile Photo</label>
@@ -135,6 +141,7 @@ const Signup = () => {
                 className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
                 name="profilePhoto"
                 onChange={handleChange}
+                required
                 />
             </label>
             </div>

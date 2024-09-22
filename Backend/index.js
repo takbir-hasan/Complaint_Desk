@@ -7,6 +7,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import comSubmit from './route/complaint.route.js';
+import check from './route/check.route.js';
+import info from './route/info.route.js';
 
 dotenv.config();
 
@@ -33,6 +35,8 @@ app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
 // API routes
 app.use('/complaint', comSubmit);
+app.use('/check', check);
+app.use('/info', info);
 
 // Catch-all route for serving React app
 app.get('*', (req, res) => {
