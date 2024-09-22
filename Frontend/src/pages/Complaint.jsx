@@ -21,7 +21,7 @@ function Complaint() {
 
       <div className="max-w-screen-md mx-auto px-4 md:px-20 py-8 text-center"> 
 
-        <p className="font-bold text-2xl md:text-3xl mb-8">Thanks for your complaint. Your complaint will be solved as soon as possible. Your complaint token number is {location.state?.token || "...."}.</p>
+        <p className=" text-2xl md:text-3xl mb-8">Thanks for your complaint. Your complaint will be solved as soon as possible. Your complaint token number is <b>{location.state?.token || "...."}</b>.</p>
 
         <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
           <button onClick={handleClick} className="btn btn-outline btn-info w-full md:w-auto">Another Complaint</button>
