@@ -38,6 +38,7 @@ app.use('/complaint', comSubmit);
 app.use('/check', check);
 app.use('/info', info);
 
+app.use('/complaint/:cdept',comSubmit);
 // Catch-all route for serving React app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/dist', 'index.html'));
