@@ -3,9 +3,9 @@ import Complaint from "../model/complaint.model.js"
 export const complaint = async (req,res)=>{
     try {
       const com = new Complaint({
-            name: req.body.name,
-            dept: req.body.dept,
-            id: req.body.id,
+            name: req.body.name || 'Anonymous',
+            dept: req.body.dept || 'Anonymous',
+            id: req.body.id || 'Anonymous',
             cdept: req.body.cdept,
             complaint: req.body.complaint
       });

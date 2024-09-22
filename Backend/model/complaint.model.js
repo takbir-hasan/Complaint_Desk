@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 
 const ComplaintSchema = mongoose.Schema({
-      name: String,
-      dept: String,
-      id: Number,
-      cdept: String,
-      complaint: String,
+      name: {type: String, default:'Anonymous'},
+      dept:{type: String, default:'Anonymous'},
+      id: {type: String, default:'Anonymous'},
+      cdept: {type: String, required: true},
+      complaint: {type: String, required: true},
       date: { type: Date, default: Date.now },
       status: {type: String, default:'submitted'}
 });

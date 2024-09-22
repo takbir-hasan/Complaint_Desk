@@ -28,20 +28,15 @@ mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static files
-app.use(express.static(path.join(__dirname, '../Frontend')));
+app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
-// Serve the index.html on root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend', 'index.html'));
-});
 
 // API routes
 app.use('/complaint', comSubmit);
 
 // Catch-all route for serving React app
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend', 'index.html'));
+  res.sendFile(path.join(__dirname, '../Frontend/dist', 'index.html'));
 });
 
 // Start the server
