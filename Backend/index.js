@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 
 // API routes
 app.use('/complaint', comSubmit);
-
+app.use('/complaint/:cdept',comSubmit);
 // Catch-all route for serving React app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/dist', 'index.html'));

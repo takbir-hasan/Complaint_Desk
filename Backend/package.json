@@ -19,6 +19,7 @@
   "homepage": "https://github.com/takbir-hasan/Complaint_Desk#readme",
   "description": "",
   "dependencies": {
+    "axios": "^1.7.7",
     "backend": "file:",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
