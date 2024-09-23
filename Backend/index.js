@@ -39,6 +39,10 @@ app.use('/check', check);
 app.use('/info', info);
 
 app.use('/complaint/:cdept',comSubmit);
+app.use('/complaint/:id',comSubmit);
+app.use('/api', comSubmit);
+
+
 // Catch-all route for serving React app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/dist', 'index.html'));

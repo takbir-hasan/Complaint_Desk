@@ -43,6 +43,8 @@ const Modal = ({ isOpen, onClose, complaint }) => {
 
 const ChairmanDashboard = () => {
   const [complaints, setComplaints] = useState([]);
+  const [discardedComplaints, setDiscardedComplaints] = useState([]);
+  const [getDiscard,DiscardedComplaintsSet] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedComplaint, setSelectedComplaint] = useState(null);
@@ -53,12 +55,13 @@ const ChairmanDashboard = () => {
     fetch(`/complaint/${deptname}`)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('No complaints found.');
         }
         return response.json();
       })
       .then(data => {
-        setComplaints(data);
+        const sortedComplaints = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setComplaints(sortedComplaints);
         setLoading(false);
       })
       .catch(error => {
@@ -66,6 +69,49 @@ const ChairmanDashboard = () => {
         setLoading(false);
       });
   }, [deptname]);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/api/discardedcomplaints/${deptname}`)
+      .then(response => {
+        if (response.status === 404) {
+          throw new Error('No discarded complaints found.');
+        }
+        if (!response.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const sortedComplaints = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setDiscardedComplaints(sortedComplaints);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, [deptname]);
+
+
+  const handleDiscard = (complaintId, event) => {
+    event.preventDefault();
+    fetch(`/complaint/${complaintId}`,{
+      method: 'DELETE',
+    })
+    .then((response) =>{
+      if(!response.ok){
+        throw new Error('Failed to discard the complaint');
+      }
+      const discarded = complaints.find(complaint => complaint._id === complaintId);
+      setDiscardedComplaints([...discardedComplaints, discarded]);
+      window.location.reload();
+    })
+    .catch((error) =>{
+      console.error("Error Discarding complaint:",error);
+      setError(error);
+    });
+  };
 
 
   const openModal = (complaint) => {
@@ -114,8 +160,56 @@ const ChairmanDashboard = () => {
                       </button>
                     </td>
                     <td className="border px-0 py-2">
-                      <button style={{ fontSize: "10px" }} className="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded">
-                        Inactive
+                    <button 
+                          style={{ fontSize: "10px" }} 
+                          className="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded"
+                          onClick={(event) => handleDiscard(complaint._id, event)}  // Discard complaint
+                        >
+                         Discard
+                    </button>
+
+                    </td>
+                    <td className="border px-0 py-2">
+                      <button style={{ fontSize: "10px" }} onClick={() => openModal(complaint)} className="button text-dark font-semibold py-1 mt-2 px-2 rounded">
+                        See Details
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+
+           {/* Discarded Complaints Section */}
+          <p style={{ fontSize: "13px" }} className="text-center mb-1 mt-5 font-semibold mt-8">Discarded Complaints</p>
+          <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
+          {loading && <p>Loading discarded complaints...</p>}
+          {!loading && discardedComplaints.length === 0 && <p>No discarded complaints found.</p>}
+          {!loading && discardedComplaints.length > 0 && (
+            <table className="table-fixed w-full text-sm mt-4 text-center">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="px-0 py-2">Token Number</th>
+                  <th className="px-0 py-2">Solve</th>
+                  <th className="px-0 py-2">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                {discardedComplaints.map((complaint) => (
+                  <tr key={complaint._id}>
+                    <td className="border px-0 py-2 mb-0">
+                      <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "8px" }}>
+                        {complaint._id}
+                      </span>
+                      <br />
+                      <span style={{ fontSize: "8px" }}>
+                        <i className="fa-solid fa-calendar-days"></i>
+                          {formatDate(complaint.date)}
+                      </span>
+                    </td>
+                    <td className="border px-0 py-2">
+                      <button style={{ fontSize: "10px" }} className="bg-green-400 hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded">
+                        Solve
                       </button>
                     </td>
                     <td className="border px-0 py-2">
