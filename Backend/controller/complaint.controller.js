@@ -1,5 +1,4 @@
 import Complaint from "../model/complaint.model.js"
-import Discard from "../model/discard.model.js"
 
 export const complaint = async (req,res)=>{
     try {

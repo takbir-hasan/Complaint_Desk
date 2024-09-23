@@ -32,6 +32,9 @@ function Check() {
         } else if (status === 'solved') {
           setSatus('Your complaint has been solved. Thanks for your concern.');
           setTextColor('green');
+        } else if (status === 'discarded') {
+          setSatus('Sorry! Your complaint has been discarded. Write a complaint correctly and it should be authentic and .');
+          setTextColor('red');
         } else {
           setSatus('Wrong Token Number!');
           setTextColor('red');
