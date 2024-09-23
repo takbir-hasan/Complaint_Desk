@@ -40,8 +40,8 @@ app.use('/info', info);
 
 app.use('/complaint/:cdept',comSubmit);
 app.use('/complaint/:id',comSubmit);
+app.use('/complaint/discarded/:cdept',comSubmit);
 app.use('/api', comSubmit);
-
 
 // Catch-all route for serving React app
 app.get('*', (req, res) => {

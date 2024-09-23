@@ -44,14 +44,15 @@ const Modal = ({ isOpen, onClose, complaint }) => {
 const ChairmanDashboard = () => {
   const [complaints, setComplaints] = useState([]);
   const [discardedComplaints, setDiscardedComplaints] = useState([]);
-  const [getDiscard,DiscardedComplaintsSet] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loadingComplaints, setLoadingComplaints] = useState(true);
+  const [loadingDiscarded, setLoadingDiscarded] = useState(true);
+  const [errorComplaints, setErrorComplaints] = useState(null);
+  const [errorDiscarded, setErrorDiscarded] = useState(null);
   const [selectedComplaint, setSelectedComplaint] = useState(null);
-  const deptname = "CSE";
+  const deptname = "EST";
 
   useEffect(() => {
-    setLoading(true);
+    setLoadingComplaints(true);
     fetch(`/complaint/${deptname}`)
       .then(response => {
         if (!response.ok) {
@@ -62,56 +63,67 @@ const ChairmanDashboard = () => {
       .then(data => {
         const sortedComplaints = data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setComplaints(sortedComplaints);
-        setLoading(false);
+        setLoadingComplaints(false);
       })
       .catch(error => {
-        setError(error);
-        setLoading(false);
+        setErrorComplaints(error);
+        setLoadingComplaints(false);
       });
   }, [deptname]);
-
+  
   useEffect(() => {
-    setLoading(true);
-    fetch(`/api/discardedcomplaints/${deptname}`)
+    setLoadingDiscarded(true);
+    fetch(`/complaint/discarded/${deptname}`)
       .then(response => {
-        if (response.status === 404) {
-          throw new Error('No discarded complaints found.');
-        }
         if (!response.ok) {
-          throw new Error('Network response was not ok.');
+          throw new Error('No complaints found.');
         }
         return response.json();
       })
       .then(data => {
         const sortedComplaints = data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setDiscardedComplaints(sortedComplaints);
-        setLoading(false);
+        setLoadingDiscarded(false);
       })
       .catch(error => {
-        setError(error.message);
-        setLoading(false);
+        setErrorDiscarded(error);
+        setLoadingDiscarded(false);
       });
   }, [deptname]);
+  
 
 
   const handleDiscard = (complaintId, event) => {
     event.preventDefault();
-    fetch(`/complaint/${complaintId}`,{
-      method: 'DELETE',
+  
+    const updatedData = {
+      status: 'discarded',
+    };
+  
+    fetch(`/complaint/${complaintId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
     })
-    .then((response) =>{
-      if(!response.ok){
-        throw new Error('Failed to discard the complaint');
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to update the complaint status');
       }
       const discarded = complaints.find(complaint => complaint._id === complaintId);
       setDiscardedComplaints([...discardedComplaints, discarded]);
+      setComplaints(complaints.filter(complaint => complaint._id !== complaintId));
       window.location.reload();
     })
-    .catch((error) =>{
-      console.error("Error Discarding complaint:",error);
+    .catch((error) => {
+      console.error("Error updating complaint status:", error);
       setError(error);
     });
   };
+
+  
+  
 
 
   const openModal = (complaint) => {
@@ -128,11 +140,13 @@ const ChairmanDashboard = () => {
         <Navbar />
         <div className="container-fluid ml-4 mr-4 max-w-7xl mt-4 mb-4 mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h1 className="text-2xl text-center font-bold mb-1">Chairman Dashboard</h1>
-        <p style={{ fontSize: "13px" }} className="mb-1 text-left font-bold">Complaints for "<span className="text-green-500">{deptname}</span>" Department</p>
+          <p style={{ fontSize: "13px" }} className="mb-1 text-left font-bold">Complaints for "<span className="text-green-500">{deptname}</span>" Department</p>
           <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
-          {loading && <p>Loading complaints...</p>}
-          {error && <p className="text-red-500">{error.message}</p>}
-          {!loading && !error && (
+
+          {loadingComplaints && <p>Loading complaints...</p>}
+          {errorComplaints && <p className="text-red-500">{errorComplaints.message}</p>}
+
+          {!loadingComplaints && !errorComplaints && (
             <table className="table-fixed w-full text-sm mt-4 text-center">
               <thead>
                 <tr className="bg-gray-100">
@@ -160,14 +174,13 @@ const ChairmanDashboard = () => {
                       </button>
                     </td>
                     <td className="border px-0 py-2">
-                    <button 
-                          style={{ fontSize: "10px" }} 
-                          className="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded"
-                          onClick={(event) => handleDiscard(complaint._id, event)}  // Discard complaint
-                        >
-                         Discard
-                    </button>
-
+                      <button 
+                        style={{ fontSize: "10px" }} 
+                        className="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded"
+                        onClick={(event) => handleDiscard(complaint._id, event)}  // Discard complaint
+                      >
+                        Discard
+                      </button>
                     </td>
                     <td className="border px-0 py-2">
                       <button style={{ fontSize: "10px" }} onClick={() => openModal(complaint)} className="button text-dark font-semibold py-1 mt-2 px-2 rounded">
@@ -180,48 +193,59 @@ const ChairmanDashboard = () => {
             </table>
           )}
 
-           {/* Discarded Complaints Section */}
-          <p style={{ fontSize: "13px" }} className="text-center mb-1 mt-5 font-semibold mt-8">Discarded Complaints</p>
-          <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
-          {loading && <p>Loading discarded complaints...</p>}
-          {!loading && discardedComplaints.length === 0 && <p>No discarded complaints found.</p>}
-          {!loading && discardedComplaints.length > 0 && (
-            <table className="table-fixed w-full text-sm mt-4 text-center">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="px-0 py-2">Token Number</th>
-                  <th className="px-0 py-2">Solve</th>
-                  <th className="px-0 py-2">Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                {discardedComplaints.map((complaint) => (
-                  <tr key={complaint._id}>
-                    <td className="border px-0 py-2 mb-0">
-                      <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "8px" }}>
-                        {complaint._id}
-                      </span>
-                      <br />
-                      <span style={{ fontSize: "8px" }}>
-                        <i className="fa-solid fa-calendar-days"></i>
-                          {formatDate(complaint.date)}
-                      </span>
-                    </td>
-                    <td className="border px-0 py-2">
+          {/* Placeholder for discarded complaints section
+          {loadingDiscarded && <p>Loading discarded complaints...</p>}
+          {errorDiscarded && <p className="text-red-500">{errorDiscarded.message}</p>} */}
+
+        <p style={{ fontSize: "13px" }} className="mb-1 mt-5 text-center font-bold">
+         Discarded Complaints
+        </p>
+        <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
+
+        {loadingDiscarded ? (
+          <p className="text-center">Loading discarded complaints...</p>
+        ) : errorDiscarded ? (
+          <p className="text-red-500 text-center">{errorDiscarded.message}</p>
+        ) : (
+          <table className="table-fixed w-full text-sm mt-4 text-center">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="px-0 py-2">Token Number</th>
+                <th className="px-0 py-2">Solve</th>
+                <th className="px-0 py-2">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {discardedComplaints.map((complaint) => (
+                <tr key={complaint._id}>
+                  <td className="border px-0 py-2 mb-0">
+                    <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "8px" }}>
+                      {complaint._id}
+                    </span>
+                    <br />
+                    <span style={{ fontSize: "8px" }}>
+                      <i className="fa-solid fa-calendar-days"></i> {formatDate(complaint.date)}
+                    </span>
+                  </td>
+                  <td className="border px-0 py-2">
                       <button style={{ fontSize: "10px" }} className="bg-green-400 hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded">
                         Solve
                       </button>
                     </td>
-                    <td className="border px-0 py-2">
-                      <button style={{ fontSize: "10px" }} onClick={() => openModal(complaint)} className="button text-dark font-semibold py-1 mt-2 px-2 rounded">
-                        See Details
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                  <td className="border px-0 py-2">
+                    <button
+                      style={{ fontSize: "10px" }}
+                      onClick={() => openModal(complaint)}
+                      className="button text-dark font-semibold py-1 mt-2 px-2 rounded"
+                    >
+                      See Details
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
         </div>
       </div>
       <Modal isOpen={!!selectedComplaint} onClose={closeModal} complaint={selectedComplaint} />
