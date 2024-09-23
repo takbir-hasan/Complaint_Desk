@@ -198,7 +198,7 @@ const ChairmanDashboard = () => {
           {errorDiscarded && <p className="text-red-500">{errorDiscarded.message}</p>} */}
 
         <p style={{ fontSize: "13px" }} className="mb-1 mt-5 text-center font-bold">
-         Discarded Complaints
+          Complaints Results
         </p>
         <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
 
@@ -211,7 +211,7 @@ const ChairmanDashboard = () => {
             <thead>
               <tr className="bg-gray-100">
                 <th className="px-0 py-2">Token Number</th>
-                <th className="px-0 py-2">Solve</th>
+                <th className="px-0 py-2">Solution</th>
                 <th className="px-0 py-2">Details</th>
               </tr>
             </thead>
@@ -228,8 +228,8 @@ const ChairmanDashboard = () => {
                     </span>
                   </td>
                   <td className="border px-0 py-2">
-                      <button style={{ fontSize: "10px" }} className="bg-green-400 hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded">
-                        Solve
+                      <button disabled style={{ fontSize: "10px" }} className="bg-green-400 hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded">
+                        {complaint.status}
                       </button>
                     </td>
                   <td className="border px-0 py-2">
