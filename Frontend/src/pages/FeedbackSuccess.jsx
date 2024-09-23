@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/navbar'
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 function FeedbackSuccess() {
       const navigate = useNavigate();
@@ -10,6 +11,10 @@ function FeedbackSuccess() {
       };
       return (
             <>
+
+<Helmet>
+    <title> Success | Feedback </title>
+    </Helmet>
                   <div className="flex flex-col h-screen text-black">
                         <Navbar />
 

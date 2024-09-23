@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
+import { Helmet } from 'react-helmet';
 
 const formatDate = (date) => {
   const complaintDate = new Date(date);
@@ -136,6 +137,10 @@ const ChairmanDashboard = () => {
 
   return (
     <>
+    <Helmet>
+    <title> Dashboard | Chairman </title>
+    </Helmet>
+
       <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
         <div className="container-fluid ml-4 mr-4 max-w-7xl mt-4 mb-4 mx-auto bg-white p-8 rounded-lg shadow-lg">

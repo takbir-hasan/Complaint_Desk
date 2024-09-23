@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/navbar'
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,10 @@ const Login = () => {
 
   return (
     <>
+         <Helmet>
+    <title> Login | Teacher </title>
+    </Helmet>
+
     <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
     <div className="w-full max-w-md mx-auto mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg">

@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import React from 'react';
 import Navbar from '../components/navbar'
+import { Helmet } from 'react-helmet';
 
 
 function AdminProfile() {
   return (
     <>
+    <Helmet>
+    <title> Profile | Admin </title>
+    </Helmet> 
+
      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
       <div className="container-fluid max-w-5xl mt-4 mb-4 ml-auto mr-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
