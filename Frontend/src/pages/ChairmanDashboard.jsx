@@ -233,7 +233,7 @@ const ChairmanDashboard = () => {
                         onClick={(event) => handleDiscard(complaint._id, event)}
                         disabled={complaint.status === 'Pending' || complaint.status === 'Solved'}  // Discard complaint
                       >
-                        Discard
+                        {complaint.status === 'Pending' || complaint.status === 'Solved' ? 'Disabled' : 'Discard'}
                       </button>
                     </td>
                     <td className="border px-0 py-2">
