@@ -45,6 +45,7 @@ const Modal = ({ isOpen, onClose, complaint }) => {
 const ChairmanDashboard = () => {
   const [complaints, setComplaints] = useState([]);
   const [discardedComplaints, setDiscardedComplaints] = useState([]);
+  const [pendingComplaints, setPendingComplaints] = useState([]);
   const [loadingComplaints, setLoadingComplaints] = useState(true);
   const [loadingDiscarded, setLoadingDiscarded] = useState(true);
   const [errorComplaints, setErrorComplaints] = useState(null);
@@ -98,7 +99,7 @@ const ChairmanDashboard = () => {
     event.preventDefault();
   
     const updatedData = {
-      status: 'discarded',
+      status: 'Discarded',
     };
   
     fetch(`/complaint/${complaintId}`, {
@@ -122,6 +123,44 @@ const ChairmanDashboard = () => {
       setError(error);
     });
   };
+
+  const handleAddsolve = (complaintId, event) => {
+    event.preventDefault();
+  
+    const updatedData = {
+      status: 'Pending',
+    };
+  
+    fetch(`/complaint/pending/${complaintId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to update the complaint status');
+        }
+        return response.json(); 
+      })
+      .then((updatedComplaint) => {
+        const updatedComplaints = complaints.map((complaint) =>
+          complaint._id === complaintId ? { ...complaint, status: 'Pending' } : complaint
+        );
+  
+        setComplaints(updatedComplaints);
+  
+        const updatedPendingComplaints = updatedComplaints.filter(
+          (complaint) => complaint.status === 'Pending'
+        );
+        setPendingComplaints(updatedPendingComplaints);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+  
 
   
   
@@ -174,17 +213,27 @@ const ChairmanDashboard = () => {
                       </span>
                     </td>
                     <td className="border px-0 py-2">
-                      <button style={{ fontSize: "10px" }} className="bg-green-400 hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded">
-                        Solve
+                      <button
+                        style={{ fontSize: '10px' }}
+                        className={`${
+                          complaint.status === 'Pending' ? 'bg-yellow-300' : 'bg-green-400'
+                        } hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded`}
+                        onClick={(event) => handleAddsolve(complaint._id, event)}
+                        disabled={complaint.status =='Solved'}
+                        >
+                      {complaint.status === 'Pending' || complaint.status === 'Solved' || complaint.status === 'Submitted' 
+                        ? complaint.status 
+                        : 'Add Solve'}
                       </button>
                     </td>
                     <td className="border px-0 py-2">
                       <button 
                         style={{ fontSize: "10px" }} 
-                        className="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded"
-                        onClick={(event) => handleDiscard(complaint._id, event)}  // Discard complaint
+                        className={`bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded ${complaint.status === 'Pending' || complaint.status === 'Solved' ? 'opacity-50 cursor-not-allowed' : ''}`} 
+                        onClick={(event) => handleDiscard(complaint._id, event)}
+                        disabled={complaint.status === 'Pending' || complaint.status === 'Solved'}  // Discard complaint
                       >
-                        Discard
+                        {complaint.status === 'Pending' || complaint.status === 'Solved' ? 'Disabled' : 'Discard'}
                       </button>
                     </td>
                     <td className="border px-0 py-2">

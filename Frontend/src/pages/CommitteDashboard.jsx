@@ -51,14 +51,15 @@ const Modal = ({ isOpen, onClose, complaint }) => {
 
 const ChairmanDashboard = () => {
   const [complaints, setComplaints] = useState([]);
+  const [solvedComplaints, setSolvedComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedComplaint, setSelectedComplaint] = useState(null);
-  const deptname = "CSE";
+  const deptname = "EST";
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/complaint/${deptname}`)
+    fetch(`/complaint/pendingsolve/${deptname}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -66,7 +67,8 @@ const ChairmanDashboard = () => {
         return response.json();
       })
       .then(data => {
-        setComplaints(data);
+        const sortedComplaints = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setComplaints(sortedComplaints);
         setLoading(false);
       })
       .catch(error => {
@@ -74,6 +76,44 @@ const ChairmanDashboard = () => {
         setLoading(false);
       });
   }, [deptname]);
+
+  const handleMarksolve = (complaintId, event) => {
+    event.preventDefault();
+  
+    const updatedData = {
+      status: 'Solved',
+    };
+  
+    fetch(`/complaint/solved/${complaintId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to update the complaint status');
+        }
+        return response.json(); 
+      })
+      .then((updatedComplaint) => {
+        const updatedComplaints = complaints.map((complaint) =>
+          complaint._id === complaintId ? { ...complaint, status: 'Solved' } : complaint
+        );
+  
+        setComplaints(updatedComplaints);
+  
+        const updatedSolvedComplaints = updatedComplaints.filter(
+          (complaint) => complaint.status === 'Solved'
+        );
+        setSolvedComplaints(updatedSolvedComplaints); 
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+  
 
 
   const openModal = (complaint) => {
@@ -116,8 +156,14 @@ const ChairmanDashboard = () => {
                       </span>
                     </td>
                     <td className="border px-0 py-2">
-                      <button style={{ fontSize: "10px" }} className="bg-green-400 hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded">
-                        Mark Solve
+                    <button
+                        style={{ fontSize: '10px' }}
+                        className={`${
+                          complaint.status === 'Solved' ? 'bg-yellow-300' : 'bg-green-400'
+                        } hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded`}
+                        onClick={(event) => handleMarksolve(complaint._id, event)}
+                        >
+                        {complaint.status === 'Solved' ? 'Solved' : 'Mark Solve'}
                       </button>
                     </td>
                     <td className="border px-0 py-2">
