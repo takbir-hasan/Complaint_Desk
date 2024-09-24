@@ -8,7 +8,7 @@ export const feedback = async (req, res) => {
               await feed.save();
             res.json({  });
           } catch (error) {
-            console.error('Error saving complaint:', err);
+            console.error('Error saving feedback:', err);
             res.status(500).send(err);
           }
 };

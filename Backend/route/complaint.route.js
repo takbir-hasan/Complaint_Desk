@@ -1,5 +1,5 @@
 import express from 'express';
-// import {complaint} from "../controller/complaint.controller.js";
+
 import { complaint, getComplaintsByDept,discardComplaint, getDiscardedComplaintsByDept} from "../controller/complaint.controller.js"; 
 
 const router = express.Router();

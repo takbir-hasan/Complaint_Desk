@@ -4,10 +4,28 @@ import { Helmet } from 'react-helmet';
 
 function Donation() {
   const [amount, setAmount] = useState('');
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you would typically handle sending the donation data to your backend for processing
-    console.log('Donation data:', { amount });
+    try {
+      await fetch('/donor', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount }),
+      })
+      .then((res)=> res.json())
+      .then((result)=>{
+        window.location.replace(result.url);
+        console.log(result);
+      });
+  
+     
+    } catch (err) {
+      console.error('Error submitting donation:', err);
+      
+    }
   };
 
   return (
@@ -31,26 +49,26 @@ function Donation() {
                   Donation Amount:
                 </label>
                 <div className="relative"> 
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 sm:text-sm">$</span> 
-                  </div>
-                  <input 
-                    type="number" 
-                    id="amount"   
- 
-                    placeholder="Enter amount"
-                    value={amount} 
-                    onChange={(e) => setAmount(e.target.value)} 
-                    className="pl-7 shadow bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                    required 
-                  />
-                </div>
+  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+    <span className="text-gray-500 sm:text-sm">BDT</span> 
+  </div>
+  <input 
+    type="number" 
+    id="amount"   
+    placeholder="Enter amount"
+    value={amount} 
+    onChange={(e) => setAmount(e.target.value)} 
+    className="pl-12 shadow bg-gray-100 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+    required 
+  />
+</div>
+
               </div>
 
               <div className="flex items-center justify-center">
                 <button 
                   type="submit" 
-                  className="bg-yellow-300 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className=" button  text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
                   Donate Now
                 </button>

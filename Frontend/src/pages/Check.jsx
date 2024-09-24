@@ -52,7 +52,7 @@ function Check() {
   return (
     <>
     <Helmet>
-    <title> Dashboard | Committee </title>
+    <title> Status | Complaint </title>
     </Helmet>
 
       <div className="flex flex-col min-h-screen bg-gray-100 text-black">
@@ -72,7 +72,7 @@ function Check() {
     required
   />
 
-  <button type="submit" className="btn bg-yellow-300 hover:bg-yellow-500 text-black w-full max-w-xs mb-4">
+  <button type="submit" className="button text-black w-full max-w-xs mb-4">
     Check
   </button>
 </form>

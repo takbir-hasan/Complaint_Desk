@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'; // Ensure useEffect is imported
+import React, { useState, useEffect } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 
 function Body() {
   const [solved, setSolved] = useState('');
   const [total, setTotal] = useState('');
-  const [error, setError] = useState(null); // Add error state to handle errors
+  const [error, setError] = useState(null); 
 
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ function Body() {
   };
 
   useEffect(() => {
-    // Fetch data from the backend
+  
     const fetchData = async () => {
       try {
         const response = await fetch(`/info`, { 
@@ -34,7 +34,7 @@ function Body() {
         setTotal(result.totalProblems);
         
       } catch (err) {
-        setError(err.message); // Use setError to store the error message
+        setError(err.message); 
       }
     };
 
@@ -42,10 +42,11 @@ function Body() {
   }, []);
 
   if (error) {
-    return <p>Error: {error}</p>; // Display error message if an error occurs
+    return <p>Error: {error}</p>; 
   }
 
   return (
+   <>
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="max-w-screen-md mx-auto px-4 md:px-20 py-8 text-center">
         <p className="font-bold text-2xl md:text-3xl mb-8">
@@ -62,6 +63,7 @@ function Body() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

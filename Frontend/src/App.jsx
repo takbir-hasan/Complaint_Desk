@@ -15,6 +15,7 @@ import FeedbackSuccess from './pages/FeedbackSuccess';
 import TeacherProfile from './pages/TeacherProfile';
 import CommitteDashboard from './pages/CommitteDashboard';
 import ChairmanDashboard from './pages/ChairmanDashboard';
+import DonationDone from './pages/DonationDone.jsx';
 
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
         <Route path="/TeacherProfile" element={<TeacherProfile/>} />
         <Route path="/CommitteDashboard" element={<CommitteDashboard/>} />
         <Route path="/ChairmanDashboard" element={<ChairmanDashboard/>} />
+        <Route path="/done/:condition" element={<DonationDone/>} />
+        <Route path="/fail/:transactionId" element={<DonationDone/>} />
+     
 
         {/* ... other routes ... */}
       </Routes>
