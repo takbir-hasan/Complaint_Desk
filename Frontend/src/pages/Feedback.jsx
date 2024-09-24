@@ -40,7 +40,7 @@ function Feedback() {
             <div className="flex items-center justify-center mt-6">
               <button
                 type="submit"
-                className="bg-yellow-300 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="button text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Send
               </button>

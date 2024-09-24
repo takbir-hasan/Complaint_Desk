@@ -53,7 +53,7 @@ function Body() {
         </p>
 
         <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-          <button onClick={handleClick} className="btn btn-outline btn-info w-full md:w-auto">
+          <button onClick={handleClick} className="button  w-full md:w-auto">
             Write a Complaint
           </button>
           <button onClick={handleClick2} className="btn btn-outline btn-warning w-full md:w-auto">
