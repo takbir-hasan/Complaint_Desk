@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/navbar'
+import { Helmet } from 'react-helmet';
 
 const TeacherProfile = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +28,10 @@ const TeacherProfile = () => {
 
   return (
     <>
+      <Helmet>
+    <title> Profile | Teacher </title>
+    </Helmet>
+
     <div className="flex flex-col min-h-screen bg-gray-100 text-black">
        <Navbar />
     <div className="container-fluid max-w-4xl mx-auto mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg">
@@ -76,7 +81,7 @@ const TeacherProfile = () => {
                 name="department"
                 value={formData.department}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
               >
                 <option value="" disabled>
                   Select a department
@@ -97,7 +102,7 @@ const TeacherProfile = () => {
                 name="designation"
                 value={formData.designation}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
               >
                 <option value="" disabled>
                   Select a designation
@@ -122,7 +127,7 @@ const TeacherProfile = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Enter mobile number"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
@@ -135,7 +140,7 @@ const TeacherProfile = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="********"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/navbar';
+import { Helmet } from 'react-helmet';
 
 function Write() {
 
@@ -45,6 +46,9 @@ function Write() {
 
   return (
     <>
+    <Helmet>
+    <title>Submit Complaint </title>
+    </Helmet>
       <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
         <div className="flex-grow p-4">

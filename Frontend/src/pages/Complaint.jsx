@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/navbar'
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 function Complaint() {
       const navigate = useNavigate();
@@ -13,6 +14,11 @@ function Complaint() {
         navigate('/check');   
       };
       return (
+
+        <>
+         <Helmet>
+        <title> Success | Complaint </title>
+        </Helmet>
 
          <div className="flex flex-col h-screen text-black">
                   <Navbar />
@@ -33,6 +39,9 @@ function Complaint() {
     </div>
 
             </div>
+        
+        </>
+
 
       )
 }

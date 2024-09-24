@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/navbar';
+import { Helmet } from 'react-helmet';
 
 function Donation() {
   const [amount, setAmount] = useState('');
@@ -11,6 +12,10 @@ function Donation() {
 
   return (
       <>
+        <Helmet>
+    <title> Donation </title>
+    </Helmet>
+
    <div className="flex flex-col h-screen bg-gray-100 text-black">
         <Navbar />
         <div className=" flex flex-grow items-center justify-center p-4"> 

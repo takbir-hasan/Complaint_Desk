@@ -1,21 +1,49 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/navbar';
+import { Helmet } from 'react-helmet';
 
 function Feedback() {
       const navigate = useNavigate();
 
       const [complaintText, setComplaintText] = useState('');
     
-      const handleSubmit = (event) => {
+      const handleSubmit = async (event) => {
         event.preventDefault();
         console.log('Form data:', { complaintText });
-        navigate('/feedbackSuccess')
+        try {
+    
+          const response = await fetch('/feedback', { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ complaint: complaintText }),
+          });
+    
+          if (response.ok) {
+           
+            navigate('/feedbackSuccess')
+            
+          } else {
+    
+            console.error('Error submitting complaint:', response.statusText);
+    
+          }
+        } catch (err) {
+          console.error('Error submitting complaint:', err);
+          
+        }
+       
       };
 
 
   return (
     <>
+         <Helmet>
+    <title> Feedback </title>
+    </Helmet>
+
      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center p-4">

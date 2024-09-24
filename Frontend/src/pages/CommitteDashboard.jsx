@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
+import { Helmet } from 'react-helmet';
 
 const formatDate = (date) => {
   const complaintDate = new Date(date);
@@ -19,6 +20,11 @@ const Modal = ({ isOpen, onClose, complaint }) => {
   if (!isOpen) return null;
 
   return (
+   <>
+    <Helmet>
+    <title> Dashboard | Committee </title>
+    </Helmet>
+    
     <div className="fixed inset-0 z-50 flex items-center  justify-center bg-black bg-opacity-50">
       <div className="bg-white p-5 ml-4 mr-4 rounded-lg shadow-lg">
         <h2 className="text-xl font-bold">Complaint</h2>
@@ -38,6 +44,8 @@ const Modal = ({ isOpen, onClose, complaint }) => {
         </button>
       </div>
     </div>
+   
+   </>
   );
 };
 

@@ -9,6 +9,7 @@ import cors from 'cors';
 import comSubmit from './route/complaint.route.js';
 import check from './route/check.route.js';
 import info from './route/info.route.js';
+import feedback from './route/feedback.route.js';
 
 dotenv.config();
 
@@ -37,11 +38,11 @@ app.use(express.static(path.join(__dirname, '../Frontend/dist')));
 app.use('/complaint', comSubmit);
 app.use('/check', check);
 app.use('/info', info);
+app.use('/feedback', feedback);
 
 app.use('/complaint/:cdept',comSubmit);
 app.use('/complaint/:id',comSubmit);
 app.use('/complaint/discarded/:cdept',comSubmit);
-app.use('/api', comSubmit);
 
 // Catch-all route for serving React app
 app.get('*', (req, res) => {
