@@ -16,6 +16,8 @@ import TeacherProfile from './pages/TeacherProfile';
 import CommitteDashboard from './pages/CommitteDashboard';
 import ChairmanDashboard from './pages/ChairmanDashboard';
 import DonationDone from './pages/DonationDone.jsx';
+import ForgetPassword from './pages/ForgetPassword.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 
 
 function App() {
@@ -42,6 +44,8 @@ function App() {
         <Route path="/ChairmanDashboard" element={<ChairmanDashboard/>} />
         <Route path="/done/:condition" element={<DonationDone/>} />
         <Route path="/fail/:transactionId" element={<DonationDone/>} />
+        <Route path="/adminforgetpassword" element={<ForgetPassword/>} />
+        <Route path="/reset-password/:token" element={<ResetPassword/>} />
      
 
         {/* ... other routes ... */}

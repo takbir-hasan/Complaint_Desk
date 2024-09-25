@@ -6,9 +6,30 @@ const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic
+
+
+    try {
+      const response = await fetch('/adminlog', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        window.location.replace('/AdminDashboard')
+         
+      } else {
+          const errorData = await response.json();
+          alert(errorData.message);
+      }
+  } catch (error) {
+      alert('Error logging in. Please try again later.');
+  }
+
   };
 
   return (
@@ -51,7 +72,7 @@ const AdminLogin = () => {
             </div>
 
             <div className="mb-4 text-left">
-            <a href="#" className="text-indigo-500 hover:text-indigo-700 text-sm">Forgot Password?</a>
+            <a href="/adminforgetpassword" className="text-indigo-500 hover:text-indigo-700 text-sm">Forgot Password?</a>
             </div>
 
             <button type="submit" className="button w-full py-2 px-4 text-dark font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-white">

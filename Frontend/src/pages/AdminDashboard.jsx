@@ -106,7 +106,7 @@ function AdminDashboard() {
                 value={searchDepartment}
                 onChange={e => setSearchDepartment(e.target.value)}
                 placeholder="Search Department..." 
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full bg-gray-100 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
               <button className="button ml-2 px-4 py-2 text-dark rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 Add
@@ -132,7 +132,7 @@ function AdminDashboard() {
                 value={searchChairman}
                 onChange={e => setSearchChairman(e.target.value)}
                 placeholder="Search Chairman..." 
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
               <button className="button ml-2 px-4 py-2 text-dark rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 Add
@@ -158,7 +158,7 @@ function AdminDashboard() {
                 value={searchTeacher}
                 onChange={e => setSearchTeacher(e.target.value)}
                 placeholder="Search Teacher..." 
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
               />
               <button className="button ml-2 px-4 py-2 text-dark rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 Add

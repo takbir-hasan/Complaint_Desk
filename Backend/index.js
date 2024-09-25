@@ -13,6 +13,8 @@ import info from './route/info.route.js';
 import feedback from './route/feedback.route.js';
 import donate from './route/donation.route.js';
 import Donation from './model/donation.model.js';
+import admin from './route/admin.login.route.js';
+import { adminforgetpass, resetPassword } from './controller/admin.login.controller.js';
 
 dotenv.config();
 
@@ -47,7 +49,18 @@ app.use('/check', check);
 app.use('/info', info);
 app.use('/feedback', feedback);
 app.use('/donor', donate);
+app.use('/adminlog',admin)
+app.use('/adminforgetpass',adminforgetpass)
+app.use('/reset',resetPassword)
 
+// app.get('/adminforgetpass',adminforgetpass);
+// app.use('/reset',resetPassword);
+
+app.use('/complaint/:cdept',comSubmit);
+app.use('/complaint/:id',comSubmit);
+app.use('/complaint/discarded/:cdept',comSubmit);
+
+// donation
 app.post('/donation', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/dist', 'index.html'));
 });
@@ -59,9 +72,6 @@ app.post('/done/:condition', (req,res)=>{
   res.sendFile(path.join(__dirname, '../Frontend/dist', 'index.html'));
 });
  
-app.use('/complaint/:cdept',comSubmit);
-app.use('/complaint/:id',comSubmit);
-app.use('/complaint/discarded/:cdept',comSubmit);
 
 // Catch-all route for serving React app
 app.get('*', (req, res) => {
