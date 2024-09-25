@@ -1,7 +1,7 @@
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
 import React, { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 function AdminProfile() {
 
@@ -12,6 +12,14 @@ function AdminProfile() {
   const [itemsPerPage] = useState(5);
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
+
+
+
+  const navigate = useNavigate(); // Correct usage of useNavigate
+
+  const handleRedirect = () => {
+    navigate('/AdminDashboard'); // Adjust the path as necessary
+  };
 
   const email = localStorage.getItem('email')
   const handleSubmit = async (e) => {
@@ -97,7 +105,14 @@ function AdminProfile() {
      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
       <div className="container-fluid max-w-5xl mt-4 mb-4 ml-auto mr-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
-      <p className="text-lg mb-3 font-bold">Admin Profile</p>
+      <div className="flex justify-between items-center mb-3">
+        <p className="text-lg font-bold">Admin Profile</p>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+        onClick={handleRedirect}
+        >
+            Admin Dashboard
+        </button>
+      </div>
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
       <p className="text-gray-600 mb-5 text-2xl mt-5 text-center">
       Welcome to the admin profile page. Here, you can change your password and view feedback.</p>

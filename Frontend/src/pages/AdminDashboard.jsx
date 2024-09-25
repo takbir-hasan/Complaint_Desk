@@ -2,6 +2,7 @@
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 function AdminDashboard() {
@@ -10,7 +11,10 @@ function AdminDashboard() {
   const [searchTeacher, setSearchTeacher] = useState('');
   const [selectedTeachers, setSelectedTeachers] = useState([]);
   
-
+  const navigate = useNavigate();
+  const handleRedirect = () => {
+    navigate('/AdminProfile'); // Adjust the path as necessary
+  };
   const departments = [
     { name: 'Computer Science & Engineering (CSE)', value: 'CSE' },
     { name: 'Electrical & Electronic Engineering (EEE)', value: 'EEE' },
@@ -77,7 +81,14 @@ const addToTable = () => {
      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
       <div className="container-fluid max-w-full mt-4 mb-4 ml-auto mr-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
-      <p className="text-lg mb-3 font-bold">Admin Dashboard</p>
+      <div className="flex justify-between items-center mb-3">
+        <p className="text-lg font-bold">Admin Dashboard</p>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+        onClick={handleRedirect}
+        >
+            Admin Profile
+        </button>
+      </div>
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
