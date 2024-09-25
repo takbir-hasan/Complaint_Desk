@@ -9,7 +9,6 @@ router.get('/:cdept', getComplaintsByDept);
 router.get('/discarded/:cdept', getDiscardedComplaintsByDept);
 router.put('/:id', discardComplaint);
 router.put('/pending/:id', markComplaintAsPending);
-// router.get('/pending/:id', getPendingComplaints)
 router.get('/pendingsolve/:cdept', getPendingComplaintBycdept);
 router.put('/solved/:id',markComplaintAsSolved);
 

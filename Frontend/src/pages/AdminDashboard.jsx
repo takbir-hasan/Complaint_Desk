@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
 function AdminDashboard() {
@@ -11,9 +11,6 @@ function AdminDashboard() {
   const [selectedTeachers, setSelectedTeachers] = useState([]);
   
 
-
-
-  
   const departments = [
     { name: 'Computer Science & Engineering (CSE)', value: 'CSE' },
     { name: 'Electrical & Electronic Engineering (EEE)', value: 'EEE' },
@@ -92,7 +89,7 @@ const addToTable = () => {
                             type="text"
                             id="searchDepartment"
                             placeholder="Search Department..."
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                            className="w-full bg-gray-100 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             value={searchDepartment}
                             onChange={e => setSearchDepartment(e.target.value)}
                         />
@@ -118,7 +115,7 @@ const addToTable = () => {
                             type="text"
                             id="searchChairman"
                             placeholder="Search Chairman..."
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                            className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             value={searchChairman}
                             onChange={e => setSearchChairman(e.target.value)}
                         />
@@ -144,7 +141,7 @@ const addToTable = () => {
                             type="text"
                             id="searchTeacher"
                             placeholder="Search Teacher..."
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                            className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
                             value={searchTeacher}
                             onChange={e => setSearchTeacher(e.target.value)}
                         />
