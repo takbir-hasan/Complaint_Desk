@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
+import { useNavigate } from 'react-router-dom';
 
 const TeacherProfile = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,16 @@ const TeacherProfile = () => {
     profilePhoto: null,
   });
 
+
+
+  const [Status, setStatus] = useState('Committee'); // Define Status here
+  const navigate = useNavigate();
+
+  const handleDashboardClick = () => {
+    if (Status === 'Committee') {
+      navigate('/CommitteDashboard'); // Redirect to the CommitteeDashboard page
+    }
+  };
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'profilePhoto') {
@@ -48,6 +59,22 @@ const TeacherProfile = () => {
       <div className="text-center mb-3">
         <span className="font-semibold">Department: </span> Computer Science and Engineering (CSE)
       </div>
+
+      {Status === 'Committee' && (
+        <div className="grid mb-2 gap-1">
+          <div className="bg-gray-200 p-4 text-center">
+            <span className="loader font-semibold text-xs">
+              You are assigned to Complaint Committee <span className="dot"></span>
+              <br />
+            </span>
+            <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded"
+            onClick={handleDashboardClick}
+            >
+              Dashboard
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
         <div className="bg-gray-200 p-4 text-center">

@@ -172,3 +172,27 @@ body{
       box-shadow: 0 0 0 20px rgba(238, 234, 234, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
     }
   }
+
+  /* Teacher Profile Loader */
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    animation: pulse 1s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(0.5);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
