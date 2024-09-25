@@ -115,6 +115,20 @@ const ChairmanDashboard = () => {
   };
   
 
+  // State Pagination
+  const [currentPage, setCurrentPage] = useState ([1]);
+  const complaintsPerPage = 10;
+
+  //Logic to calculate current complaints
+  const indexOfLastComplaint = currentPage * complaintsPerPage;
+  const indexOfFirstComplaint = indexOfLastComplaint - complaintsPerPage;
+  const currentComplaints = complaints.slice(indexOfFirstComplaint, indexOfLastComplaint);
+
+  //Logic for Pagination controls
+  const totalPages = Math.ceil(complaints.length / complaintsPerPage);
+  const goToNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const goToPreviousPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+
 
   const openModal = (complaint) => {
     setSelectedComplaint(complaint);
@@ -144,7 +158,7 @@ const ChairmanDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {complaints.map((complaint) => (
+                {currentComplaints.map((complaint) => (
                   <tr key={complaint._id}>
                     <td className="border px-0 py-2 mb-0">
                       <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "8px" }}>
@@ -176,7 +190,28 @@ const ChairmanDashboard = () => {
               </tbody>
             </table>
           )}
-        </div>
+            {/* Pagination Controls */}
+          <div className="flex justify-center mt-4">
+              <button
+                onClick={goToPreviousPage}
+                disabled={currentPage === 1}
+                className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              >
+                Previous
+              </button>
+              <span className="px-4 py-2 mx-1">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={goToNextPage}
+                disabled={currentPage === totalPages}
+                className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+
       </div>
       <Modal isOpen={!!selectedComplaint} onClose={closeModal} complaint={selectedComplaint} />
     </>
