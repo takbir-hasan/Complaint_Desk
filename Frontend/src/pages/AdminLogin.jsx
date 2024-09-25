@@ -20,6 +20,7 @@ const AdminLogin = () => {
       });
 
       if (response.ok) {
+        localStorage.setItem('email', email); 
         window.location.replace('/AdminDashboard')
          
       } else {

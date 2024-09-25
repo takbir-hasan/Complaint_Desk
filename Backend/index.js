@@ -14,7 +14,7 @@ import feedback from './route/feedback.route.js';
 import donate from './route/donation.route.js';
 import Donation from './model/donation.model.js';
 import admin from './route/admin.login.route.js';
-import { adminforgetpass, resetPassword } from './controller/admin.login.controller.js';
+import { adminforgetpass, resetPassword, updatePass } from './controller/admin.login.controller.js';
 
 dotenv.config();
 
@@ -52,9 +52,7 @@ app.use('/donor', donate);
 app.use('/adminlog',admin)
 app.use('/adminforgetpass',adminforgetpass)
 app.use('/reset',resetPassword)
-
-// app.get('/adminforgetpass',adminforgetpass);
-// app.use('/reset',resetPassword);
+app.post('/adminchangepass',updatePass)
 
 app.use('/complaint/:cdept',comSubmit);
 app.use('/complaint/:id',comSubmit);

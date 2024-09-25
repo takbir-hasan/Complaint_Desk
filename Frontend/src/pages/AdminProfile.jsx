@@ -10,8 +10,32 @@ function AdminProfile() {
   const [selectedFeedback, setSelectedFeedback] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
+  const [oldPass, setOldPass] = useState('');
+  const [newPass, setNewPass] = useState('');
 
+  const email = localStorage.getItem('email')
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/adminchangepass', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, oldPass, newPass }),
+      });
 
+      if (response.ok) {
+       alert("Password has been updated!")
+         
+      } else {
+          const errorData = await response.json();
+          alert(errorData.message);
+      }
+  } catch (error) {
+      alert('Error in changing. Please try again later.');
+  }
+  };
 
 
   // Fetch feedback data from the API
@@ -56,8 +80,6 @@ function AdminProfile() {
   };
 
 
-
-
   
   const departments = ['CSE', 'EEE', 'BME', 'PHARM'];
   const chairmen = ['John Doe', 'Jane Smith', 'Michael Brown', 'Lisa Johnson'];
@@ -80,17 +102,31 @@ function AdminProfile() {
       <p className="text-gray-600 mb-5 text-2xl mt-5 text-center">
       Welcome to the admin profile page. Here, you can change your password and view feedback.</p>
       <p className="text-md mb-0 text-center">Change Password</p>
+      
+      <form onSubmit={handleSubmit}>
       <div className="flex-grow flex flex-col items-center justify-center p-4">
         <input
-          type="text"
+          type="password"
+          placeholder="Enter Old Password"
+          value={oldPass}
+          onChange={(e)=> setOldPass(e.target.value)}
+          required
+          className="input input-bordered w-full max-w-xs mb-4 py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+       />
+        <input
+          type="password"
           placeholder="Enter New Password"
+          value={newPass}
+          onChange={(e)=> setNewPass(e.target.value)}
+          required
           className="input input-bordered w-full max-w-xs mb-4 py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
        />
 
-      <button type="submit" className="button  text-black w-full max-w-xs mb-4">
+      <button  type="submit" className="button  text-black w-full max-w-xs mb-4">
         Update
       </button>
       </div>
+      </form>
 
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
       

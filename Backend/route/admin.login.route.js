@@ -7,4 +7,5 @@ router.post("/", admin);
 router.post("/", adminforgetpass);
 router.post("/", resetPassword);
 
+
 export default router;

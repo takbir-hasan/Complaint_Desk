@@ -122,3 +122,41 @@ export const resetPassword = async (req, res) => {
     return res.status(500).send({ message: 'Something went wrong.' }); // Avoid exposing details in production
   }
 };
+
+export const updatePass = async (req, res) => {
+  try {
+    const { email, oldPass, newPass } = req.body;
+
+          const checkMail = await Admin.findOne({ email });
+
+              if (await bcrypt.compare(oldPass, checkMail.password)) {
+
+                if (!newPass || newPass.length < 8) {
+                  return res.status(400).send({
+                    message: "Please provide a password with at least 8 characters.",
+                  });
+                }
+                
+    // Hash password securely
+    const hashedPassword = await bcrypt.hash(newPass, 10); // Adjust salt rounds as needed
+
+    // Update user password
+    checkMail.password = hashedPassword;
+    await checkMail.save();
+
+    // Send success response
+    return res.status(200).send({
+      message: "Password Change successful.",
+      status: 'success',
+    });
+
+              } else {
+                  return res.status(401).json({ message: 'Incorrect old password.' });
+              }
+
+
+  } catch (error) {
+    console.error("Error during password reset:", error);
+    return res.status(500).send({ message: 'Something went wrong.' }); // Avoid exposing details in production
+  }
+};
