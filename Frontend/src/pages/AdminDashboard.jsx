@@ -80,6 +80,13 @@ const addToTable = () => {
     }
 };
 
+const removeTeacher = (teacherToRemove) => {
+    setSelectedTeachers(prevTeachers => 
+        prevTeachers.filter(teacher => teacher !== teacherToRemove)
+    );
+};
+
+
   return (
     <>
      <Helmet>
@@ -190,7 +197,16 @@ const addToTable = () => {
                     </ul>
                     <div id="selectedTeachers" className="mt-2 gap-3 mb-2">
                         {selectedTeachers.map((teacher, index) => (
-                            <span key={index} className="px-2 py-1 bg-blue-100 rounded-md mr-2">{teacher}</span>
+                            <span key={index} className="px-2 py-1 bg-blue-100 rounded-md mr-2 flex items-center">
+                            {teacher}
+                            <button
+                                className="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
+                                onClick={() => removeTeacher(teacher)} // Call removeTeacher function
+                                aria-label={`Remove ${teacher}`}
+                            >
+                                &times;
+                            </button>
+                        </span>
                         ))}
                     </div>
                 </div>
