@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
 
 function AdminDashboard() {
   const [searchDepartment, setSearchDepartment] = useState('');
@@ -103,6 +104,7 @@ const removeTeacher = (teacherToRemove) => {
               onClick={handleRedirect}
           >
           <span className="flex items-center">
+          <FaUserCircle className="mr-2" />
             Admin Profile
           </span>
           </button>
