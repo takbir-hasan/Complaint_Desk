@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Check from './pages/Check';
 import Write from './pages/Write';
 import Home from './pages/Home';
@@ -18,9 +18,12 @@ import ChairmanDashboard from './pages/ChairmanDashboard';
 import DonationDone from './pages/DonationDone.jsx';
 import ForgetPassword from './pages/ForgetPassword.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
+import Verification from './pages/Verification.jsx';
 
 
 function App() {
+  const isLoggedIn = localStorage.getItem('email') ? true : false;
+
   return (
     <>
      <BrowserRouter>
@@ -35,10 +38,10 @@ function App() {
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/feedbackSuccess" element={<FeedbackSuccess />} />
         <Route path="/Signup" element={<Signup/>} />
-        <Route path="/Login" element={<Login/>} />
+        <Route path="/Login" element={<Login/>} />  
         <Route path="/AdminLogin" element={<AdminLogin/>} />
-        <Route path="/AdminProfile" element={<AdminProfile/>} />
-        <Route path="/AdminDashboard" element={<AdminDashboard/>} />
+        <Route path="/AdminProfile" element={isLoggedIn ? <AdminProfile/> : <Navigate to="/AdminLogin" replace />} />
+        <Route path="/AdminDashboard" element={isLoggedIn ? <AdminDashboard/> : <Navigate to="/AdminLogin" replace />} />
         <Route path="/TeacherProfile" element={<TeacherProfile/>} />
         <Route path="/CommitteDashboard" element={<CommitteDashboard/>} />
         <Route path="/ChairmanDashboard" element={<ChairmanDashboard/>} />
@@ -46,6 +49,7 @@ function App() {
         <Route path="/fail/:transactionId" element={<DonationDone/>} />
         <Route path="/adminforgetpassword" element={<ForgetPassword/>} />
         <Route path="/reset-password/:token" element={<ResetPassword/>} />
+        <Route path="/verification" element={<Verification/>} />
      
 
         {/* ... other routes ... */}
