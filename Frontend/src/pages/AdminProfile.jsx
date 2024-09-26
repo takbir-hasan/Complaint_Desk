@@ -187,16 +187,18 @@ function AdminProfile() {
       {/* Modal */}
       {isModalOpen && selectedFeedback && (
         <div className="fixed inset-0 z-50 flex items-center  justify-center bg-black bg-opacity-50">
-         <div className="bg-white p-5 ml-4 mr-4 rounded-lg shadow-lg">
+         <div className="bg-white p-5 ml-4 mr-4 rounded-lg shadow-lg" style={{ marginLeft: '80px', marginRight: '80px' }}>
          <p className="mt-3 text-lg mb-3 font-bold text-center">Feedback Details</p>
          <hr className="border-t-4 mb-2" style={{ borderColor: '#FEDE00' }} />
             <p class="text-justify">{selectedFeedback.complaint}</p>
+            <div className= "flex justify-center">
             <button 
-              className="mt-4 bg-red-500 text-white rounded px-4 py-2" 
+              className="mt-4 bg-red-500 text-white rounded px-4 py-1" 
               onClick={() => setModalOpen(false)}
             >
               Close
             </button>
+            </div>
           </div>
         </div>
       )}
