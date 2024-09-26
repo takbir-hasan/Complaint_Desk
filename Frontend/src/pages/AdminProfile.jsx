@@ -2,6 +2,9 @@ import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaSignOutAlt } from 'react-icons/fa';
+import { MdDashboard } from 'react-icons/md';
+
 
 function AdminProfile() {
 
@@ -14,12 +17,16 @@ function AdminProfile() {
   const [newPass, setNewPass] = useState('');
 
 
-
   const navigate = useNavigate(); // Correct usage of useNavigate
 
   const handleRedirect = () => {
     navigate('/AdminDashboard'); // Adjust the path as necessary
   };
+
+  const handleLogoutRedirect = () => {
+    navigate('/'); // Home page Ridirect by logout button
+  };
+
 
   const email = localStorage.getItem('email')
   const handleSubmit = async (e) => {
@@ -107,12 +114,27 @@ function AdminProfile() {
       <div className="container-fluid max-w-5xl mt-4 mb-4 ml-auto mr-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-3">
         <p className="text-lg font-bold">Admin Profile</p>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
-        onClick={handleRedirect}
-        >
+        <div className="flex justify-end space-x-4">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+              onClick={handleRedirect}
+          >
+          <span className="flex items-center">
+            <MdDashboard className="mr-2" />
             Admin Dashboard
-        </button>
+          </span>
+          </button>
+          <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
+              onClick={handleLogoutRedirect}
+          >
+          <span className="flex items-center">
+            <FaSignOutAlt className="mr-2" />
+             Logout
+          </span>
+          </button>
+       </div>
+
       </div>
+
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
       <p className="text-gray-600 mb-5 text-2xl mt-5 text-center">
       Welcome to the admin profile page. Here, you can change your password and view feedback.</p>

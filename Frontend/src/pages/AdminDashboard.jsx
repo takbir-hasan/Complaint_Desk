@@ -3,6 +3,7 @@ import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaSignOutAlt } from 'react-icons/fa';
 
 
 function AdminDashboard() {
@@ -15,6 +16,13 @@ function AdminDashboard() {
   const handleRedirect = () => {
     navigate('/AdminProfile'); // Adjust the path as necessary
   };
+
+  const handleLogoutRedirect = () => {
+    navigate('/'); //Home page redirect by Logout button
+  }
+
+
+
   const departments = [
     { name: 'Computer Science & Engineering (CSE)', value: 'CSE' },
     { name: 'Electrical & Electronic Engineering (EEE)', value: 'EEE' },
@@ -83,11 +91,23 @@ const addToTable = () => {
       <div className="container-fluid max-w-full mt-4 mb-4 ml-auto mr-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
       <div className="flex justify-between items-center mb-3">
         <p className="text-lg font-bold">Admin Dashboard</p>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
-        onClick={handleRedirect}
-        >
+        <div className="flex justify-end space-x-4">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+              onClick={handleRedirect}
+          >
+          <span className="flex items-center">
             Admin Profile
-        </button>
+          </span>
+          </button>
+          <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
+              onClick={handleLogoutRedirect}
+          >
+          <span className="flex items-center">
+            <FaSignOutAlt className="mr-2" />
+             Logout
+          </span>
+          </button>
+       </div>
       </div>
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
 
