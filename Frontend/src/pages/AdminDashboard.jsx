@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSignOutAlt } from 'react-icons/fa';
-
+import { FaTrash } from 'react-icons/fa';
 
 function AdminDashboard() {
   const [searchDepartment, setSearchDepartment] = useState('');
@@ -239,10 +239,14 @@ const removeTeacher = (teacherToRemove) => {
                             <td className="py-2 px-2 border-b text-center">
                               {row.department} <br/>
                               <button 
-                                className="ml-2 p-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                className="ml-2 p-2 bg-red-500 text-white rounded hover:bg-red-600"
                                 onClick={() => handleButtonClick(row.id)} 
+                                
                               >
-                              Remove
+                                <span className="flex items-center">
+                                <FaTrash className="mr-2" />
+                                    Remove
+                                </span>
                               </button>
                             </td>
                             <td className="py-2 px-2 border-b text-center">{row.chairman}</td>
