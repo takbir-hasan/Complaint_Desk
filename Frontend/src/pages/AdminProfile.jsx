@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { MdDashboard } from 'react-icons/md';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminProfile() {
 
@@ -27,6 +28,14 @@ function AdminProfile() {
     navigate('/'); // Home page Ridirect by logout button
   };
 
+  //Update Password Toast
+  const updateNotify = () => {
+    if (!oldPass || !newPass) {
+      toast.error('Wrong: Please fill up all fields!'); 
+    } else {
+      toast.success('Password updated successfully');
+    }
+  };
 
   const email = localStorage.getItem('email')
   const handleSubmit = async (e) => {
@@ -41,8 +50,7 @@ function AdminProfile() {
       });
 
       if (response.ok) {
-       alert("Password has been updated!")
-         
+      //  alert("Password has been updated!")   
       } else {
           const errorData = await response.json();
           alert(errorData.message);
@@ -159,9 +167,10 @@ function AdminProfile() {
           className="input input-bordered w-full max-w-xs mb-4 py-2 px-3 bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
        />
 
-      <button  type="submit" className="button  text-black w-full max-w-xs mb-4">
+      <button  type="submit" className="button  text-black w-full max-w-xs mb-4" onClick={updateNotify}>
         Update
       </button>
+      <ToastContainer />
       </div>
       </form>
 
