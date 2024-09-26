@@ -35,7 +35,8 @@ const chairmen = [
     'John Doe',
     'Jane Smith',
     'Michael Brown',
-    'Lisa Johnson'
+    'Lisa Johnson',
+    'Galib',
 ];
 
 const teachers = [
@@ -43,7 +44,9 @@ const teachers = [
     'Jane Smith',
     'Galib',
     'Michael Brown',
-    'Lisa Johnson'
+    'Lisa Johnson',
+    'Sadia Afrin',
+    'Tasnim Binte Shahid',
 ];
 
 const [tableData, setTableData] = useState([]);
