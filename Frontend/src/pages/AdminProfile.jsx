@@ -25,6 +25,7 @@ function AdminProfile() {
   };
 
   const handleLogoutRedirect = () => {
+    localStorage.clear();
     navigate('/'); // Home page Ridirect by logout button
   };
 
