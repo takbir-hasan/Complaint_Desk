@@ -101,9 +101,11 @@ const removeTeacher = (teacherToRemove) => {
      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
       <div className="container-fluid max-w-full mt-4 mb-4 ml-auto mr-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
-      <div className="flex justify-between items-center mb-3">
-        <p className="text-lg font-bold">Admin Dashboard</p>
-        <div className="flex justify-end space-x-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
+        <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 mt-3 sm:mt-0">
+            <p className="text-lg font-bold">Admin Dashboard</p>
+        </div>
+        <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 mt-3 sm:mt-0">
           <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
               onClick={handleRedirect}
           >
