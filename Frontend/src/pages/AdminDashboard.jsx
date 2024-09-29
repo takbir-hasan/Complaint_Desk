@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function AdminDashboard() {
   const [searchDepartment, setSearchDepartment] = useState('');
@@ -60,14 +63,38 @@ const selectTeacher = (teacher) => {
     if (selectedTeachers.length < 5 && !selectedTeachers.includes(teacher)) {
         setSelectedTeachers([...selectedTeachers, teacher]);
     } else {
-        alert("You can only add up to 5 teachers.");
+        toast.error("Already selected this teacher.");
     }
 };
 
 const addToTable = () => {
     const departmentValue = searchDepartment;
     const chairmanValue = searchChairman;
-    if (departmentValue && chairmanValue && selectedTeachers.length) {
+    const isDepartmnetAlreadyAdded =  tableData.some(item => item.department ===  departmentValue);
+    const isChairmanAlreadyAdded = tableData.some(item => item.chairman === chairmanValue);
+
+    if(isDepartmnetAlreadyAdded)
+    {
+        toast.error("Department already added");
+        return;
+    }
+
+    if(isChairmanAlreadyAdded)
+    {
+        toast.error("Chairman already added.");
+        return;
+    }
+
+    if(isDepartmnetAlreadyAdded && isChairmanAlreadyAdded)
+    {
+        toast.wrong("Department and Chairman are already selected.");
+        return;
+    }
+
+
+
+
+    if (!isDepartmnetAlreadyAdded && !isChairmanAlreadyAdded && selectedTeachers.length) {
         setTableData([
             ...tableData,
             {
@@ -82,6 +109,9 @@ const addToTable = () => {
         setSearchChairman('');
         setSelectedTeachers([]);
         setSearchTeacher('');
+        toast.success("Successfully added committee.");
+    } else {
+        toast.error("Please fill out all the fields.");
     }
 };
 
@@ -100,6 +130,10 @@ const removeTeacher = (teacherToRemove) => {
 
      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
+
+       {/* Selected teachers Toast */}
+       <ToastContainer/>
+
       <div className="container-fluid max-w-full mt-4 mb-4 ml-auto mr-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
         <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 mt-3 sm:mt-0">
