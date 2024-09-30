@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
+import { FaSignOutAlt } from 'react-icons/fa';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TeacherProfile = () => {
   const [formData, setFormData] = useState({
@@ -37,6 +40,12 @@ const TeacherProfile = () => {
     console.log(formData);
   };
 
+  //Logout
+  const handleLogoutRedirect = () => {
+    localStorage.clear();
+    navigate('/login'); //Home page redirect by Logout button
+  }
+
   return (
     <>
       <Helmet>
@@ -46,7 +55,19 @@ const TeacherProfile = () => {
     <div className="flex flex-col min-h-screen bg-gray-100 text-black">
        <Navbar />
     <div className="container-fluid max-w-4xl mx-auto mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg">
-      <p className="text-lg mb-3 font-bold">Teacher&apos;s Profile</p>
+    <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
+      <p className="text-lg mb-3 font-bold">Teacher Profile</p>
+      <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 mt-3 sm:mt-0">
+          <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
+              onClick={handleLogoutRedirect}
+          >
+          <span className="flex items-center">
+            <FaSignOutAlt className="mr-2" />
+             Logout
+          </span>
+          </button>
+       </div>
+    </div>
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
       <div className="p-4 text-center">
         <img
