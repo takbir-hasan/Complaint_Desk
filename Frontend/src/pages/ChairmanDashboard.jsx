@@ -31,7 +31,7 @@ const Modal = ({ isOpen, onClose, complaint }) => {
         </p>
         <p style={{ fontSize: "13px",textAlign: "justify" }}><strong>Details: </strong> {complaint.complaint}</p>
         <p style={{ fontSize: "13px" }} class="mt-3"><strong>Date: </strong>{formatDate(complaint.date)}</p>
-        <div className= "flex justify-center">
+        <div className= "flex justify-center items-center">
         <button
           onClick={onClose}
           className="mt-4 bg-red-500 text-white font-semibold py-1 px-4 rounded"
