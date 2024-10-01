@@ -6,6 +6,7 @@ const Verification = () => {
   const [status, setStatus] = useState('');
   const [textColor, setTextColor] = useState('black');
   const [token, setToken] = useState('');
+  const email = localStorage.getItem('temail');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,13 +17,18 @@ const Verification = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({ token, email }),
       });
 
       if (response.ok) {
+        const data = await response.json();
+        
+        localStorage.setItem('status','success');
+
         setStatus('Verification successful');
         setTextColor('green');
-        window.location.href = '/login';
+        localStorage.setItem('tmail', data.email);
+        window.location.href = '/TeacherProfile';
       } else {
         console.error('Error checking verification:', response.statusText);
         setStatus('Verification failed');

@@ -1,62 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/navbar';
-import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { useParams } from 'react-router-dom'; // Import the useParams hook
 
-function ResetPassword() {
+function Reset() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
 
-  const { token } = useParams();
+  const { token } = useParams(); // Extract userId and token from URL
+
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    // Basic input validation
-    if (!password || !confirmPassword) {
-      setError('Please enter both password and confirm password fields.');
-      return;
-    }
-
-    if (password.length < 8) {
-      setError('Password should be at least 8 characters long.');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError('Confirm password does not match password.');
-      return;
-    }
-
-    try {
-      const response = await fetch('/reset', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.status === 'success') {
+      event.preventDefault();
+    
+      // Basic input validation
+      if (!password || !confirmPassword) {
+        setError('Please enter both password and confirm password fields.');
+        return;
+      }
+    
+      if (password.length < 8) {
+        setError('Password should be at least 8 characters long.');
+        return;
+      }
+    
+      if (password !== confirmPassword) {
+        setError('Confirm password does not match password.');
+        return;
+      }
+    
+      try {
+        const response = await fetch(`/reset-pass`, { // Correctly interpolate the URL
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token, password }),
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
           setSuccessMessage(data.message);
           setError(null);
-          localStorage.setItem('email', data.email);
-         window.location.href = '/AdminDashboard';
+          localStorage.setItem('status', 'success');
+          localStorage.setItem('tmail', data.email);
+          window.location.href = '/TeacherProfile'; // Redirect on success
         } else {
-          setError(data.message); // Set error message from response
+          setError('Server error. Please try again later.');
         }
-      } else {
-        setError('Server error. Please try again later.');
+      } catch (err) {
+        console.error('Error resetting password:', err);
+        setError('An unexpected error occurred.');
       }
-    } catch (err) {
-      console.error('Error verifying email:', err);
-      setError('An unexpected error occurred.');
-    }
-  };
+    };
+    
 
   return (
     <>
@@ -102,4 +101,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default Reset;

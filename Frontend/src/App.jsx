@@ -19,10 +19,14 @@ import DonationDone from './pages/DonationDone.jsx';
 import ForgetPassword from './pages/ForgetPassword.jsx';
 import ResetPassword from './pages/ResetPassword.jsx';
 import Verification from './pages/Verification.jsx';
+import Reset from './pages/Reset.jsx';
+import Forget from './pages/Forget.jsx';
 
 
 function App() {
   const isLoggedIn = localStorage.getItem('email') ? true : false;
+  const status = localStorage.getItem('status') ? true : false;
+  const isAuthentic = localStorage.getItem('name') ? true : false;
 
   return (
     <>
@@ -38,18 +42,21 @@ function App() {
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/feedbackSuccess" element={<FeedbackSuccess />} />
         <Route path="/Signup" element={<Signup/>} />
-        <Route path="/Login" element={<Login/>} />  
-        <Route path="/AdminLogin" element={<AdminLogin/>} />
+        <Route path="/Login" element={ !status ? <Login/> : <Navigate to="/TeacherProfile" replace />} />  
+        <Route path="/AdminLogin" element={ !isLoggedIn ? <AdminLogin/> : <Navigate to="/AdminDashboard" replace />} />
         <Route path="/AdminProfile" element={isLoggedIn ? <AdminProfile/> : <Navigate to="/AdminLogin" replace />} />
         <Route path="/AdminDashboard" element={isLoggedIn ? <AdminDashboard/> : <Navigate to="/AdminLogin" replace />} />
-        <Route path="/TeacherProfile" element={<TeacherProfile/>} />
+        <Route path="/TeacherProfile" element={status ? <TeacherProfile/> :  <Navigate to="/Login" replace />} />
         <Route path="/CommitteDashboard" element={<CommitteDashboard/>} />
         <Route path="/ChairmanDashboard" element={<ChairmanDashboard/>} />
         <Route path="/done/:condition" element={<DonationDone/>} />
         <Route path="/fail/:transactionId" element={<DonationDone/>} />
-        <Route path="/adminforgetpassword" element={<ForgetPassword/>} />
+        <Route path="/forgetpassword" element={ <ForgetPassword/> } />
         <Route path="/reset-password/:token" element={<ResetPassword/>} />
-        <Route path="/verification" element={<Verification/>} />
+        <Route path="/verification" element={isAuthentic ? <Verification/> : <Navigate to="/Login" replace />} />
+        <Route path="/resetPass/:token" element={<Reset/>} />
+        <Route path="/forget" element={<Forget/>} />
+        
      
 
         {/* ... other routes ... */}

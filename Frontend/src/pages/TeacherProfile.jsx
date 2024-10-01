@@ -43,7 +43,8 @@ const TeacherProfile = () => {
   //Logout
   const handleLogoutRedirect = () => {
     localStorage.clear();
-    navigate('/login'); //Home page redirect by Logout button
+    // navigate('/login'); //Home page redirect by Logout button
+    window.location.href = '/login';
   }
 
   return (

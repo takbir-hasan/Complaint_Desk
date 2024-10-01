@@ -26,7 +26,8 @@ function AdminProfile() {
 
   const handleLogoutRedirect = () => {
     localStorage.clear();
-    navigate('/'); // Home page Ridirect by logout button
+    window.location.href = '/AdminLogin';
+    // navigate('/AdminLogin'); // logout page Ridirect by logout button
   };
 
   //Update Password Toast

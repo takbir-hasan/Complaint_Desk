@@ -73,7 +73,7 @@ const AdminLogin = () => {
             </div>
 
             <div className="mb-4 text-left">
-            <a href="/adminforgetpassword" className="text-indigo-500 hover:text-indigo-700 text-sm">Forgot Password?</a>
+            <a href="/forgetpassword" className="text-indigo-500 hover:text-indigo-700 text-sm">Forgot Password?</a>
             </div>
 
             <button type="submit" className="button w-full py-2 px-4 text-dark font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-white">

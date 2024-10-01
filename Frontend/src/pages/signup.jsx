@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
+import {useNavigate} from 'react-router-dom';
 
 const Signup = () => {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     department: '',
@@ -20,12 +23,77 @@ const Signup = () => {
       [name]: files ? files[0] : value,
     });
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    // Handle form submission logic here
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Input Validation
+    if (!validateEmail(formData.email)) {
+      alert('Invalid email format');
+      return;
+    }
+
+    if (!validatePhone(formData.phone)) {
+      alert('Invalid phone number format');
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      alert('Password must be at least 8 characters long');
+      return;
+    }
+
+    try {
+      let base64Photo = null;
+      if (formData.profilePhoto) {
+        base64Photo = await convertToBase64(formData.profilePhoto);
+      }
+
+      const response = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, profilePhoto: base64Photo }),
+      });
+
+     if (!response.ok) {
+        const errorData = await response.json();
+        alert(errorData.message);
+        
+      } else {
+        localStorage.setItem('name', formData.name);
+        localStorage.setItem('temail', formData.email);
+        window.location.href = '/verification'; 
+        // navigate('/verification');
+        // const result = await response.json();
+        // Handle successful signup (e.g., redirect to login page)
+        // alert(result.message);
+        console.log('Signup is pending!');
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      setErrorMessage('An unexpected error occurred');
+    } finally {
+      setIsLoading(false); // Reset loading state
+    }
+  };
+
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+    };
+    const validatePhone = (phone) => {
+    // Adjust this regex based on your phone number format requirements (e.g., country code, etc.)
+    const regex = /^\d+$/; // Matches digits only
+        return regex.test(phone);
+      };
 
   return (
     <>
@@ -107,7 +175,7 @@ const Signup = () => {
             <div className="mb-4">
             <label className="block text-gray-700 text-sm font-semibold mb-2">Mobile Number</label>
             <input
-                type="text"
+                type="tel"
                 id="phone"
                 name="phone"
                 placeholder="Enter mobile number"

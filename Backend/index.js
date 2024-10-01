@@ -15,11 +15,13 @@ import donate from './route/donation.route.js';
 import Donation from './model/donation.model.js';
 import admin from './route/admin.login.route.js';
 import { adminforgetpass, resetPassword, updatePass } from './controller/admin.login.controller.js';
+import { register, login, forgetPass, resetPass, verification } from './controller/teacher.controller.js';
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
+app.use(express.json({ limit: '100mb' }));
 
 const port = process.env.PORT || 3000;
 const URI = process.env.MongoDB;
@@ -53,10 +55,15 @@ app.use('/adminlog',admin)
 app.use('/adminforgetpass',adminforgetpass)
 app.use('/reset',resetPassword)
 app.post('/adminchangepass',updatePass)
-
 app.use('/complaint/:cdept',comSubmit);
 app.use('/complaint/:id',comSubmit);
 app.use('/complaint/discarded/:cdept',comSubmit);
+app.post('/register',register);
+app.post('/login',login);
+app.post('/forgetPass',forgetPass);
+app.post('/reset-pass',resetPass);
+app.post('/verify',verification);
+
 
 // donation
 app.post('/donation', (req, res) => {

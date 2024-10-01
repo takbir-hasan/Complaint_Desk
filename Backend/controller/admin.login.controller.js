@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 
 dotenv.config(); 
 
-export const admin = async (req, res) => {
+export const admin = async (req, res) => { //login
       try {
           const { email, password } = req.body;
           const checkMail = await Admin.findOne({ email });
@@ -43,6 +43,15 @@ export const adminforgetpass = async (req, res) => {
 
     const token = jwt.sign({ email }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
+     // Send reset email with token
+     const resetUrl = `${process.env.CLIENT_URL}/reset-password/${token}`;
+
+     const message = `
+           <h1>You requested a password reset</h1>
+           <p>Please click the following link to reset your password:</p>
+           <a href="${resetUrl}">Reset Password</a> 
+       `;
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       secure: true,
@@ -57,7 +66,7 @@ export const adminforgetpass = async (req, res) => {
       from: "passwordreset@complaintdesk.com",
       to: email,
       subject: "Password Reset Request",
-      text: `Click on this link to generate your new password: ${process.env.CLIENT_URL}reset-password/${token}`,
+     html: message,
     };
 
     // Sending email
@@ -101,7 +110,7 @@ export const resetPassword = async (req, res) => {
     // Find user by email from decoded token
     const user = await Admin.findOne({ email: decoded.email });
     if (!user) {
-      return res.status(404).send({ message: "User not found." });
+      return res.status(404).send({ message: "User not found."});
     }
 
     // Hash password securely
@@ -115,6 +124,7 @@ export const resetPassword = async (req, res) => {
     return res.status(200).send({
       message: "Password reset successful. Login to your account.",
       status: 'success',
+      email:user.email,
     });
 
   } catch (error) {

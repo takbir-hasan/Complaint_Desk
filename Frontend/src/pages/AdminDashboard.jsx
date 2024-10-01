@@ -23,7 +23,8 @@ function AdminDashboard() {
 
   const handleLogoutRedirect = () => {
     localStorage.clear();
-    navigate('/'); //Home page redirect by Logout button
+    window.location.href = '/AdminLogin';
+    // navigate('/AdminLogin'); //Login page redirect by Logout button
   }
 
 

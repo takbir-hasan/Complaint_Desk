@@ -6,10 +6,30 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add login logic here
-    console.log("Email:", email, "Password:", password);
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form submission refresh
+    try {
+      const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        localStorage.setItem('temail', email); 
+        localStorage.setItem('status','success');
+        window.location.replace('/TeacherProfile')
+         
+      } else {
+          const errorData = await response.json();
+          alert(errorData.message);
+      }
+  } catch (error) {
+      alert('Error logging in. Please try again later.');
+  }
+
   };
 
   return (
@@ -52,7 +72,7 @@ const Login = () => {
         </div>
 
         <div className="mb-4 text-left">
-          <a href="#" className="text-indigo-500 hover:text-indigo-700 text-sm">Forgot Password?</a>
+          <a href="/forget" className="text-indigo-500 hover:text-indigo-700 text-sm">Forgot Password?</a>
         </div>
 
         <button
@@ -63,7 +83,7 @@ const Login = () => {
         </button>
 
         <p className="mt-4 text-center text-gray-600 text-sm">
-          Don't have an account? <a href="/signup" className="text-indigo-500 hover:text-indigo-700">Sign Up</a>
+          Don't have an account? <a href="/Signup" className="text-indigo-500 hover:text-indigo-700">Sign Up</a>
         </p>
       </form>
     </div>
