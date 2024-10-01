@@ -27,13 +27,13 @@ function Check() {
         if (status === 'submitted') {
           setSatus('Your complaint is processing.');
           setTextColor('blue');
-        } else if (status === 'pending') {
+        } else if (status === 'Pending') {
           setSatus('Your complaint has been reached to the investigative committee.');
           setTextColor('orange');
-        } else if (status === 'solved') {
+        } else if (status === 'Solved') {
           setSatus('Your complaint has been solved. Thanks for your concern.');
           setTextColor('green');
-        } else if (status === 'discarded') {
+        } else if (status === 'Discarded') {
           setSatus('Sorry! Your complaint has been discarded. Write a complaint correctly and it should be authentic and .');
           setTextColor('red');
         } else {
