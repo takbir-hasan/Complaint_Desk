@@ -34,9 +34,6 @@ function AdminProfile() {
   const updateNotify = () => {
     if (!oldPass || !newPass) {
       toast.error('Wrong: Please fill up all fields!'); 
-    } else if(oldPass !== newPass)
-    {
-      toast.error('Wrong: Passwords do not match!');
     }
      else {
       toast.success('Password updated successfully');
