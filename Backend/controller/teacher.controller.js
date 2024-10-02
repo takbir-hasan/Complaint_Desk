@@ -266,3 +266,51 @@ export const verification = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error', error: error.message });
   }
 };
+
+
+//Get Teachers Info
+export const getTeacherByEmail = async (req,res) =>
+{
+    try{
+      const {email} = req.params;
+      const teacher = await Teacher.findOne({email});
+
+
+      if(!teacher)
+      {
+        return res.status(404).json({message: 'Teacher not found'});
+      }
+      return res.status(200).json({teacher});
+    } catch (error)
+    {
+      console.error('Error during getTeacherByEmail:', error);
+      res.status(500).json({message: 'Internal Server Error', error: error.message});
+    }
+};
+
+
+//Update Tacher Profile Info
+export const updateTeacherProfile = async (req, res) =>
+{
+  try{
+    const {email} = req.params;
+    const {dept, designation, phone, profilePhoto} = req.body;
+
+    const updateTeacher = await Teacher.findOneAndUpdate(
+      { email },
+      { $set: { dept, designation, phone, profilePhoto} },
+      { new: true }
+    );
+
+    if(!updateTeacher)
+    {
+      return res.status(404).json({message: 'Teacher not Found'});
+    }
+    return res.status(200).json({message: 'Teacher Profile Updated Successfully', updateTeacher});
+  } catch (error)
+  {
+    console.error('Error during updateTeacherByEmail:', error);
+    return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+  }
+
+};

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
@@ -8,37 +8,94 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const TeacherProfile = () => {
   const [formData, setFormData] = useState({
-    department: '',
+    dept: '',
     designation: '',
     phone: '',
-    password: '',
     profilePhoto: null,
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
 
-
-  const [Status, setStatus] = useState('Committee'); // Define Status here
+  const [teacher, setTeacher] = useState(null);
+  const [Status, setStatus] = useState(null); // Define Status here
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const email = localStorage.getItem('temail');
+        try {
+          const response = await fetch(`/teacher/${email}`);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+            // console.log(data); 
+            setTeacher(data.teacher);
+        } catch (error) {
+            console.error('Error fetching teacher data:', error);
+        }
+    };
+
+    fetchData();
+}, []);
+
 
   const handleDashboardClick = () => {
     if (Status === 'Committee') {
       navigate('/CommitteDashboard'); // Redirect to the CommitteeDashboard page
     }
   };
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === 'profilePhoto') {
-      setFormData((prev) => ({ ...prev, [name]: files[0] }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    setFormData({
+      ...formData,
+      [name]: files ? files[0] : value,
+    });
+  };
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
   };
 
-  const handleSubmit = (e) => {
+
+  //Update Profile Info
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log(formData);
+
+    try {
+      const email = localStorage.getItem('temail');
+      let base64Photo = null;
+      if (formData.profilePhoto) {
+        base64Photo = await convertToBase64(formData.profilePhoto);
+      }
+      const response = await fetch(`/teacher/api/updateTeacherProfile/${email}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, profilePhoto: base64Photo }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      // console.log(data);
+      toast.success('Profile updated successfully!');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      toast.error('Error updating profile, please try again.'); // Use toast for error messages
+    }
   };
+  const validatePhone = (phone) => {
+    // Adjust this regex based on your phone number format requirements (e.g., country code, etc.)
+    const regex = /^\d+$/; // Matches digits only
+        return regex.test(phone);
+      };
+
+  
 
   //Logout
   const handleLogoutRedirect = () => {
@@ -55,6 +112,10 @@ const TeacherProfile = () => {
 
     <div className="flex flex-col min-h-screen bg-gray-100 text-black">
        <Navbar />
+
+      {/* Toast Notify */}
+      <ToastContainer autoClose={3000} position="top-right" />
+
     <div className="container-fluid max-w-4xl mx-auto mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg">
     <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
       <p className="text-lg mb-3 font-bold">Teacher Profile</p>
@@ -70,48 +131,52 @@ const TeacherProfile = () => {
        </div>
     </div>
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
-      <div className="p-4 text-center">
-        <img
-          className="mx-auto"
-          src="https://img.freepik.com/premium-photo/girl-stands-front-chalkboard-with-word-phot-it_984237-23448.jpg?ga=GA1.1.209838246.1722743839&semt=ais_hybrid"
-          alt="Teacher"
-          style={{ borderRadius: '50%', width: '200px' }}
-        />
-      </div>
-      <div className="text-center mb-3">
-        <span className="font-semibold">Department: </span> Computer Science and Engineering (CSE)
-      </div>
+      {teacher ? (
+            <>
+                <div className="p-4 text-center">
+                    <img
+                        className="mx-auto"
+                        src={teacher.profilePhoto || ''}
+                        alt="Teacher"
+                        style={{ borderRadius: '50%', width: '200px' }}
+                    />
+                </div>
+                <div className="text-center mb-3">
+                    <span className="font-semibold">Department: </span> {teacher.dept}
+                </div>
 
-      {Status === 'Committee' && (
-        <div className="grid mb-2 gap-1">
-          <div className="bg-gray-200 p-4 text-center">
-            <span className="loader font-semibold text-xs">
-              You are assigned to Complaint Committee <span className="dot"></span>
-              <br />
-            </span>
-            <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded"
-            onClick={handleDashboardClick}
-            >
-              Dashboard
-            </button>
-          </div>
-        </div>
-      )}
+                {Status === 'Committee' && (
+                    <div className="grid mb-2 gap-1">
+                        <div className="bg-gray-200 p-4 text-center">
+                            <span className="loader font-semibold text-xs">
+                                You are assigned to Complaint Committee <span className="dot"></span>
+                                <br />
+                            </span>
+                            <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDashboardClick}>
+                                Dashboard
+                            </button>
+                        </div>
+                    </div>
+                )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-        <div className="bg-gray-200 p-4 text-center">
-          <span className="font-semibold">Name: </span> Syed Md. Galib
-        </div>
-        <div className="bg-gray-200 p-4 text-center">
-          <span className="font-semibold">Designation: </span> Chairman
-        </div>
-        <div className="bg-gray-200 p-4 text-center">
-          <span className="font-semibold">Email: </span> example@just.edu.bd
-        </div>
-        <div className="bg-gray-200 p-4 text-center">
-          <span className="font-semibold">Mobile: </span>01*********
-        </div>
-      </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+                    <div className="bg-gray-200 p-4 text-center">
+                        <span className="font-semibold">Name: </span> {teacher.name}
+                    </div>
+                    <div className="bg-gray-200 p-4 text-center">
+                        <span className="font-semibold">Designation: </span> {teacher.designation}
+                    </div>
+                    <div className="bg-gray-200 p-4 text-center">
+                        <span className="font-semibold">Email: </span> {teacher.email}
+                    </div>
+                    <div className="bg-gray-200 p-4 text-center">
+                        <span className="font-semibold">Mobile: </span> {teacher.phone}
+                    </div>
+                </div>
+            </>
+        ) : (
+            <p>Loading...</p>
+        )}
 
       <hr className="border-t-4 mt-5" style={{ borderColor: '#FEDE00' }} />
       <div className="text-center mb-3 mt-5">
@@ -127,18 +192,45 @@ const TeacherProfile = () => {
               </label>
               <select
                 id="department"
-                name="department"
-                value={formData.department}
+                type="text"
+                name="dept"
+                value={formData.dept}
                 onChange={handleChange}
+                required
                 className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
               >
                 <option value="" disabled>
                   Select a department
                 </option>
-                <option value="CSE">CSE</option>
-                <option value="EEE">EEE</option>
-                <option value="BME">BME</option>
-                <option value="PHARM">PHARM</option>
+                <option value="CSE">Computer Science and Engineering (CSE)</option>
+                <option value="EEE">Electrical and Electronic Engineering (EEE)</option>
+                <option value="BME">Biomedical Engineering (BME)</option>
+                <option value="PHARM">Pharmacy (PHARM)</option>
+                <option value="ChE">Chemical Engineering (ChE)</option>
+                <option value="IPE">Industrial and Production Engineering (IPE)</option>
+                <option value="PME">Petroleum and Mining Engineering (PME)</option>
+                <option value="TE">Textile Engineering (TE)</option>
+                <option value="APPT">Agro Product Processing Technology (APPT)</option>
+                <option value="CDM">Climate and Disaster Management (CDM)</option>
+                <option value="EST">Environmental Science and Technology (EST)</option>
+                <option value="NFT">Nutrition and Food Technology (NFT)</option>
+                <option value="BMB">Biochemistry and Molecular Biology (BMB)</option>
+                <option value="FMB">Fisheries and Marine Bioscience (FMB)</option>
+                <option value="GEBT">Genetic Engineering and Biotechnology (GEBT)</option>
+                <option value="MB">Microbiology (MB)</option>
+                <option value="NHS">Nursing and Health Science (NHS)</option>
+                <option value="PESS">Physical Education and Sports Science (PESS)</option>
+                <option value="PTR">Physiotherapy and Rehabilitation (PTR)</option>
+                <option value="ENGLISH">English</option>
+                <option value="STATISTICS">Applied Statistics</option>
+                <option value="CHE">Chemistry</option>
+                <option value="MATH">Mathematics</option>
+                <option value="PHY">Physics</option>
+                <option value="AIS">Accounting and Information Systems (AIS)</option>
+                <option value="FB">Finance and Banking (FB)</option>
+                <option value="MANAGEMENT">Management</option>
+                <option value="MARKETING">Marketing</option>
+
               </select>
             </div>
 
@@ -149,17 +241,18 @@ const TeacherProfile = () => {
               <select
                 id="designation"
                 name="designation"
+                type="text"
                 value={formData.designation}
                 onChange={handleChange}
+                required
                 className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
               >
                 <option value="" disabled>
                   Select a designation
                 </option>
-                <option value="Chairman">Chairman</option>
                 <option value="Professor">Professor</option>
-                <option value="Assistant Professor">Assistant Professor</option>
                 <option value="Associate Professor">Associate Professor</option>
+                <option value="Assistant Professor">Assistant Professor</option>
                 <option value="Lecturer">Lecturer</option>
               </select>
             </div>
@@ -170,26 +263,14 @@ const TeacherProfile = () => {
             <div>
               <label className="block text-gray-700 text-sm font-semibold mb-2">Mobile Number</label>
               <input
-                type="text"
+                type="tel"
                 id="phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Enter mobile number"
+                required
                 className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-gray-700 text-sm font-semibold mb-2">Password</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="********"
-                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
@@ -208,6 +289,7 @@ const TeacherProfile = () => {
                     type="file"
                     name="profilePhoto"
                     onChange={handleChange}
+                    required
                     className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
                   />
                 </label>
@@ -225,6 +307,13 @@ const TeacherProfile = () => {
               <i className="fa-solid fa-angle-right"></i>
             </button>
           </div>
+
+          {/* Error message display */}
+        {errorMessage && (
+          <div className="md:col-span-2 text-red-500 text-center mt-4">
+            {errorMessage}
+          </div>
+        )}
         </form>
       </div>
     </div>
