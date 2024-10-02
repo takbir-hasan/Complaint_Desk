@@ -132,7 +132,7 @@ const TeacherProfile = () => {
        </div>
     </div>
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
-      {teacher ? (
+      {teacher && (
             <>
                 <div className="p-4 text-center">
                     <img
@@ -175,13 +175,6 @@ const TeacherProfile = () => {
                     </div>
                 </div>
             </>
-        ) : (
-          <div class="flex justify-center items-center h-screen bg-gray-100">
-          <div class="text-center">
-            <div class="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
-          </div>
-        </div>
-        
         )}
 
       <hr className="border-t-4 mt-5" style={{ borderColor: '#FEDE00' }} />
