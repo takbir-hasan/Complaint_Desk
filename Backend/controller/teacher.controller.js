@@ -46,7 +46,7 @@ export const register = async (req, res) => {
     // Create a new user
     const user = new Teacher({
       name,
-      department,
+      dept: department,
       email,
       designation,
       phone,
