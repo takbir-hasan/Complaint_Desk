@@ -35,9 +35,6 @@ function AdminProfile() {
     if (!oldPass || !newPass) {
       toast.error('Wrong: Please fill up all fields!'); 
     }
-     else {
-      toast.success('Password updated successfully');
-    }
   };
 
   const email = localStorage.getItem('email')
@@ -53,10 +50,12 @@ function AdminProfile() {
       });
 
       if (response.ok) {
-      //  alert("Password has been updated!")   
+      //  alert("Password has been updated!") 
+      toast.success("Password has been updated!");  
       } else {
           const errorData = await response.json();
-          alert(errorData.message);
+          // alert(errorData.message);
+          toast.error(errorData.message); 
       }
   } catch (error) {
       alert('Error in changing. Please try again later.');
@@ -175,9 +174,9 @@ function AdminProfile() {
       <button  type="submit" className="button  text-black w-full max-w-xs mb-4" onClick={updateNotify}>
         Update
       </button>
-      <ToastContainer />
       </div>
       </form>
+      <ToastContainer />
 
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
       
