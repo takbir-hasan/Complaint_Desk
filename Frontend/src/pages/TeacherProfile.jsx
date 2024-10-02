@@ -136,10 +136,10 @@ const TeacherProfile = () => {
             <>
                 <div className="p-4 text-center">
                     <img
-                        className="mx-auto"
+                        className="mx-auto rounded-full"
                         src={teacher.profilePhoto || ''}
                         alt="Teacher"
-                        style={{ borderRadius: '50%', width: '200px' }}
+                        style={{width: '180px' }}
                     />
                 </div>
                 <div className="text-center mb-3">
