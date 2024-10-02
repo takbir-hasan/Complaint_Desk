@@ -196,3 +196,11 @@ body{
       transform: scale(1);
     }
   }
+
+  .profile-image {
+    width: 180px;
+    height: 180px;
+    object-fit: cover; 
+    border-radius: 50%; 
+    border: 2px solid #ffd700; 
+}

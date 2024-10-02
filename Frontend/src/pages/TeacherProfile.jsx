@@ -136,10 +136,9 @@ const TeacherProfile = () => {
             <>
                 <div className="p-4 text-center">
                     <img
-                        className="mx-auto rounded-full"
+                        className="mx-auto rounded-full profile-image"
                         src={teacher.profilePhoto || ''}
                         alt="Teacher"
-                        style={{width: '180px' }}
                     />
                 </div>
                 <div className="text-center mb-3">
