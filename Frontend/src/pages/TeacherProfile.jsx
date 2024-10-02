@@ -84,6 +84,7 @@ const TeacherProfile = () => {
       const data = await response.json();
       // console.log(data);
       toast.success('Profile updated successfully!');
+      window.location.reload();
     } catch (error) {
       console.error('Error updating profile:', error);
       toast.error('Error updating profile, please try again.'); // Use toast for error messages
