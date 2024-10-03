@@ -314,3 +314,95 @@ export const updateTeacherProfile = async (req, res) =>
   }
 
 };
+
+//Get Teacher
+ export const getTeacherByDepartment = async (req, res) => {
+  const {dept} = req.query;
+  try{
+    const teachers = await Teacher.find({dept: dept});
+    res.json({teachers});
+  } catch (error)
+  {
+    res.status(500).json({ error: 'Server Error' });
+  }
+}
+
+
+//Function to handle the update of assigned position and department
+export const updatePosition = async (req, res) => {
+
+  const { chairman, teachers } = req.body;
+  try{
+    if (chairman) {
+      const updatedChairman = await Teacher.findOneAndUpdate(
+          { name: chairman.name }, // Search by the chairman's name
+          { assignedPosition: chairman.assignedPosition, assignedDept: chairman.assignedDept },
+          { new: true } // Return the updated document
+      );
+
+      if (!updatedChairman) {
+          return res.status(404).json({ message: "Chairman not found" });
+      }
+  }
+
+  if (teachers && teachers.length > 0) {
+      const updatePromises = teachers.map(async (teacher) => {
+          return await Teacher.findOneAndUpdate(
+              { name: teacher.name }, // Search by the teacher's name
+              { assignedPosition: teacher.assignedPosition, assignedDept: teacher.assignedDept },
+              { new: true } // Return the updated document
+          );
+      });
+
+      await Promise.all(updatePromises);
+  }
+
+  return res.status(200).json({ message: "Successfully Added Committe" });
+   
+  }
+  catch (error) {
+    console.error("Error updating teachers:", error);
+    return res.status(500).json({ message: "Internal server error" });
+}
+
+};
+
+
+//Function to get Teachers with Specified Positions
+// export const getAssignedTeachersByPosition = async (req, res) => {
+//   try {
+//       const assignedTeachers = await Teacher.find({
+//           assignedPosition: { $in: ["Chairman", "Committee"] }
+//       }).select('name assignedDept assignedPosition'); // Select only the required fields
+
+//       if (assignedTeachers.length === 0) {
+//           return res.status(404).json({ message: "No teachers found with the specified positions." });
+//       }
+
+//       return res.status(200).json({ assignedTeachers });
+//   } catch (error) {
+//       console.error("Error retrieving assigned teachers:", error);
+//       return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
+// Function to get Teachers with Specified Positions
+export const getAssignedTeachersByPosition = async (req, res) => {
+  try {
+      const positions = req.query.positions ? req.query.positions.split(',') : ["Chairman", "Committee"]; // Allow dynamic positions
+
+      const assignedTeachers = await Teacher.find({
+          assignedPosition: { $in: positions }
+      }).select('name assignedDept assignedPosition');
+
+      if (assignedTeachers.length === 0) {
+          return res.status(404).json({ success: false, message: "No teachers found with the specified positions." });
+      }
+
+      console.log(`Retrieved ${assignedTeachers.length} assigned teachers.`);
+      return res.status(200).json({ success: true, assignedTeachers });
+  } catch (error) {
+      console.error("Error retrieving assigned teachers:", error);
+      return res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};

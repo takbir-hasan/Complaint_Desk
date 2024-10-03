@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
@@ -11,11 +11,46 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function AdminDashboard() {
-  const [searchDepartment, setSearchDepartment] = useState('');
-  const [searchChairman, setSearchChairman] = useState('');
-  const [searchTeacher, setSearchTeacher] = useState('');
-  const [selectedTeachers, setSelectedTeachers] = useState([]);
+ const [selectedDept, setSelectedDept] = useState('');
+ const [teachers, setTeachers] = useState([]);
+ const [search1, setSearch1] = useState('');
+const [search2, setSearch2] = useState('');
+const [selectedTeachers, setSelectedTeachers] = useState([]); // for committe
+const [assignedTeachersData, setAssignedTeachersData] = useState([]);
+
+
+useEffect(() => {
+    const fetchTeachers = async () => {
+      try {
+        const response = await fetch(`/teacher/api/getAllteacherByDeparment?dept=${selectedDept}`);
+        const data = await response.json();
+        setTeachers(data.teachers);
+      } catch (error) {
+        console.error('Error fetching teachers:', error);
+      }
+    };
+    fetchTeachers();
+  }, [selectedDept]);
+
+
+  const handleTeacherSelect = (e) => {
+    const teacher = e.target.value;
+    if (teacher && !selectedTeachers.includes(teacher) && selectedTeachers.length < 5) {
+        setSelectedTeachers([...selectedTeachers, teacher]);
+      } else if (selectedTeachers.length >= 5) {
+        alert("You can only select up to 5 teachers.");
+      }
+      setSearch2('');
+  };
+
+  const removeTeacher = (teacherToRemove) => {
+    setSelectedTeachers((prevTeachers) =>
+      prevTeachers.filter((teacher) => teacher !== teacherToRemove)
+    );
+  };
   
+  
+
   const navigate = useNavigate();
   const handleRedirect = () => {
     navigate('/AdminProfile'); // Adjust the path as necessary
@@ -28,99 +63,71 @@ function AdminDashboard() {
   }
 
 
+  //Add Committee
+  const handleAddClick = async () => {
+    const assignedData = selectedTeachers.map(teacher => ({
+        name: teacher,
+        assignedPosition: "Committee", 
+        assignedDept: selectedDept,
+    }));
 
-  const departments = [
-    { name: 'Computer Science & Engineering (CSE)', value: 'CSE' },
-    { name: 'Electrical & Electronic Engineering (EEE)', value: 'EEE' },
-    { name: 'Biomedical Engineering (BME)', value: 'BME' },
-    { name: 'Pharmacy (PHARM)', value: 'PHARM' },
-];
+    const chairmanData = {
+        name: search1,
+        assignedPosition: "Chairman", 
+        assignedDept: selectedDept,
+    };
 
-const chairmen = [
-    'John Doe',
-    'Jane Smith',
-    'Michael Brown',
-    'Lisa Johnson',
-    'Galib',
-];
+    const requestData = {
+        chairman: chairmanData, 
+        teachers: assignedData, 
+    };
 
-const teachers = [
-    'John Doe',
-    'Jane Smith',
-    'Galib',
-    'Michael Brown',
-    'Lisa Johnson',
-    'Sadia Afrin',
-    'Tasnim Binte Shahid',
-];
+    try {
+        const response = await fetch('/teacher/api/updatePosition', {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData), 
+        });
 
-const [tableData, setTableData] = useState([]);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
 
-const filterItems = (list, search) => {
-    return list.filter(item => item.toLowerCase().includes(search.toLowerCase()));
-};
-
-const selectTeacher = (teacher) => {
-    if (selectedTeachers.length < 5 && !selectedTeachers.includes(teacher)) {
-        setSelectedTeachers([...selectedTeachers, teacher]);
-    } else {
-        toast.error("Already selected this teacher.");
+        const data = await response.json(); 
+        // console.log('Update successful:', data);
+        toast.success(data.message); 
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    } catch (error) {
+        console.error('Error updating data:', error);
+        toast.error(error.message);
     }
 };
 
-const addToTable = () => {
-    const departmentValue = searchDepartment;
-    const chairmanValue = searchChairman;
-    const isDepartmnetAlreadyAdded =  tableData.some(item => item.department ===  departmentValue);
-    const isChairmanAlreadyAdded = tableData.some(item => item.chairman === chairmanValue);
+//Fetch Assigned Committee
+useEffect(() => {
+    const fetchAssignedTeachers = async () => {
+      try {
+        const response = await fetch('/teacher/api/getAssignedTeachers');
+        const data = await response.json();
+        // console.log(data);
+        if (data.success) {
+          setAssignedTeachersData(data.assignedTeachers);
+          console.log('Assigned Teachers:', data.assignedTeachers);
+        } else {
+          console.error(data.message);
+        }
+      } catch (error) {
+        console.error('Error fetching assigned teachers:', error);
+        // toast.error('Failed to fetch assigned teachers');
+      }
+    };
 
-    if(isDepartmnetAlreadyAdded)
-    {
-        toast.error("Department already added");
-        return;
-    }
-
-    if(isChairmanAlreadyAdded)
-    {
-        toast.error("Chairman already added.");
-        return;
-    }
-
-    if(isDepartmnetAlreadyAdded && isChairmanAlreadyAdded)
-    {
-        toast.wrong("Department and Chairman are already selected.");
-        return;
-    }
-
-
-
-
-    if (!isDepartmnetAlreadyAdded && !isChairmanAlreadyAdded && selectedTeachers.length) {
-        setTableData([
-            ...tableData,
-            {
-                department: departmentValue,
-                chairman: chairmanValue,
-                teachers: selectedTeachers
-            }
-        ]);
-
-        // Clear selections
-        setSearchDepartment('');
-        setSearchChairman('');
-        setSelectedTeachers([]);
-        setSearchTeacher('');
-        toast.success("Successfully added committee.");
-    } else {
-        toast.error("Please fill out all the fields.");
-    }
-};
-
-const removeTeacher = (teacherToRemove) => {
-    setSelectedTeachers(prevTeachers => 
-        prevTeachers.filter(teacher => teacher !== teacherToRemove)
-    );
-};
+    fetchAssignedTeachers();
+  }, []);
 
 
   return (
@@ -166,26 +173,17 @@ const removeTeacher = (teacherToRemove) => {
                 <div className="mb-0">
                     <label htmlFor="searchDepartment" className="block text-gray-700 text-sm font-semibold mb-2">Department</label>
                     <div className="flex">
-                        <input
-                            type="text"
-                            id="searchDepartment"
+                        <select
                             placeholder="Search Department..."
                             className="w-full bg-gray-100 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            value={searchDepartment}
-                            onChange={e => setSearchDepartment(e.target.value)}
-                        />
+                            value={selectedDept}
+                            onChange={(e) => setSelectedDept(e.target.value)}
+                        >
+                            <option value="CSE">CSE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="EST">EST</option>
+                        </select>
                     </div>
-                    <ul className={`mt-2 border border-gray-300 rounded-md ${searchDepartment ? '' : 'hidden'}`}>
-                        {filterItems(departments.map(d => d.name), searchDepartment).map((department, index) => (
-                            <li
-                                key={index}
-                                className="p-2 cursor-pointer hover:bg-gray-200"
-                                onClick={() => setSearchDepartment(departments[index].value)}
-                            >
-                                {department}
-                            </li>
-                        ))}
-                    </ul>
                 </div>
             </div>
             <div className="col-span-1">
@@ -194,24 +192,18 @@ const removeTeacher = (teacherToRemove) => {
                     <div className="flex">
                         <input
                             type="text"
-                            id="searchChairman"
                             placeholder="Search Chairman..."
                             className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            value={searchChairman}
-                            onChange={e => setSearchChairman(e.target.value)}
+                            value={search1}
+                            list="teacherList1"
+                            onChange={(e) => setSearch1(e.target.value)}
                         />
-                    </div>
-                    <ul className={`mt-2 border border-gray-300 rounded-md ${searchChairman ? '' : 'hidden'}`}>
-                        {filterItems(chairmen, searchChairman).map((chairman, index) => (
-                            <li
-                                key={index}
-                                className="p-2 cursor-pointer hover:bg-gray-200"
-                                onClick={() => setSearchChairman(chairman)}
-                            >
-                                {chairman}
-                            </li>
+                        <datalist id="teacherList1">
+                        {teachers.map((teacher) => (
+                        <option key={teacher._id} value={teacher.name} />
                         ))}
-                    </ul>
+                        </datalist>
+                    </div>
                 </div>
             </div>
             <div className="col-span-1">
@@ -220,49 +212,54 @@ const removeTeacher = (teacherToRemove) => {
                     <div className="flex">
                         <input
                             type="text"
-                            id="searchTeacher"
                             placeholder="Search Teacher..."
                             className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            value={searchTeacher}
-                            onChange={e => setSearchTeacher(e.target.value)}
+                            list="teacherList2"
+                            value={search2}
+                            // onChange={(e) => setSearch2(e.target.value)}
+                            onChange={(e) => {
+                                setSearch2(e.target.value);
+                                const selectedTeacher = teachers.find(teacher => teacher.name === e.target.value);
+                                if (selectedTeacher && !selectedTeachers.includes(selectedTeacher.name)) {
+                                    setSelectedTeachers([...selectedTeachers, selectedTeacher.name]);
+                                }
+                            }}
+                            onBlur={handleTeacherSelect}
                         />
+                         <datalist id="teacherList2">
+                        {teachers.map((teacher) => (
+                        <option key={teacher._id} value={teacher.name} />
+                        ))}
+                        </datalist>
                     </div>
-                    <ul className={`mt-2 border border-gray-300 rounded-md ${searchTeacher ? '' : 'hidden'}`}>
-                        {filterItems(teachers, searchTeacher).map((teacher, index) => (
-                            <li
-                                key={index}
-                                className="p-2 cursor-pointer hover:bg-gray-200"
-                                onClick={() => selectTeacher(teacher)}
-                            >
-                                {teacher}
-                            </li>
-                        ))}
-                    </ul>
                     <div id="selectedTeachers" className="mt-2 gap-3 mb-2">
-                        {selectedTeachers.map((teacher, index) => (
-                            <span key={index} className="px-2 py-1 bg-blue-100 rounded-md mr-2 flex items-center">
-                            {teacher}
-                            <button
-                                className="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
-                                onClick={() => removeTeacher(teacher)} // Call removeTeacher function
-                                aria-label={`Remove ${teacher}`}
-                            >
-                                &times;
-                            </button>
+                    {selectedTeachers.map((teacher, index) => (
+                        <span key={index} className="px-2 py-2 mb-2 bg-blue-100 rounded-md mr-2 flex items-center">
+                        {teacher}
+                        <button
+                            className="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
+                            onClick={() => removeTeacher(teacher)}
+                            aria-label={`Remove ${teacher}`}
+                        >
+                            &times;
+                        </button>
                         </span>
-                        ))}
+                    ))}
                     </div>
                 </div>
             </div>
 
+
             <div className="col-span-1 sm:col-span-3 md:col-span-3 lg:col-span-3 flex justify-center">
                 <button
                     className="button px-4 py-2 text-dark font-semibold rounded-md"
-                    onClick={addToTable}
+                    onClick={handleAddClick} // Add onClick handler
                 >
                     Add
                 </button>
+                <ToastContainer />
             </div>
+
         </div>
 
         <hr className="border-t-4 mt-5" style={{ borderColor: '#FEDE00' }} />
@@ -277,31 +274,47 @@ const removeTeacher = (teacherToRemove) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {tableData.map((row, index) => (
-                        <tr key={index}>
+                
+
+                {assignedTeachersData.length > 0 ? (
+                assignedTeachersData.map((teacher, index) => {
+                    const departmentName = teacher.assignedDept;
+                    const isNewDepartment = index === 0 || assignedTeachersData[index - 1].assignedDept !== departmentName;
+
+                    // Get unique committee members for the current department
+                    const committeeMembers = assignedTeachersData
+                        .filter(t => t.assignedPosition === "Committee" && t.assignedDept === departmentName)
+                        .map(committeeMember => committeeMember.name);
+
+                    const uniqueCommitteeMembers = [...new Set(committeeMembers)]; // Remove duplicates
+
+                    return (
+                        <tr key={teacher.id || index} className="hover:bg-gray-100">
                             <td className="py-2 px-2 border-b text-center">
-                              {row.department} <br/>
-                              <button 
-                                className="ml-2 p-2 bg-red-500 text-white rounded hover:bg-red-600"
-                                onClick={() => handleButtonClick(row.id)} 
-                                
-                              >
-                                <span className="flex items-center">
-                                <FaTrash className="mr-2" />
-                                    Remove
-                                </span>
-                              </button>
+                                {isNewDepartment ? departmentName : ''}
                             </td>
-                            <td className="py-2 px-2 border-b text-center">{row.chairman}</td>
-                            <td className="py-2 px-2 border-b">
-                                <ol type="1">
-                                    {row.teachers.map((teacher, i) => (
-                                        <li key={i}>{teacher}</li>
-                                    ))}
-                                </ol>
+                            <td className="py-2 px-2 border-b text-center">
+                                {teacher.assignedPosition === "Chairman" ? teacher.name : ''}
+                            </td>
+                            <td className="py-2 px-2 border-b text-center">
+                                {isNewDepartment && uniqueCommitteeMembers.length > 0 && (
+                                    uniqueCommitteeMembers.map((member, i) => (
+                                        <span key={member}>
+                                            {member}{i < uniqueCommitteeMembers.length - 1 ? <br /> : ""}
+                                        </span>
+                                    ))
+                                )}
                             </td>
                         </tr>
-                    ))}
+                    );
+                    })
+                    ) : (
+                        <tr>
+                            <td colSpan="3" className="py-2 text-center">No assigned Committee found.</td>
+                        </tr>
+                    )}
+                
+
                 </tbody>
             </table>
         </div>
