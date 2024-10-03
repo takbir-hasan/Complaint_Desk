@@ -37,6 +37,14 @@ const TeacherProfile = () => {
     fetchData();
 }, []);
 
+const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
 
   const handleDashboardClick = () => {
     if (Status === 'Committee') {
@@ -46,20 +54,26 @@ const TeacherProfile = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: files ? files[0] : value,
-    });
+  
+    // Handle file upload (if applicable)
+    if (files) {
+      const file = files[0];
+      if (file.size > 2 * 1024 * 1024) {
+        alert('File size should not exceed 2MB');
+        return; // Exit if file size is too large
+      }
+      setFormData({
+        ...formData,
+        [name]: file,
+      });
+    } else {
+      // Handle regular input changes
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
-
 
   //Update Profile Info
   const handleSubmit = async (e) => {
@@ -71,6 +85,11 @@ const TeacherProfile = () => {
       if (formData.profilePhoto) {
         base64Photo = await convertToBase64(formData.profilePhoto);
       }
+      if(!validatePhone(formData.phone)) {
+        alert('Invalid phone number format');
+        return;
+      }
+
       const response = await fetch(`/teacher/api/updateTeacherProfile/${email}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -90,10 +109,11 @@ const TeacherProfile = () => {
       toast.error('Error updating profile, please try again.'); // Use toast for error messages
     }
   };
+  
   const validatePhone = (phone) => {
     // Adjust this regex based on your phone number format requirements (e.g., country code, etc.)
-    const regex = /^\d+$/; // Matches digits only
-        return regex.test(phone);
+    const phoneRegex = /^(01|\+8801)[3-9]\d{8}$/;
+        return phoneRegex.test(phone);
       };
 
   
@@ -273,7 +293,7 @@ const TeacherProfile = () => {
             </div>
 
             <div>
-              <label className="block text-gray-700 text-sm font-semibold mb-2">Profile Photo</label>
+              <label className="block text-gray-700 text-sm font-semibold mb-2">Profile Photo (Max Size 2MB)</label>
               <div className="flex items-center space-x-5">
                 <div className="shrink-0">
                   <img

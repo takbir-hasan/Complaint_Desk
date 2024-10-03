@@ -16,13 +16,7 @@ const Signup = () => {
     profilePhoto: null,
   });
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: files ? files[0] : value,
-    });
-  };
+  
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -31,6 +25,30 @@ const Signup = () => {
       reader.onerror = (error) => reject(error);
     });
   };
+  
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+  
+    // Handle file upload (if applicable)
+    if (files) {
+      const file = files[0];
+      if (file.size > 2 * 1024 * 1024) {
+        alert('File size should not exceed 2MB');
+        return; // Exit if file size is too large
+      }
+      setFormData({
+        ...formData,
+        [name]: file,
+      });
+    } else {
+      // Handle regular input changes
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,8 +109,8 @@ const Signup = () => {
     };
     const validatePhone = (phone) => {
     // Adjust this regex based on your phone number format requirements (e.g., country code, etc.)
-    const regex = /^\d+$/; // Matches digits only
-        return regex.test(phone);
+    const phoneRegex = /^(01|\+8801)[3-9]\d{8}$/;
+        return phoneRegex.test(phone);
       };
 
   return (
@@ -208,7 +226,7 @@ const Signup = () => {
                 />
             </div>
             <label className="block mb-4">
-                <span className="sr-only">Choose profile photo</span>
+                <span className="sr-only">Choose profile photo (Max Size 2MB)</span>
                 <input
                 type="file"
                 className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
