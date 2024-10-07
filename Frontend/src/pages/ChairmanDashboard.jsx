@@ -53,7 +53,8 @@ const ChairmanDashboard = () => {
   const [errorComplaints, setErrorComplaints] = useState(null);
   const [errorDiscarded, setErrorDiscarded] = useState(null);
   const [selectedComplaint, setSelectedComplaint] = useState(null);
-  const deptname = "EST";
+  // const deptname = "EST";
+  const deptname = localStorage.getItem('assignedDept');
 
   useEffect(() => {
     setLoadingComplaints(true);

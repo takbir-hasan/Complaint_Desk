@@ -368,24 +368,6 @@ export const updatePosition = async (req, res) => {
 };
 
 
-//Function to get Teachers with Specified Positions
-// export const getAssignedTeachersByPosition = async (req, res) => {
-//   try {
-//       const assignedTeachers = await Teacher.find({
-//           assignedPosition: { $in: ["Chairman", "Committee"] }
-//       }).select('name assignedDept assignedPosition'); // Select only the required fields
-
-//       if (assignedTeachers.length === 0) {
-//           return res.status(404).json({ message: "No teachers found with the specified positions." });
-//       }
-
-//       return res.status(200).json({ assignedTeachers });
-//   } catch (error) {
-//       console.error("Error retrieving assigned teachers:", error);
-//       return res.status(500).json({ message: "Internal server error" });
-//   }
-// };
-
 // Function to get Teachers with Specified Positions
 export const getAssignedTeachersByPosition = async (req, res) => {
   try {

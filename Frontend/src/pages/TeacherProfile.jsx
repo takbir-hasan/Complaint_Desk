@@ -29,6 +29,10 @@ const TeacherProfile = () => {
             const data = await response.json();
             // console.log(data); 
             setTeacher(data.teacher);
+            setStatus(data.teacher.assignedPosition);
+            // console.log(data.teacher.status);
+            localStorage.setItem('assignedDept', data.teacher.assignedDept);
+
         } catch (error) {
             console.error('Error fetching teacher data:', error);
         }
@@ -46,11 +50,17 @@ const convertToBase64 = (file) => {
   });
 };
 
-  const handleDashboardClick = () => {
-    if (Status === 'Committee') {
-      navigate('/CommitteDashboard'); // Redirect to the CommitteeDashboard page
-    }
-  };
+//Redirect Chairman
+const handleDashboardClick = () => {
+  console.log('Button clicked. Status:', Status); // Check button click and status
+ if (Status === 'Chairman') {
+      navigate('/ChairmanDashboard'); 
+  }
+  if(Status === "Committee")
+  {
+    navigate('/CommitteDashboard');
+  }
+};
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -166,18 +176,31 @@ const convertToBase64 = (file) => {
                 </div>
 
                 {Status === 'Committee' && (
-                    <div className="grid mb-2 gap-1">
-                        <div className="bg-gray-200 p-4 text-center">
-                            <span className="loader font-semibold text-xs">
-                                You are assigned to Complaint Committee <span className="dot"></span>
-                                <br />
-                            </span>
-                            <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDashboardClick}>
-                                Dashboard
-                            </button>
+                        <div className="grid mb-2 gap-1">
+                            <div className="bg-gray-200 p-4 text-center">
+                                <span className="loader font-semibold text-xs">
+                                    You are assigned to Complaint Committee <span className="dot"></span>
+                                    <br />
+                                </span>
+                                <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDashboardClick}>
+                                    Dashboard
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                    {Status === 'Chairman' && (
+                        <div className="grid mb-2 gap-1">
+                            <div className="bg-gray-200 p-4 text-center">
+                                <span className="loader font-semibold text-xs">
+                                    You are assigned as Chairman <span className="dot"></span>
+                                    <br />
+                                </span>
+                                <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDashboardClick} >
+                                    Dashboard
+                                </button>
+                            </div>
+                        </div>
+                    )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
                     <div className="bg-gray-200 p-4 text-center">
