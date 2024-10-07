@@ -8,7 +8,7 @@ export const info = async (req, res) => {
         $facet: {
           totalProblems: [{ $count: "count" }],
           solvedProblems: [
-            { $match: { status: "solved" } },
+            { $match: { status: "Solved" } },
             { $count: "count" }
           ]
         }
