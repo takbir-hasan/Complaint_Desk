@@ -277,43 +277,42 @@ useEffect(() => {
                 
 
                 {assignedTeachersData.length > 0 ? (
-                assignedTeachersData.map((teacher, index) => {
-                    const departmentName = teacher.assignedDept;
-                    const isNewDepartment = index === 0 || assignedTeachersData[index - 1].assignedDept !== departmentName;
+    assignedTeachersData.map((teacher, index) => {
+        const departmentName = teacher.assignedDept;
+        const isNewDepartment = index === 0 || assignedTeachersData[index - 1].assignedDept !== departmentName;
 
-                    // Get unique committee members for the current department
-                    const committeeMembers = assignedTeachersData
-                        .filter(t => t.assignedPosition === "Committee" && t.assignedDept === departmentName)
-                        .map(committeeMember => committeeMember.name);
+        // Get unique committee members for the current department
+        const committeeMembers = assignedTeachersData
+            .filter(t => t.assignedPosition === "Committee" && t.assignedDept === departmentName)
+            .map(committeeMember => committeeMember.name);
 
-                    const uniqueCommitteeMembers = [...new Set(committeeMembers)]; // Remove duplicates
+        const uniqueCommitteeMembers = [...new Set(committeeMembers)]; // Remove duplicates
 
-                    return (
-                        <tr key={teacher.id || index} className="hover:bg-gray-100">
-                            <td className="py-2 px-2 border-b text-center">
-                                {isNewDepartment ? departmentName : ''}
-                            </td>
-                            <td className="py-2 px-2 border-b text-center">
-                                {teacher.assignedPosition === "Chairman" ? teacher.name : ''}
-                            </td>
-                            <td className="py-2 px-2 border-b text-center">
-                                {isNewDepartment && uniqueCommitteeMembers.length > 0 && (
-                                    uniqueCommitteeMembers.map((member, i) => (
-                                        <span key={member}>
-                                            {member}{i < uniqueCommitteeMembers.length - 1 ? <br /> : ""}
-                                        </span>
-                                    ))
-                                )}
-                            </td>
-                        </tr>
-                    );
-                    })
-                    ) : (
-                        <tr>
-                            <td colSpan="3" className="py-2 text-center">No assigned Committee found.</td>
-                        </tr>
+        return isNewDepartment ? (
+            <tr key={teacher.id || index} className="hover:bg-gray-100">
+                <td className="py-2 px-2 border-b text-center">
+                    {departmentName}
+                </td>
+                <td className="py-2 px-2 border-b text-center">
+                    {assignedTeachersData.find(t => t.assignedPosition === "Chairman" && t.assignedDept === departmentName)?.name || ''}
+                </td>
+                <td className="py-2 px-2 border-b text-center">
+                    {uniqueCommitteeMembers.length > 0 && (
+                        uniqueCommitteeMembers.map((member, i) => (
+                            <span key={member}>
+                                {member}{i < uniqueCommitteeMembers.length - 1 ? <br /> : ""}
+                            </span>
+                        ))
                     )}
-                
+                </td>
+            </tr>
+        ) : null;
+    })
+) : (
+    <tr>
+        <td colSpan="3" className="py-2 text-center">No assigned Committee found.</td>
+    </tr>
+)}
 
                 </tbody>
             </table>
