@@ -10,6 +10,7 @@
     * Teacher Features (Complaint Committee Members)
     * Admin Features
     * Additional Features
+* [Screenshots](#screenshots)
 * [Project Structure](#project-structure)
     * Frontend (React.js)
     * Backend (Node.js, Express.js, MongoDB)
@@ -45,6 +46,32 @@ ComplaintDesk is a web application built with the MERN stack (MongoDB, Express.j
 * **Password Recovery:** Forgot your password? No worries! Recover it seamlessly through email verification.
 * **Complaint Dashboard:** Only authorized committee members have access to the dashboard, maintaining data privacy and confidentiality.
 * **Donations via SSLCOMMERZ (Optional):** Support ComplaintDesk by making secure donations through the integrated SSLCOMMERZ payment gateway (requires configuration).
+
+## Screenshots
+Here are some screenshots of the application:
+**Home Page**
+![Home Page](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Home.png?raw=true)
+**Write Complaint**
+![Write Complaint](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/writecomplaint.png?raw=true)
+**Check Status**
+![Check Status](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/writecomplaint.png?raw=true)
+**Teacher Login**
+![Teacher Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/login.png?raw=true)
+**Teacher SignUp**
+![Teacher SignUp](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/teacher%20Signup.png?raw=true)
+**Update Teacher Profile**
+![Update Teacher Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/update%20Teacher%20%20Profile.png?raw=true)
+**Teacher Profile**
+![Teacher Com. Dash.](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Teacher%20Dashboard.png?raw=true)
+**Admin Login**
+![Admin Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20login.png?raw=true)
+**Admin Dashboard**
+![Admin Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20dashboard.png?raw=true)
+**Donate**
+![Donate](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Donate.png?raw=true)![SSLCOMMERZ](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/sslcommerz.png?raw=true)
+**Feedback**
+![Feedback](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Feedback.png?raw=true)
+
 
 ## Project Structure
 
