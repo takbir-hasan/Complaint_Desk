@@ -388,3 +388,29 @@ export const getAssignedTeachersByPosition = async (req, res) => {
       return res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+
+// Function to handle updating teacher's assignDept and assignPosition to "NotAssigned" by departmentName
+export const updatePositionByDepartment = async (req, res) => {
+  const { dept } = req.body;
+
+  try {
+    const updatedTeacher = await Teacher.updateMany(
+      { assignedDept: dept }, // Search by the department name
+      { 
+        assignedDept: 'NotAssigned', 
+        assignedPosition: 'NotAssigned' 
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedTeacher) {
+      return res.status(404).json({ message: "Teacher not found for this department" });
+    }
+
+    return res.status(200).json({ message: "Position and Department updated to NotAssigned" });
+  } catch (error) {
+    console.error("Error updating teacher:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};

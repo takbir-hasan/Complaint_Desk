@@ -130,6 +130,25 @@ useEffect(() => {
   }, []);
 
 
+  const handleCancelClick = async (departmentName) => {
+    try {
+        const response = await fetch('/teacher/api/updatePositionByDepartment', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ dept: departmentName }),
+        });
+
+        const data = await response.json();
+        toast.success(data.message);
+        window.location.reload();
+    } catch (error) {
+        console.error("Error updating positions:", error);
+        toast.error("Failed to update positions.");
+    }
+};
+
+
+
   return (
     <>
      <Helmet>
@@ -291,7 +310,13 @@ useEffect(() => {
         return isNewDepartment ? (
             <tr key={teacher.id || index} className="hover:bg-gray-100">
                 <td className="py-2 px-2 border-b text-center">
-                    {departmentName}
+                    {departmentName} <br/>
+                    <button 
+                    onClick={() => handleCancelClick(departmentName)}
+                    className="mt-2 bg-red-500 text-white px-2 py-1 rounded"
+                    >
+                        Cancel
+                    </button>
                 </td>
                 <td className="py-2 px-2 border-b text-center">
                     {assignedTeachersData.find(t => t.assignedPosition === "Chairman" && t.assignedDept === departmentName)?.name || ''}
