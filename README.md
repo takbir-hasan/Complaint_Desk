@@ -54,7 +54,7 @@ Here are some screenshots of the application:
 **Write Complaint**
 ![Write Complaint](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/writecomplaint.png?raw=true)
 **Check Status**
-![Check Status](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/writecomplaint.png?raw=true)
+![Check Status](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/check.png?raw=true)
 **Teacher Login**
 ![Teacher Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/login.png?raw=true)
 **Teacher SignUp**
