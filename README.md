@@ -63,8 +63,12 @@ Here are some screenshots of the application:
 ![Update Teacher Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/update%20Teacher%20%20Profile.png?raw=true)
 **Teacher Profile**
 ![Teacher Com. Dash.](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Teacher%20Dashboard.png?raw=true)
+**Committee Dashboard**
+![Committee Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Committe%20Dashboard.png?raw=true)
 **Admin Login**
 ![Admin Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20login.png?raw=true)
+**Admin Profile**
+![Admin Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/AdminProfile.png?raw=true)
 **Admin Dashboard**
 ![Admin Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20dashboard.png?raw=true)
 **Donate**
