@@ -32,6 +32,7 @@ const TeacherProfile = () => {
             setStatus(data.teacher.assignedPosition);
             // console.log(data.teacher.status);
             localStorage.setItem('assignedDept', data.teacher.assignedDept);
+            localStorage.setItem('assignedPosition', data.teacher.assignedPosition);
 
         } catch (error) {
             console.error('Error fetching teacher data:', error);

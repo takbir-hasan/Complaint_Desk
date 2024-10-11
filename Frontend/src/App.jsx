@@ -27,6 +27,9 @@ function App() {
   const isLoggedIn = localStorage.getItem('email') ? true : false;
   const status = localStorage.getItem('status') ? true : false;
   const isAuthentic = localStorage.getItem('name') ? true : false;
+  const isAssigned = localStorage.getItem('assignedPosition') ;
+  const chairman = isAssigned === "Chairman" ? true : false;
+  const committee = isAssigned === "Committee" ? true : false;
 
   return (
     <>
@@ -47,8 +50,8 @@ function App() {
         <Route path="/AdminProfile" element={isLoggedIn ? <AdminProfile/> : <Navigate to="/AdminLogin" replace />} />
         <Route path="/AdminDashboard" element={isLoggedIn ? <AdminDashboard/> : <Navigate to="/AdminLogin" replace />} />
         <Route path="/TeacherProfile" element={status ? <TeacherProfile/> :  <Navigate to="/Login" replace />} />
-        <Route path="/CommitteDashboard" element={<CommitteDashboard/>} />
-        <Route path="/ChairmanDashboard" element={<ChairmanDashboard/>} />
+        <Route path="/CommitteDashboard" element={committee ? <CommitteDashboard/> :  <Navigate to="/Login" replace />} />
+        <Route path="/ChairmanDashboard" element={chairman ? <ChairmanDashboard/> :  <Navigate to="/Login" replace />} />
         <Route path="/done/:condition" element={<DonationDone/>} />
         <Route path="/fail/:transactionId" element={<DonationDone/>} />
         <Route path="/forgetpassword" element={ <ForgetPassword/> } />
