@@ -52,28 +52,40 @@ Here are some screenshots of the application:
 
 **Home Page**
 ![Home Page](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Home.png?raw=true)
+
 **Write Complaint**
 ![Write Complaint](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/writecomplaint.png?raw=true)
-**Check Status**
+
+**Check Complaint Status**
 ![Check Status](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/check.png?raw=true)
+
 **Teacher Login**
 ![Teacher Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/login.png?raw=true)
+
 **Teacher SignUp**
 ![Teacher SignUp](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/teacher%20Signup.png?raw=true)
+
 **Update Teacher Profile**
 ![Update Teacher Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/update%20Teacher%20%20Profile.png?raw=true)
+
 **Teacher Profile**
 ![Teacher Com. Dash.](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Teacher%20Dashboard.png?raw=true)
+
 **Committee Dashboard**
 ![Committee Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Committe%20Dashboard.png?raw=true)
+
 **Admin Login**
 ![Admin Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20login.png?raw=true)
+
 **Admin Profile**
 ![Admin Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/AdminProfile.png?raw=true)
+
 **Admin Dashboard**
 ![Admin Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20dashboard.png?raw=true)
+
 **Donate**
 ![Donate](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Donate.png?raw=true)![SSLCOMMERZ](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/sslcommerz.png?raw=true)
+
 **Feedback**
 ![Feedback](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Feedback.png?raw=true)
 
@@ -153,5 +165,5 @@ Here are some screenshots of the application:
 
 ## Developer Credits
 
-*  **Md Saniul Basir Saz:** [https://www.linkedin.com/in/md-saniul-basir-saz/]
-* **Takbir Hasan:** [https://www.linkedin.com/in/sajid-hasan-takbir/]
+*  <a href="https://www.linkedin.com/in/sajid-hasan-takbir">**Sajid Hasan Takbir**</a>
+*  <a href="https://www.linkedin.com/in/md-saniul-basir-saz">**Md Saniul Basir Saz**</a>
