@@ -1,4 +1,4 @@
-## ComplaintDesk: A Streamlined Complaint Management System for Universities (MERN Stack)
+## Complaint Desk: A Streamlined Complaint Management System for Universities (MERN Stack)
 
 **Empowering students, teachers, and administrators with a user-friendly platform for voicing concerns and fostering collaborative resolution.**
 
@@ -152,5 +152,5 @@ Here are some screenshots of the application:
 
 ## Developer Credits
 
-* **Md Saniul Basir Saz:** [https://www.linkedin.com/in/md-saniul-basir-saz/]
+*  **Md Saniul Basir Saz:** [https://www.linkedin.com/in/md-saniul-basir-saz/]
 * **Takbir Hasan:** [https://www.linkedin.com/in/sajid-hasan-takbir/]
