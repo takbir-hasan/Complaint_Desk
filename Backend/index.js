@@ -74,7 +74,7 @@ app.post('/donation', (req, res) => {
 });
 app.post('/fail/:transactionId', async (req, res) => {
   await Donation.updateOne({ _id: req.params.transactionId }, { $set: { status: "failed" } });
-  res.redirect(`http://localhost:4000/done/${'fail'}`);
+  res.redirect(`${process.env.CLIENT_URL}/done/${'fail'}`);
 });
 app.post('/done/:condition', (req,res)=>{
   res.sendFile(path.join(__dirname, '../Frontend/dist', 'index.html'));
