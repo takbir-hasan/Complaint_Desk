@@ -165,6 +165,7 @@ Here are some screenshots of the application:
 
 ## Developer Credits
 
-*  <a href="https://www.linkedin.com/in/md-saniul-basir-saz">**Md Saniul Basir Saz**</a>
 *  <a href="https://www.linkedin.com/in/sajid-hasan-takbir">**Sajid Hasan Takbir**</a>
+*  <a href="https://www.linkedin.com/in/md-saniul-basir-saz">**Md Saniul Basir Saz**</a>
+
 
