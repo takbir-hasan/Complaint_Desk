@@ -20,7 +20,7 @@ function Complaint() {
         <title> Success | Complaint </title>
         </Helmet>
 
-         <div className="flex flex-col min-h-screen overflow-x-hidden max-auto text-black">
+         <div className="flex flex-col h-screen max-auto text-black">
                   <Navbar />
 
        <div className="flex flex-col items-center justify-center h-screen bg-gray-100"> 
