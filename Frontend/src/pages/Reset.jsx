@@ -63,7 +63,7 @@ function Reset() {
         <title>Reset Password</title>
       </Helmet>
 
-      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
+      <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
         <div className="flex-grow flex flex-col items-center justify-center p-4">
           <div className="bg-white p-8 rounded text-center shadow-lg w-full max-w-md">

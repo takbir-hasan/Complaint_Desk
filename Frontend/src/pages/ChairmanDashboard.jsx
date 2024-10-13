@@ -212,7 +212,7 @@ const ChairmanDashboard = () => {
     <title> Dashboard | Chairman </title>
     </Helmet>
 
-      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
+      <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
         <div className="container-fluid ml-4 mr-4 max-w-7xl mt-4 mb-4 mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h1 className="text-2xl text-center font-bold mb-1">Chairman Dashboard</h1>

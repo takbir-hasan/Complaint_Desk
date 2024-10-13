@@ -142,7 +142,7 @@ const handleDashboardClick = () => {
     <title> Profile | Teacher </title>
     </Helmet>
 
-    <div className="flex flex-col min-h-screen bg-gray-100 text-black">
+    <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
        <Navbar />
 
       {/* Toast Notify */}

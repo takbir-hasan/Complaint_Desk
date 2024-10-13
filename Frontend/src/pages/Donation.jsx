@@ -34,7 +34,7 @@ function Donation() {
     <title> Donation </title>
     </Helmet>
 
-   <div className="flex flex-col h-screen bg-gray-100 text-black">
+   <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
         <div className=" flex flex-grow items-center justify-center p-4"> 
           <div className="bg-white p-6 rounded-lg fle shadow-lg w-full max-w-md md:max-w-lg lg:max-w-xl"> 

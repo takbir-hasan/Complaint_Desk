@@ -39,7 +39,7 @@ const AdminLogin = () => {
     <title> Login | Admin </title>
     </Helmet> 
 
-     <div className="flex flex-col min-h-screen bg-gray-100 text-black">
+     <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
         <div className="w-full max-w-md mt-4 mb-4 mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">Admin Login</h2>

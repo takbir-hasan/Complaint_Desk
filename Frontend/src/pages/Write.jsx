@@ -50,7 +50,7 @@ function Write() {
     <Helmet>
     <title>Submit Complaint </title>
     </Helmet>
-      <div className="flex flex-col min-h-screen bg-gray-100 text-black">
+      <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
         <div className="flex-grow p-4">
           <form onSubmit={handleSubmit} className="mx-auto p-6 bg-white rounded shadow-lg w-full sm:max-w-md md:max-w-lg lg:max-w-2xl">

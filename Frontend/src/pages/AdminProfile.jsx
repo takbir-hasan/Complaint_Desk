@@ -119,7 +119,7 @@ function AdminProfile() {
     <title> Profile | Admin </title>
     </Helmet> 
 
-     <div className="flex flex-col min-h-screen bg-gray-100 text-black">
+     <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
       <div className="container-fluid max-w-5xl mt-4 mb-4 ml-auto mr-auto mx-auto bg-white p-8 rounded-lg shadow-lg">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
