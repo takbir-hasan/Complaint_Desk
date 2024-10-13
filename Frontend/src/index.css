@@ -204,3 +204,32 @@ body{
     border-radius: 50%; 
     border: 2px solid #ffd700; 
 }
+
+
+.responsive-font {
+  font-size: 6px; /* Default */
+}
+
+@media (min-width: 640px) {
+  .responsive-font {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-font {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-font {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-font {
+    font-size: 16px;
+  }
+}

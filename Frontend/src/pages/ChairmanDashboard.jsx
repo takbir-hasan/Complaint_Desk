@@ -236,7 +236,7 @@ const ChairmanDashboard = () => {
                 {currentComplaints.map((complaint) => (
                   <tr key={complaint._id}>
                     <td className="border px-0 py-2 mb-0">
-                      <span className="font-semibold bg-gray-300 rounded text-xs sm:text-sm md:text-base" style={{ color: "blue", fontSize: "8px" }}>
+                      <span className="font-semibold bg-gray-300 rounded text-xs sm:text-sm md:text-base responsive-font" style={{ color: "blue"}}>
                         {complaint._id}
                       </span>
                       <br />
