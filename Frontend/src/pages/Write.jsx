@@ -32,8 +32,8 @@ function Write() {
         const data = await response.json();
         const token = data.token;
 
-        // Navigate to the '/complaint' page with the token in the state
-        navigate('/complaint', { state: { token } }); 
+        localStorage.setItem('token', token);
+        window.location.replace('/complaint');
       } else {
 
         console.error('Error submitting complaint:', response.statusText);
