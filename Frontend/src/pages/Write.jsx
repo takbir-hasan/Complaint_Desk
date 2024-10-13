@@ -82,11 +82,35 @@ function Write() {
                  
                 >
                   <option value="">Select Your Department</option>
-                  <option value="CSE">CSE</option>
-                  <option value="EST">EST</option>
-                   <option value="MB">MB</option>
-                   <option value="FB">FB</option>
-                   <option value="FMB">FMB</option>
+                  <option value="CSE">Computer Science and Engineering (CSE)</option>
+                <option value="EEE">Electrical and Electronic Engineering (EEE)</option>
+                <option value="BME">Biomedical Engineering (BME)</option>
+                <option value="PHARM">Pharmacy (PHARM)</option>
+                <option value="ChE">Chemical Engineering (ChE)</option>
+                <option value="IPE">Industrial and Production Engineering (IPE)</option>
+                <option value="PME">Petroleum and Mining Engineering (PME)</option>
+                <option value="TE">Textile Engineering (TE)</option>
+                <option value="APPT">Agro Product Processing Technology (APPT)</option>
+                <option value="CDM">Climate and Disaster Management (CDM)</option>
+                <option value="EST">Environmental Science and Technology (EST)</option>
+                <option value="NFT">Nutrition and Food Technology (NFT)</option>
+                <option value="BMB">Biochemistry and Molecular Biology (BMB)</option>
+                <option value="FMB">Fisheries and Marine Bioscience (FMB)</option>
+                <option value="GEBT">Genetic Engineering and Biotechnology (GEBT)</option>
+                <option value="MB">Microbiology (MB)</option>
+                <option value="NHS">Nursing and Health Science (NHS)</option>
+                <option value="PESS">Physical Education and Sports Science (PESS)</option>
+                <option value="PTR">Physiotherapy and Rehabilitation (PTR)</option>
+                <option value="ENGLISH">English</option>
+                <option value="STATISTICS">Applied Statistics</option>
+                <option value="CHE">Chemistry</option>
+                <option value="MATH">Mathematics</option>
+                <option value="PHY">Physics</option>
+                <option value="AIS">Accounting and Information Systems (AIS)</option>
+                <option value="FB">Finance and Banking (FB)</option>
+                <option value="MANAGEMENT">Management</option>
+                <option value="MARKETING">Marketing</option>
+
                 </select>
               </div>
 
@@ -115,11 +139,35 @@ function Write() {
                   required
                 >
                   <option value="">Select Complaint Department</option>
-                  <option value="CSE">CSE</option>
-                  <option value="EST">EST</option>
-                   <option value="MB">MB</option>
-                   <option value="FB">FB</option>
-                   <option value="FMB">FMB</option>
+                  <option value="CSE">Computer Science and Engineering (CSE)</option>
+                <option value="EEE">Electrical and Electronic Engineering (EEE)</option>
+                <option value="BME">Biomedical Engineering (BME)</option>
+                <option value="PHARM">Pharmacy (PHARM)</option>
+                <option value="ChE">Chemical Engineering (ChE)</option>
+                <option value="IPE">Industrial and Production Engineering (IPE)</option>
+                <option value="PME">Petroleum and Mining Engineering (PME)</option>
+                <option value="TE">Textile Engineering (TE)</option>
+                <option value="APPT">Agro Product Processing Technology (APPT)</option>
+                <option value="CDM">Climate and Disaster Management (CDM)</option>
+                <option value="EST">Environmental Science and Technology (EST)</option>
+                <option value="NFT">Nutrition and Food Technology (NFT)</option>
+                <option value="BMB">Biochemistry and Molecular Biology (BMB)</option>
+                <option value="FMB">Fisheries and Marine Bioscience (FMB)</option>
+                <option value="GEBT">Genetic Engineering and Biotechnology (GEBT)</option>
+                <option value="MB">Microbiology (MB)</option>
+                <option value="NHS">Nursing and Health Science (NHS)</option>
+                <option value="PESS">Physical Education and Sports Science (PESS)</option>
+                <option value="PTR">Physiotherapy and Rehabilitation (PTR)</option>
+                <option value="ENGLISH">English</option>
+                <option value="STATISTICS">Applied Statistics</option>
+                <option value="CHE">Chemistry</option>
+                <option value="MATH">Mathematics</option>
+                <option value="PHY">Physics</option>
+                <option value="AIS">Accounting and Information Systems (AIS)</option>
+                <option value="FB">Finance and Banking (FB)</option>
+                <option value="MANAGEMENT">Management</option>
+                <option value="MARKETING">Marketing</option>
+
                 </select>
               </div>
             </div>
