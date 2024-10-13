@@ -47,7 +47,7 @@ function Body() {
 
   return (
    <>
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen overflow-x-hidden bg-gray-100">
       <div className="max-w-screen-md mx-auto px-4 md:px-20 py-8 text-center">
         <p className="font-bold text-2xl md:text-3xl mb-8">
           {solved}/{total} Complaints are Solved
