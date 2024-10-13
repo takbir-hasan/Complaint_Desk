@@ -214,7 +214,7 @@ const ChairmanDashboard = () => {
 
       <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
-        <div className="container-fluid ml-4 mr-4 max-w-7xl mt-4 mb-4 mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <div className="container mx-auto max-w-7xl mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg sm:p-4 md:p-6 lg:p-8">
         <h1 className="text-2xl text-center font-bold mb-1">Chairman Dashboard</h1>
           <p style={{ fontSize: "13px" }} className="mb-1 text-left font-bold">Complaints for "<span className="text-green-500">{deptname}</span>" Department</p>
           <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
@@ -236,11 +236,11 @@ const ChairmanDashboard = () => {
                 {currentComplaints.map((complaint) => (
                   <tr key={complaint._id}>
                     <td className="border px-0 py-2 mb-0">
-                      <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "8px" }}>
+                      <span className="font-semibold bg-gray-300 rounded text-xs sm:text-sm md:text-base" style={{ color: "blue", fontSize: "8px" }}>
                         {complaint._id}
                       </span>
                       <br />
-                      <span style={{ fontSize: "8px" }}>
+                      <span style={{ fontSize: "10px" }}>
                         <i className="fa-solid fa-calendar-days"></i> {formatDate(complaint.date)}
                       </span>
                     </td>
@@ -269,7 +269,7 @@ const ChairmanDashboard = () => {
                       </button>
                     </td>
                     <td className="border px-0 py-2">
-                      <button style={{ fontSize: "10px" }} onClick={() => openModal(complaint)} className="button text-dark font-semibold py-1 mt-2 px-2 rounded">
+                      <button style={{ fontSize: "10px", padding: "4px 8px" }} onClick={() => openModal(complaint)} className="button text-dark font-semibold py-1 mt-2 px-2 rounded">
                         See Details
                       </button>
                     </td>
