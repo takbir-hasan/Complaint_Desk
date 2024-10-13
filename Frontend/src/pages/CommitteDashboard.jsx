@@ -27,15 +27,15 @@ const Modal = ({ isOpen, onClose, complaint }) => {
     
     <div className="fixed inset-0 z-50 flex items-center  justify-center bg-black bg-opacity-50">
       <div className="bg-white p-5 ml-4 mr-4 rounded-lg shadow-lg">
-        <h2 className="text-xl font-bold text-center">Complaint</h2>
+        <h2 className="text-xl font-bold text-center text-black">Complaint Details</h2>
         <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
-        <p style={{ fontSize: "13px" }} class="mt-2"><strong>Token Number: </strong>
+        <p style={{ fontSize: "13px" }} className="mt-2 text-black"><strong>Token Number: </strong>
         <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "13px" }}>
           {complaint._id}
         </span>
         </p>
-        <p style={{ fontSize: "13px",textAlign: "justify" }}><strong>Details: </strong> {complaint.complaint}</p>
-        <p style={{ fontSize: "13px" }} class="mt-3"><strong>Date: </strong>{formatDate(complaint.date)}</p>
+        <p style={{ fontSize: "13px",textAlign: "justify" }} className="text-black"><strong>Details: </strong> {complaint.complaint}</p>
+        <p style={{ fontSize: "13px" }} className="mt-3 text-black"><strong>Date: </strong>{formatDate(complaint.date)}</p>
         
         <div className= "flex justify-center items-center">
         <button
