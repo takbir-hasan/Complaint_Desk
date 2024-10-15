@@ -26,6 +26,7 @@ import Forget from './pages/Forget.jsx';
 function App() {
   const isLoggedIn = localStorage.getItem('email') ? true : false;
   const status = localStorage.getItem('status') ? true : false;
+  const token = localStorage.getItem('token') ? true : false;
   const isAuthentic = localStorage.getItem('name') ? true : false;
   const isAssigned = localStorage.getItem('assignedPosition') ;
   const chairman = isAssigned === "Chairman" ? true : false;
@@ -40,7 +41,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/check" element={<Check />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/complaint" element={<Complaint />} />
+        <Route path="/complaint" element={token ? <Complaint /> : <Navigate to="/write" replace />} />
         <Route path="/donation" element={<Donation />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/feedbackSuccess" element={<FeedbackSuccess />} />
