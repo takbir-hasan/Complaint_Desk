@@ -29,6 +29,7 @@ const Verification = () => {
         setTextColor('green');
         localStorage.setItem('tmail', data.email);
         window.location.href = '/TeacherProfile';
+        // window.location.href = '/Login';
       } else {
         console.error('Error checking verification:', response.statusText);
         setStatus('Verification failed');

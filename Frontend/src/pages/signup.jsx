@@ -89,10 +89,7 @@ const Signup = () => {
         localStorage.setItem('name', formData.name);
         localStorage.setItem('temail', formData.email);
         window.location.href = '/verification'; 
-        // navigate('/verification');
-        // const result = await response.json();
-        // Handle successful signup (e.g., redirect to login page)
-        // alert(result.message);
+        
         console.log('Signup is pending!');
       }
     } catch (error) {
@@ -186,8 +183,8 @@ const Signup = () => {
                 </option>
                 {/* <option value="Chairman">Chairman</option> */}
                 <option value="Professor">Professor</option>
-                <option value="Associate Professor">Assistant Professor</option>
-                <option value="Assistant Professor">Associate Professor</option>
+                <option value="Associate Professor">Associate Professor</option>
+                <option value="Assistant Professor">Assistant Professor</option>
                 <option value="Lecturer">Lecturer</option>
             </select>
             </div>
