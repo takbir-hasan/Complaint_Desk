@@ -236,7 +236,7 @@ body{
 
 /* Forget.css */
 
-.loader {
+.loader-verify {
   border: 8px solid #f3f3f3; 
   border-top: 8px solid #ffd700; /* Blue */
   border-radius: 50%;

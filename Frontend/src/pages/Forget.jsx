@@ -71,7 +71,7 @@ function Forget() { // techer pass forget
                 Verify
               </button> */}
               {loading ? (
-                <div className="loader"></div> // Display loader while loading
+                <div className="loader-verify"></div> // Display loader while loading
               ) : (
                 <button type="submit" className="button text-black w-full max-w-xs mb-4">
                   Verify
