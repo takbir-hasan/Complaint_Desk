@@ -3,7 +3,7 @@ import Navbar from '../components/navbar';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom'; // Import the useParams hook
 
-function Reset() {
+function Reset() { // teacher reset page  <+++++++++++------
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
@@ -44,9 +44,7 @@ function Reset() {
           const data = await response.json();
           setSuccessMessage(data.message);
           setError(null);
-          localStorage.setItem('status', 'success');
-          localStorage.setItem('tmail', data.email);
-          window.location.href = '/TeacherProfile'; // Redirect on success
+          window.location.href = '/Login'; // Redirect on success
         } else {
           setError('Server error. Please try again later.');
         }
