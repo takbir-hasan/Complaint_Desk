@@ -19,7 +19,7 @@ const TeacherProfile = () => {
   const [teacher, setTeacher] = useState(null);
   const [Status, setStatus] = useState(null); // Define Status here
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       const email = localStorage.getItem('temail');
@@ -33,10 +33,15 @@ const TeacherProfile = () => {
             // console.log(data.teacher.status);
             localStorage.setItem('assignedDept', data.teacher.assignedDept);
             localStorage.setItem('assignedPosition', data.teacher.assignedPosition);
-
+           
+            // Set a timeout for 2 seconds before stopping the loading state
+            setTimeout(() => {
+              setLoading(false);
+            }, 1000);
         } catch (error) {
             console.error('Error fetching teacher data:', error);
-        }
+            setLoading(false); // Set loading to false even if there's an error
+          }
     };
 
     fetchData();
@@ -163,7 +168,9 @@ const handleDashboardClick = () => {
        </div>
     </div>
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
-      {teacher && (
+      {loading ? (
+        <div className="loader-verify"></div> // Display loader while loading
+      ) : teacher && (
             <>
                 <div className="p-4 text-center">
                     <img
