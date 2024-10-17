@@ -6,9 +6,11 @@ function ForgetPassword() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null); // Store error messages
   const [successMessage, setSuccessMessage] = useState(''); // Store success message
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       // Send email verification request
@@ -34,6 +36,8 @@ function ForgetPassword() {
     } catch (err) {
       console.error('Error verifying email:', err);
       setError('An unexpected error occurred.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,9 +67,16 @@ function ForgetPassword() {
               {error && <p className="text-red-500 font-bold mb-4">{error}</p>}
               {successMessage && <p className="text-green-500 font-bold mb-4">{successMessage}</p>}
 
-              <button type="submit" className="button text-black w-full max-w-xs mb-4">
+              {/* <button type="submit" className="button text-black w-full max-w-xs mb-4">
                 Verify
-              </button>
+              </button> */}
+               {loading ? (
+                <div className="loader"></div> // Display loader while loading
+              ) : (
+                <button type="submit" className="button text-black w-full max-w-xs mb-4">
+                  Verify
+                </button>
+              )}
             </form>
           </div>
         </div>

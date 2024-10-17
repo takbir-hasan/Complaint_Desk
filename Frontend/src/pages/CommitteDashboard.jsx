@@ -35,7 +35,7 @@ const Modal = ({ isOpen, onClose, complaint }) => {
         </span>
         </p>
         <p style={{ fontSize: "13px",textAlign: "justify", whiteSpace: "pre-line" }} className="text-black"><strong>Details: </strong> <br/> {complaint.complaint}</p>
-        <p style={{ fontSize: "13px" }} className="mt-3 text-black"><strong>Date: </strong>{formatDate(complaint.date)}</p>
+        <p style={{ fontSize: "13px" }} className="mt-3 text-black"><strong className='text-black'>Date: </strong>{formatDate(complaint.date)}</p>
         
         <div className= "flex justify-center items-center">
         <button
