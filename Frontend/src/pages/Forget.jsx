@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/navbar';
 import { Helmet } from 'react-helmet';
 
-function Forget() {
+function Forget() { // techer pass forget
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null); // Store error messages
   const [successMessage, setSuccessMessage] = useState(''); // Store success message

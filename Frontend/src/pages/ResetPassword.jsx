@@ -3,7 +3,7 @@ import Navbar from '../components/navbar';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-function ResetPassword() {
+function ResetPassword() { // admin reset page
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
@@ -44,8 +44,7 @@ function ResetPassword() {
         if (data.status === 'success') {
           setSuccessMessage(data.message);
           setError(null);
-          localStorage.setItem('email', data.email);
-         window.location.href = '/AdminDashboard';
+         window.location.href = '/AdminLogin';
         } else {
           setError(data.message); // Set error message from response
         }
