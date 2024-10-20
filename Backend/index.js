@@ -15,6 +15,7 @@ import donate from './route/donation.route.js';
 import Donation from './model/donation.model.js';
 import admin from './route/admin.login.route.js';
 import teacherRoutes from './route/teacher.route.js';
+import StudentRoutes from './route/student.route.js';
 
 import { adminforgetpass, resetPassword, updatePass } from './controller/admin.login.controller.js';
 import { register, login, forgetPass, resetPass, verification, getTeacherByEmail} from './controller/teacher.controller.js';
@@ -66,6 +67,7 @@ app.post('/forgetPass',forgetPass);
 app.post('/reset-pass',resetPass);
 app.post('/verify',verification);
 app.use('/teacher',teacherRoutes);
+app.use('/student',StudentRoutes);
 
 
 // donation

@@ -12,7 +12,7 @@ const StudentVerification = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('/verify', {
+      const response = await fetch('/student/verification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ const StudentVerification = () => {
       if (response.ok) {
         const data = await response.json();
         
-        localStorage.setItem('status','success');
+        // localStorage.setItem('status','success');
 
         setStatus('Mail verification successful. Please, Contact with the chairman of the department for account confirmation.');
         setTextColor('green');

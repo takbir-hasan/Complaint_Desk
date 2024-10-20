@@ -12,7 +12,7 @@ const StudentLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent form submission refresh
     try {
-      const response = await fetch('/login', {
+      const response = await fetch('/student/login', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -21,14 +21,14 @@ const StudentLogin = () => {
       });
 
       if (response.ok) {
-      const data = await response.json();
+        const data = await response.json();
         localStorage.setItem('semail', email); 
         localStorage.setItem('name',data.name);
         localStorage.setItem('department',data.department);
         localStorage.setItem('session',data.session);
         localStorage.setItem('id',data.id);
       //   localStorage.setItem('status','success');
-        window.location.replace('/TeacherProfile')
+        window.location.replace('/slogin');
          
       } else {
           const errorData = await response.json();
@@ -83,7 +83,7 @@ const StudentLogin = () => {
         </div>
 
         <div className="mb-4 text-left">
-          <a href="/forget" className="text-indigo-500 hover:text-indigo-700 text-sm">Forgot Password?</a>
+          <a href="/sforgotpass" className="text-indigo-500 hover:text-indigo-700 text-sm">Forgot Password?</a>
         </div>
 
         <button

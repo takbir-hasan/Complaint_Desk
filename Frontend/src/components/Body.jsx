@@ -14,7 +14,7 @@ function Body() {
     if(localStorage.getItem('smail'))
     navigate('/write');
     else
-    toast.error('You must be login!');
+    toast.error('You must be login first.');
     
   };
 

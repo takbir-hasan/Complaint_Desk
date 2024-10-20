@@ -74,7 +74,7 @@ const StudentRegister = () => {
         base64Photo = await convertToBase64(formData.profilePhoto);
       }
 
-      const response = await fetch('/register', {
+      const response = await fetch('/student/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, profilePhoto: base64Photo }),
@@ -86,7 +86,7 @@ const StudentRegister = () => {
         
       } else {
         localStorage.setItem('name', formData.name);
-        localStorage.setItem('semail', formData.email);
+        // localStorage.setItem('semail', formData.email);
         window.location.href = '/sverification'; 
         
         console.log('Signup is pending!');
