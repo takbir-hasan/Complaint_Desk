@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Body() {
   const [solved, setSolved] = useState('');
@@ -9,7 +11,11 @@ function Body() {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    if(localStorage.getItem('smail'))
     navigate('/write');
+    else
+    toast.error('You must be login!');
+    
   };
 
   const handleClick2 = () => {
@@ -62,6 +68,7 @@ function Body() {
           </button>
         </div>
       </div>
+      <ToastContainer />
     </div>
     </>
   );

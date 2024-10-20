@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const Login = () => {
+const StudentLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,8 +21,13 @@ const Login = () => {
       });
 
       if (response.ok) {
-        localStorage.setItem('temail', email); 
-        localStorage.setItem('status','success');
+      const data = await response.json();
+        localStorage.setItem('semail', email); 
+        localStorage.setItem('name',data.name);
+        localStorage.setItem('department',data.department);
+        localStorage.setItem('session',data.session);
+        localStorage.setItem('id',data.id);
+      //   localStorage.setItem('status','success');
         window.location.replace('/TeacherProfile')
          
       } else {
@@ -47,7 +52,7 @@ const Login = () => {
     <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
     <div className="w-full max-w-md mx-auto mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center"> Teacher Login</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Student Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-semibold mb-2">Email Address</label>
@@ -89,7 +94,7 @@ const Login = () => {
         </button>
 
         <p className="mt-4 text-center text-gray-600 text-sm">
-          Don't have an account? <a href="/Signup" className="text-indigo-500 hover:text-indigo-700">Sign Up</a>
+          Don't have an account? <a href="/ssignup" className="text-indigo-500 hover:text-indigo-700">Sign Up</a>
         </p>
       </form>
     </div>
@@ -98,4 +103,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default StudentLogin;

@@ -21,6 +21,9 @@ import ResetPassword from './pages/ResetPassword.jsx';
 import Verification from './pages/Verification.jsx';
 import Reset from './pages/Reset.jsx';
 import Forget from './pages/Forget.jsx';
+import StudentLogin from './pages/StudentLogin.jsx';
+import StudentRegister from './pages/StudentRegister.jsx';
+import StudentVerification from './pages/StudentVerification.jsx';
 
 
 function App() {
@@ -31,6 +34,7 @@ function App() {
   const isAssigned = localStorage.getItem('assignedPosition') ;
   const chairman = isAssigned === "Chairman" ? true : false;
   const committee = isAssigned === "Committee" ? true : false;
+  const login  = localStorage.getItem('semail') ? true : false;
 
   return (
     <>
@@ -40,7 +44,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/check" element={<Check />} />
-        <Route path="/write" element={<Write />} />
+        <Route path="/write" element={login ? <Write />: <Navigate to="/" replace />} />
         <Route path="/complaint" element={token ? <Complaint /> : <Navigate to="/write" replace />} />
         <Route path="/donation" element={<Donation />} />
         <Route path="/feedback" element={<Feedback />} />
@@ -60,6 +64,9 @@ function App() {
         <Route path="/verification" element={isAuthentic ? <Verification/> : <Navigate to="/Login" replace />} />
         <Route path="/resetPass/:token" element={<Reset/>} />
         <Route path="/forget" element={<Forget/>} />
+        <Route path="/slogin" element={<StudentLogin/>} />
+        <Route path="/ssignup" element={<StudentRegister/>} />
+        <Route path="/sverification"  element={isAuthentic ? <StudentVerification/> : <Navigate to="/slogin" replace />} />
         
      
 

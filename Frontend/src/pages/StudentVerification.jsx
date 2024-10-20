@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/navbar';
 import { Helmet } from 'react-helmet';
 
-const Verification = () => {
+const StudentVerification = () => {
   const [status, setStatus] = useState('');
   const [textColor, setTextColor] = useState('black');
   const [token, setToken] = useState('');
@@ -27,8 +27,8 @@ const Verification = () => {
 
         setStatus('Mail verification successful. Please, Contact with the chairman of the department for account confirmation.');
         setTextColor('green');
-        // localStorage.setItem('tmail', data.email);
-        // window.location.href = '/TeacherProfile';
+      //   localStorage.setItem('smail', data.email);
+      //   window.location.href = '/TeacherProfile';
         // window.location.href = '/Login'; 
       } else {
         console.error('Error checking verification:', response.statusText);
@@ -75,4 +75,4 @@ const Verification = () => {
   );
 };
 
-export default Verification;
+export default StudentVerification;
