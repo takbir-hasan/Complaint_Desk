@@ -28,7 +28,7 @@ const StudentLogin = () => {
         localStorage.setItem('session',data.session);
         localStorage.setItem('id',data.id);
       //   localStorage.setItem('status','success');
-        window.location.replace('/slogin');
+        // window.location.replace('/slogin');
          
       } else {
           const errorData = await response.json();

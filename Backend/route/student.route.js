@@ -3,10 +3,10 @@ import { register, login, verification, forgetPass, resetPass } from '../control
 const router = express.Router();
 
 // Route to get a specific teacher by email
-router.get('/register', register);
-router.put('/login',login);
-router.get('/verification',verification);
-router.put('/forgetPass', forgetPass);
-router.get('/resetPass',resetPass);
+router.post('/register', register);
+router.post('/login',login);
+router.post('/verification',verification);
+router.post('/forgetPass', forgetPass);
+router.post('/resetPass',resetPass);
 
 export default router;

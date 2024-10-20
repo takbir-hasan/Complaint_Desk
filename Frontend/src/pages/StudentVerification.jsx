@@ -6,7 +6,7 @@ const StudentVerification = () => {
   const [status, setStatus] = useState('');
   const [textColor, setTextColor] = useState('black');
   const [token, setToken] = useState('');
-  const email = localStorage.getItem('temail');
+  const email = localStorage.getItem('semail');
 
   const handleSubmit = async (event) => {
     event.preventDefault();

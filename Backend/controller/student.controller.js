@@ -47,8 +47,9 @@ export const register = async (req, res) => {
     const user = new Student({
       name,
       dept: department,
+      id,
+      session,
       email,
-      designation,
       phone,
       password, 
       profilePhoto,  // The base64 encoded string is saved here
