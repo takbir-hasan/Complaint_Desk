@@ -76,8 +76,6 @@ function App() {
         <Route path="/sforgotpass" element={ <StudentForgotPass/> } />
         <Route path="/sresetPass/:token" element={<StudentResetPass/>} />
         <Route path="/StudentProfile" element={login ? <StudentProfile/> : <Navigate to="/slogin" replace />} />
-        <Route path="/sresetPass/:token" element={<Reset/>} />
-        <Route path="/StudentProfile" element={<StudentProfile/>} />
         <Route path="/StudentList" element={<StudentList/>} />
         
      
