@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/navbar';
 import { Helmet } from 'react-helmet';
 
-function Forget() { // teacher pass forget
+function StudentForgotPass() { //  pass forget
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null); // Store error messages
   const [successMessage, setSuccessMessage] = useState(''); // Store success message
@@ -14,7 +14,7 @@ function Forget() { // teacher pass forget
 
     try {
       // Send email verification request
-      const response = await fetch('/forgetPass', {
+      const response = await fetch('/student/forgetPass', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,4 +85,4 @@ function Forget() { // teacher pass forget
   );
 }
 
-export default Forget;
+export default StudentForgotPass;

@@ -106,13 +106,14 @@ function AdminProfile() {
 
 
   
-  const departments = ['CSE', 'EEE', 'BME', 'PHARM'];
-  const chairmen = ['John Doe', 'Jane Smith', 'Michael Brown', 'Lisa Johnson'];
-  const teachers = ['John Doe', 'Jane Smith', 'Galib', 'Michael Brown', 'Lisa Johnson'];
+  // const departments = ['CSE', 'EEE', 'BME', 'PHARM'];
+  // const chairmen = ['John Doe', 'Jane Smith', 'Michael Brown', 'Lisa Johnson'];
+  // const teachers = ['John Doe', 'Jane Smith', 'Galib', 'Michael Brown', 'Lisa Johnson'];
 
-  const filterList = (input, list) => {
-    return list.filter(item => item.toLowerCase().includes(input.toLowerCase()));
-  };
+  // const filterList = (input, list) => {
+  //   return list.filter(item => item.toLowerCase().includes(input.toLowerCase()));
+  // };
+
   return (
     <>
     <Helmet>

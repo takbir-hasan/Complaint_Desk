@@ -114,7 +114,7 @@ export const login = async (req, res) => {
               if (checkMail.status === 'verified') {
                 res.json({ });
             } else {
-                return res.status(401).json({ message: 'Your Account is not verified' });
+                return res.status(401).json({ message: 'Your Account is not verified completely. Please contact with the chairman of the department.'});
             }
             } else {
                 return res.status(401).json({ message: 'Incorrect email or password.' });
@@ -250,7 +250,7 @@ export const verification = async (req, res) => {
     }
 
     // Mark the user as verified (consider using findOneAndUpdate for atomicity)
-    const teacher = await Teacher.findOneAndUpdate({ email }, { status: 'verified' }, { new: true }); // { new: true } returns the updated document
+    const teacher = await Teacher.findOneAndUpdate({ email }, { status: 'pending' }, { new: true }); // { new: true } returns the updated document
 
     if (!teacher) {
       return res.status(404).json({ message: 'Teacher not found' });

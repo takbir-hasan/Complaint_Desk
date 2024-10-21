@@ -1,10 +1,11 @@
 import mongoose from 'mongoose'
 
-const TeacherSchema = mongoose.Schema({
+const StudentSchema = mongoose.Schema({
       name: {type: String},
       dept: {type: String},
+      id: {type: String},
+      session: {type: String},
       email: {type: String},
-      designation: {type: String},
       phone: {type: String},
       password:{type: String,},
       profilePhoto:{type: String},
@@ -13,8 +14,8 @@ const TeacherSchema = mongoose.Schema({
       status: {type: String, default: "Email is not verified"},
 });
 
-const Teacher = mongoose.model("Teacher",TeacherSchema);
+const Student = mongoose.model("Student",StudentSchema);
 
-export default Teacher;
+export default Student;
 
 

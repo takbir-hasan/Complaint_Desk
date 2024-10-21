@@ -1,9 +1,10 @@
 import mongoose from 'mongoose'
 
 const ComplaintSchema = mongoose.Schema({
-      name: {type: String, default:'Anonymous'},
-      dept:{type: String, default:'Anonymous'},
-      id: {type: String, default:'Anonymous'},
+      name: {type: String,},
+      dept:{type: String, },
+      id: {type: String, },
+      session: {type: String},
       cdept: {type: String, required: true},
       complaint: {type: String, required: true},
       date: { type: Date, default: Date.now },

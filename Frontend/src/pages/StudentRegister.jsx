@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import Navbar from '../components/navbar'
 import { Helmet } from 'react-helmet';
-import {useNavigate} from 'react-router-dom';
 
-const Signup = () => {
+const StudentRegister = () => {
 
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     department: '',
+    id: '',
+    session: '',
     email: '',
-    designation: '',
     phone: '',
     password: '',
     profilePhoto: null,
@@ -75,7 +74,7 @@ const Signup = () => {
         base64Photo = await convertToBase64(formData.profilePhoto);
       }
 
-      const response = await fetch('/register', {
+      const response = await fetch('/student/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, profilePhoto: base64Photo }),
@@ -87,8 +86,8 @@ const Signup = () => {
         
       } else {
         localStorage.setItem('name', formData.name);
-        localStorage.setItem('temail', formData.email);
-        window.location.href = '/verification'; 
+        localStorage.setItem('semail', formData.email);
+        window.location.href = '/sverification'; 
         
         console.log('Signup is pending!');
       }
@@ -175,9 +174,37 @@ const Signup = () => {
                 <option value="FB">Finance and Banking (FB)</option>
                 <option value="MANAGEMENT">Management</option>
                 <option value="MARKETING">Marketing</option>
+
                 
             </select>
+
             </div>
+            <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-semibold mb-2">Student ID</label>
+            <input
+                type="text"
+                id="id"
+                name="id"
+                placeholder="Enter your student ID"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                value={formData.id}
+                onChange={handleChange}
+            />
+            </div>
+
+            <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-semibold mb-2">Session</label>
+            <input
+                type="text"
+                id="session"
+                name="session"
+                placeholder="Enter your session"
+                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                value={formData.session}
+                onChange={handleChange}
+            />
+            </div>
+
             <div className="mb-4">
             <label className="block text-gray-700 text-sm font-semibold mb-2">Email Address</label>
             <input
@@ -190,26 +217,7 @@ const Signup = () => {
                 onChange={handleChange}
             />
             </div>
-            <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-semibold mb-2">Designation</label>
-            <select
-                id="designation"
-                name="designation"
-                className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                value={formData.designation}
-                onChange={handleChange}
-                required
-            >
-                <option value="" disabled>
-                Select a designation
-                </option>
-                {/* <option value="Chairman">Chairman</option> */}
-                <option value="Professor">Professor</option>
-                <option value="Associate Professor">Associate Professor</option>
-                <option value="Assistant Professor">Assistant Professor</option>
-                <option value="Lecturer">Lecturer</option>
-            </select>
-            </div>
+            
             <div className="mb-4">
             <label className="block text-gray-700 text-sm font-semibold mb-2">Mobile Number</label>
             <input
@@ -264,7 +272,7 @@ const Signup = () => {
             <i className="fa-solid fa-angle-right"></i>
             </button>
             <p className="mt-4 text-center text-gray-600 text-sm">
-                Already have an account? <a href="/Login" className="text-indigo-500 hover:text-indigo-700">Log In</a>
+                Already have an account? <a href="/slogin" className="text-indigo-500 hover:text-indigo-700">Log In</a>
             </p>
         </form>
         </div>
@@ -274,4 +282,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default StudentRegister;

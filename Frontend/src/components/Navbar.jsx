@@ -3,6 +3,7 @@ import React from 'react';
 function Navbar() {
   const navItem = (
     <>
+      <li><a href='/slogin' className='text-xl hover:shadow-lg hover:bg-blue-200'>Student</a></li>
       <li><a href='/Login' className='text-xl hover:shadow-lg hover:bg-blue-200'>Teacher</a></li>
       <li><a href='/AdminLogin' className='text-xl hover:shadow-lg hover:bg-blue-200'>Admin</a></li>
       <li><a href='/feedback' className='text-xl hover:shadow-lg hover:bg-blue-200'>Feedback</a></li>
