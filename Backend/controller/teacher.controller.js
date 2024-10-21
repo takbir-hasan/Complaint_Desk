@@ -315,17 +315,83 @@ export const updateTeacherProfile = async (req, res) =>
 
 };
 
-//Get Teacher
- export const getTeacherByDepartment = async (req, res) => {
-  const {dept} = req.query;
-  try{
-    const teachers = await Teacher.find({dept: dept});
-    res.json({teachers});
-  } catch (error)
-  {
+
+// Get Teacher by Dept
+export const getTeacherByDepartment = async (req, res) => {
+  const { dept } = req.params;
+  // console.log(`Requested department: ${dept}`);
+    try {
+      const teachers = await Teacher.find({ dept, assignedPosition: { $ne: "Chairman" } });
+        // console.log(`Found teachers:`, teachers);
+
+        if (!teachers.length) {
+            return res.status(404).json({ message: 'No teachers found for this department' });
+        }
+
+        res.status(200).json(teachers);
+    } catch (error) {
+        res.status(500).json({ message: 'An error occurred', error: error.message });
+    }
+};
+
+
+
+// Delete Teacher by ID
+export const deleteTeacherById = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Teacher ID is required' });
+  }
+
+  try {
+    const deletedTeacher = await Teacher.findByIdAndDelete(id);
+
+    if (!deletedTeacher) {
+      return res.status(404).json({ message: 'Teacher not found' });
+    }
+
+    res.json({ message: 'Teacher deleted successfully', teacher: deletedTeacher });
+  } catch (error) {
+    console.error('Error deleting teacher:', error);
     res.status(500).json({ error: 'Server Error' });
   }
-}
+};
+
+// Update Teacher's assignedPosition and assignedDept by ID
+export const updateAssignedCommitteeTeacherById = async (req, res) => {
+  const { id } = req.params;
+  const { assignedPosition, assignedDept } = req.body; // Get the new values from the request body
+
+  if (!id) {
+    return res.status(400).json({ error: 'Teacher ID is required' });
+  }
+
+  try {
+    // Find the teacher by ID
+    const teacher = await Teacher.findById(id);
+
+    // Check if the teacher exists
+    if (!teacher) {
+      return res.status(404).json({ message: 'Teacher not found' });
+    }
+
+    // Update the teacher's assignedPosition and assignedDept
+    teacher.assignedPosition = assignedPosition;
+    teacher.assignedDept = assignedDept;
+
+    // Save the updated teacher
+    const updatedTeacher = await teacher.save();
+
+    res.json({ message: 'Teacher updated successfully', teacher: updatedTeacher });
+  } catch (error) {
+    console.error('Error updating teacher:', error);
+    res.status(500).json({ error: 'Server Error' });
+  }
+};
+
+
+
 
 
 //Function to handle the update of assigned position and department
@@ -413,4 +479,27 @@ export const updatePositionByDepartment = async (req, res) => {
     console.error("Error updating teacher:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
+};
+
+
+//Function to verify a teacher
+
+export const  verifyTeacherById = async (req, res) => {
+  const { teacherId } = req.params;
+
+  try {
+    const UpdatedTeacher = await Teacher.findOneAndUpdate(
+      { _id: teacherId },
+      { status: 'verified' },
+      { new: true } 
+    );
+    if (!UpdatedTeacher) {
+      return res.status(404).json({ message: "Teacher not found" });
+    }
+    return res.status(200).json({ message: "Teacher verified" });
+  } catch (error) {
+    console.error("Error verifying teacher:", error);
+    return res.status(500).json({ message: 'Server error', error });
+  }
+
 };

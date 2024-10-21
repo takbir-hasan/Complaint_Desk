@@ -21,6 +21,7 @@ import ResetPassword from './pages/ResetPassword.jsx';
 import Verification from './pages/Verification.jsx';
 import Reset from './pages/Reset.jsx';
 import Forget from './pages/Forget.jsx';
+import TeacherPage from './pages/TeacherPage.jsx';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
         <Route path="/verification" element={isAuthentic ? <Verification/> : <Navigate to="/Login" replace />} />
         <Route path="/resetPass/:token" element={<Reset/>} />
         <Route path="/forget" element={<Forget/>} />
+        <Route path="/TeacherPage" element={<TeacherPage/>} />
         
      
 
