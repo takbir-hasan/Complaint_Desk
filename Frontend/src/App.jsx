@@ -28,6 +28,7 @@ import StudentVerification from './pages/StudentVerification.jsx';
 import StudentForgotPass from './pages/StudentForgotPass.jsx';
 import StudentResetPass from './pages/StudentResetPass.jsx';
 import StudentProfile from './pages/StudentProfile.jsx';
+import StudentList from './pages/StudentList.jsx';
 
 
 function App() {
@@ -75,6 +76,9 @@ function App() {
         <Route path="/sforgotpass" element={ <StudentForgotPass/> } />
         <Route path="/sresetPass/:token" element={<StudentResetPass/>} />
         <Route path="/StudentProfile" element={login ? <StudentProfile/> : <Navigate to="/slogin" replace />} />
+        <Route path="/sresetPass/:token" element={<Reset/>} />
+        <Route path="/StudentProfile" element={<StudentProfile/>} />
+        <Route path="/StudentList" element={<StudentList/>} />
         
      
 

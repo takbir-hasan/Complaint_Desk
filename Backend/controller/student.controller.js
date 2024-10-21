@@ -310,3 +310,62 @@ export const updateStudentById = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+
+//getStudentsBy Dept
+export const getStudentsByDept = async (req, res) => {
+  const { dept } = req.params; // Extract the department name from the request parameters
+
+  try {
+    const students = await Student.find({ dept: dept }); // Search for students by department
+    if (!students.length) {
+      return res.status(404).json({ message: 'No students found for this department' });
+    }
+    res.json(students); // Return the list of students
+  } catch (error) {
+    console.error('Error fetching students:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+
+// Function to update status by ID
+export const updateStudentStatus = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const updatedStudent = await Student.findOneAndUpdate(
+      { id: id }, 
+      { status: "verified" }, // Update the status field
+      { new: true } 
+    );
+
+    if (updatedStudent) {
+      // console.log("Student status updated successfully:", updatedStudent);
+      return res.status(200).json({
+        message: "Student status updated successfully",
+        student: updatedStudent
+      });
+    } else {
+      console.log("Student not found with the given ID.");
+    }
+  } catch (error) {
+    console.error("Error updating student status:", error);
+  }
+};
+
+// Method to delete student by ID
+export const deleteStudentById = async (req, res) => {
+  const { id } = req.params; // Extract the ID from the request parameters
+
+  try {
+      const student = await Student.findOneAndDelete({ id }); // Delete the student by ID
+      if (!student) {
+          return res.status(404).json({ message: 'Student not found' });
+      }
+      res.json({ message: 'Student deleted successfully' }); // Return success message
+  } catch (error) {
+      console.error('Error deleting student:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+};
