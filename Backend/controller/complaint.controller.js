@@ -154,3 +154,25 @@ export const markComplaintAsSolved = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+
+//Get Complaint By Student ID
+export const getComplaintByStudentId = async (req, res) => {
+  const { id } = req.params; 
+
+  try {
+     
+      const complaint = await Complaint.findOne({ id }, '_id status');
+
+     
+      if (!complaint) {
+          return res.status(404).json({ message: 'Complaint not found' });
+      }
+
+      
+      res.status(200).json(complaint);
+  } catch (error) {
+      console.error('Error fetching complaint:', error);
+      res.status(500).json({ message: 'Server error' });
+  }
+};
