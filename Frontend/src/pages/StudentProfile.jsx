@@ -17,7 +17,7 @@ const StudentProfile = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const studentId = '200152';
+        const studentId = localStorage.getItem('id'); // Get student ID from local storage
         const fetchStudentProfile = async () => {
             try {
                 const response = await axios.get(`/student/api/getStudentByID/${studentId}`); // Use Axios to fetch data
@@ -48,11 +48,13 @@ const StudentProfile = () => {
     const handleLogoutRedirect = () => {
         // Implement your logout logic here
         toast.success('Logged out successfully.');
-        navigate('/slogin'); // Redirect to login page after logout
+        localStorage.clear(); // Clear all items in local storage
+        // navigate('/slogin'); // Redirect to login page after logout
+        window.location.replace('/slogin');
     };
 
     const handleSubmit = async (e) => {
-        const studentId = '200152'; // Assuming this ID is hardcoded for demonstration
+        const studentId = localStorage.getItem('id'); // Assuming this ID is hardcoded for demonstration
     
         e.preventDefault();
         setErrorMessage('');
@@ -83,6 +85,7 @@ const StudentProfile = () => {
                     const result = await response.json();
                     toast.success('Profile updated successfully.');
                     setStudent((prev) => ({ ...prev, phone: formData.phone, profilePhoto: base64String }));
+                    setFormData({ phone: '', profilePhoto: null }); // Reset form data after successful update
                 } catch (error) {
                     console.error('Error updating profile:', error);
                     setErrorMessage('Failed to update profile. Please try again.');
@@ -106,6 +109,7 @@ const StudentProfile = () => {
                 const result = await response.json();
                 toast.success('Profile updated successfully.');
                 setStudent((prev) => ({ ...prev, phone: formData.phone }));
+                setFormData({ phone: '', profilePhoto: null }); // Reset form data after successful update
             } catch (error) {
                 console.error('Error updating profile:', error);
                 setErrorMessage('Failed to update profile. Please try again.');
@@ -192,7 +196,7 @@ const StudentProfile = () => {
                             <div className="space-y-4">
                                
                                     <div>
-                                        <label className="block text-gray-700 text-sm font-semibold mb-2">Mobile Number [Optional]</label>
+                                        <label className="block text-gray-700 text-sm font-semibold mb-2">Mobile Number</label>
                                         <input
                                             type="tel"
                                             id="phone"
@@ -205,7 +209,7 @@ const StudentProfile = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-gray-700 text-sm font-semibold mb-2">Profile Photo [Optional] (Max Size 2MB)</label>
+                                        <label className="block text-gray-700 text-sm font-semibold mb-2">Profile Photo (Max Size 2MB)</label>
                                         <div className="flex items-center space-x-5">
                                             <div className="shrink-0">
                                                 <img

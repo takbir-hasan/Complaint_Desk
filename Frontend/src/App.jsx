@@ -69,12 +69,12 @@ function App() {
         <Route path="/resetPass/:token" element={<Reset/>} />
         <Route path="/forget" element={<Forget/>} />
         <Route path="/TeacherPage" element={<TeacherPage/>} />
-        <Route path="/slogin" element={<StudentLogin/>} />
+        <Route path="/slogin" element={!login ? <StudentLogin/>:  <Navigate to="/StudentProfile" replace />} />
         <Route path="/ssignup" element={<StudentRegister/>} />
         <Route path="/sverification"  element={isAuthentic ? <StudentVerification/> : <Navigate to="/slogin" replace />} />
         <Route path="/sforgotpass" element={ <StudentForgotPass/> } />
-        <Route path="/sresetPass/:token" element={<Reset/>} />
-        <Route path="/StudentProfile" element={<StudentProfile/>} />
+        <Route path="/sresetPass/:token" element={<StudentResetPass/>} />
+        <Route path="/StudentProfile" element={login ? <StudentProfile/> : <Navigate to="/slogin" replace />} />
         
      
 
