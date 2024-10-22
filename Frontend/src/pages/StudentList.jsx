@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
@@ -45,14 +46,15 @@ const StudentList = () => {
   );
 
 
-   const currentStudents = students.slice(indexOfFirstStudent, indexOfLastStudent);
+  const currentStudents = filteredStudents.slice(indexOfFirstStudent, indexOfLastStudent);
+
  
    // Change page
    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     // Handle next and previous buttons
     const handleNextPage = () => {
-        if (currentPage < Math.ceil(students.length / studentsPerPage)) {
+        if (currentPage < Math.ceil(filteredStudents.length / studentsPerPage)) {
         setCurrentPage(currentPage + 1);
         }
     };
@@ -105,6 +107,10 @@ const StudentList = () => {
     }
   };
 
+  const handleBackClick = () => {
+    window.history.back(); 
+  };
+
   return (
     <>
       <Helmet>
@@ -114,9 +120,18 @@ const StudentList = () => {
         <Navbar />
         <div className="container mx-auto max-w-7xl mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg sm:p-4 md:p-6 lg:p-8">
           <h1 className="text-2xl text-center font-bold mb-1">Student List</h1>
-          <p style={{ fontSize: "13px" }} className="mb-1 text-left font-bold">
-            Student list for "<span className="text-green-500">{deptname}</span>" Department
-          </p>
+          <div className="flex items-center justify-between mb-2">
+              <p style={{ fontSize: "13px" }} className="mb-1 text-left font-bold">
+                Student list for "<span className="text-green-500">{deptname}</span>" Department
+              </p>
+              <button
+                onClick={handleBackClick}
+                className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                <FaArrowLeft className="mr-1" /> 
+                Back
+              </button>
+          </div>
           <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
 
            {/* Search input */}
@@ -132,6 +147,7 @@ const StudentList = () => {
               className="border p-2 bg-gray-100 rounded w-full " style={{ borderColor: "#FEDE00" }}
             />
           </div>
+          
           {loading ? (
             <p className='loader-verify'></p>
           ) : (
