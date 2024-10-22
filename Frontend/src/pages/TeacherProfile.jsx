@@ -20,6 +20,7 @@ const TeacherProfile = () => {
   const [Status, setStatus] = useState(null); // Define Status here
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       const email = localStorage.getItem('temail');
@@ -34,6 +35,18 @@ const TeacherProfile = () => {
             localStorage.setItem('assignedDept', data.teacher.assignedDept);
             localStorage.setItem('assignedPosition', data.teacher.assignedPosition);
            
+  const refreshKey = 'teacherProfileRefreshed';
+  const hasRefreshed = localStorage.getItem(refreshKey);
+
+  if (!hasRefreshed) {
+    // Refresh the page once
+    localStorage.setItem(refreshKey, 'true');
+    window.location.reload();
+  } else {
+    // Clear the key after the refresh to allow future refreshes
+    localStorage.removeItem(refreshKey);
+  }
+
             // Set a timeout for 2 seconds before stopping the loading state
             setTimeout(() => {
               setLoading(false);
@@ -153,16 +166,16 @@ const handleTeacherListClick = () => {
     window.location.href = '/login';
   }
 
-  //Refresh function
-  const [hasRefreshed, setHasRefreshed] = useState(false);
-  useEffect(() => {
-    if (!hasRefreshed) {
-        setTimeout(() => {
-            window.location.reload();
-            setHasRefreshed(true);  
-        }, 1000); 
-    }
-  }, [hasRefreshed]); 
+  // //Refresh function
+  // const [hasRefreshed, setHasRefreshed] = useState(false);
+  // useEffect(() => {
+  //   if (!hasRefreshed) {
+  //       setTimeout(() => {
+  //           window.location.reload();
+  //           setHasRefreshed(true);  
+  //       }, 1000); 
+  //   }
+  // }, [hasRefreshed]); 
 
 
   return (

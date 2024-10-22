@@ -14,7 +14,6 @@ function AdminDashboard() {
  const [selectedDept, setSelectedDept] = useState('');
  const [teachers, setTeachers] = useState([]);
  const [search1, setSearch1] = useState('');
-const [search2, setSearch2] = useState('');
 const [selectedTeachers, setSelectedTeachers] = useState([]); // for committe
 const [assignedTeachersData, setAssignedTeachersData] = useState([]);
 
@@ -33,22 +32,7 @@ useEffect(() => {
   }, [selectedDept]);
 
 
-  const handleTeacherSelect = (e) => {
-    const teacher = e.target.value;
-    if (teacher && !selectedTeachers.includes(teacher) && selectedTeachers.length < 5) {
-        setSelectedTeachers([...selectedTeachers, teacher]);
-      } else if (selectedTeachers.length >= 5) {
-        alert("You can only select up to 5 teachers.");
-      }
-      setSearch2('');
-  };
 
-  const removeTeacher = (teacherToRemove) => {
-    setSelectedTeachers((prevTeachers) =>
-      prevTeachers.filter((teacher) => teacher !== teacherToRemove)
-    );
-  };
-  
   
 
   const navigate = useNavigate();
@@ -92,7 +76,8 @@ useEffect(() => {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            // throw new Error('Network response was not ok');
+            throw new Error('Information may be wrong or Network response was not ok');
         }
 
         const data = await response.json(); 
