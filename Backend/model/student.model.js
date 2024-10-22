@@ -9,8 +9,6 @@ const StudentSchema = mongoose.Schema({
       phone: {type: String},
       password:{type: String,},
       profilePhoto:{type: String},
-      assignedPosition: {type: String, default: "NotAssigned"},
-      assignedDept: {type: String, default: "NotAssigned"},
       status: {type: String, default: "Email is not verified"},
 });
 
