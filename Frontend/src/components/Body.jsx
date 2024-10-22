@@ -11,7 +11,7 @@ function Body() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if(localStorage.getItem('smail'))
+    if(localStorage.getItem('semail'))
     navigate('/write');
     else
     toast.error('You must be login first.');

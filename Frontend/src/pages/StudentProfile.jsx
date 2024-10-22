@@ -21,7 +21,11 @@ const StudentProfile = () => {
     const [errorComplaints, setErrorComplaints] = useState(null);
 
     useEffect(() => {
+<<<<<<< HEAD
         const studentId = localStorage.getItem('id');
+=======
+        const studentId = localStorage.getItem('id'); // Get student ID from local storage
+>>>>>>> cb1fde60a4c802cee32db6efa6977833c74e7bda
         const fetchStudentProfile = async () => {
             try {
                 const response = await axios.get(`/student/api/getStudentByID/${studentId}`); // Use Axios to fetch data
@@ -48,7 +52,9 @@ const StudentProfile = () => {
     const handleLogoutRedirect = () => {
         // Implement your logout logic here
         toast.success('Logged out successfully.');
-        navigate('/slogin'); // Redirect to login page after logout
+        localStorage.clear(); // Clear all items in local storage
+        // navigate('/slogin'); // Redirect to login page after logout
+        window.location.replace('/slogin');
     };
 
 
@@ -62,6 +68,11 @@ const StudentProfile = () => {
     };
 
     const handleSubmit = async (e) => {
+<<<<<<< HEAD
+=======
+        const studentId = localStorage.getItem('id'); // Assuming this ID is hardcoded for demonstration
+    
+>>>>>>> cb1fde60a4c802cee32db6efa6977833c74e7bda
         e.preventDefault();
         setErrorMessage('');
     
@@ -82,9 +93,23 @@ const StudentProfile = () => {
                 };
     
                 try {
+<<<<<<< HEAD
                     const response = await axios.put(`/student/api/updateStudentByID/${id}`, dataToSend); // Correct usage of template literal
                     toast.success('Profile updated successfully!');
                     window.location.reload();
+=======
+                    const response = await fetch(`/student/api/updateStudentByID/${studentId}`, { // Use backticks here
+                        method: 'PUT', // Changed to PUT
+                        body: formDataToSubmit,
+                    });
+    
+                    if (!response.ok) throw new Error('Failed to update profile');
+    
+                    const result = await response.json();
+                    toast.success('Profile updated successfully.');
+                    setStudent((prev) => ({ ...prev, phone: formData.phone, profilePhoto: base64String }));
+                    setFormData({ phone: '', profilePhoto: null }); // Reset form data after successful update
+>>>>>>> cb1fde60a4c802cee32db6efa6977833c74e7bda
                 } catch (error) {
                     setErrorMessage('Failed to update data.');
                     toast.error('Failed to update data.');
@@ -102,8 +127,18 @@ const StudentProfile = () => {
                 const response = await axios.put(`/student/api/updateStudentByID/${id}`, {
                     phone: formData.phone,
                 });
+<<<<<<< HEAD
                 toast.success('Profile updated successfully!');
                 window.location.reload();
+=======
+    
+                if (!response.ok) throw new Error('Failed to update profile');
+    
+                const result = await response.json();
+                toast.success('Profile updated successfully.');
+                setStudent((prev) => ({ ...prev, phone: formData.phone }));
+                setFormData({ phone: '', profilePhoto: null }); // Reset form data after successful update
+>>>>>>> cb1fde60a4c802cee32db6efa6977833c74e7bda
             } catch (error) {
                 setErrorMessage('Failed to update data.');
                 console.error('Error updating data:', error);
@@ -193,7 +228,7 @@ const StudentProfile = () => {
                             <div className="space-y-4">
                                
                                     <div>
-                                        <label className="block text-gray-700 text-sm font-semibold mb-2">Mobile Number [Optional]</label>
+                                        <label className="block text-gray-700 text-sm font-semibold mb-2">Mobile Number</label>
                                         <input
                                             type="tel"
                                             id="phone"
@@ -207,7 +242,7 @@ const StudentProfile = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-gray-700 text-sm font-semibold mb-2">Profile Photo [Optional] (Max Size 2MB)</label>
+                                        <label className="block text-gray-700 text-sm font-semibold mb-2">Profile Photo (Max Size 2MB)</label>
                                         <div className="flex items-center space-x-5">
                                             <div className="shrink-0">
                                                 <img

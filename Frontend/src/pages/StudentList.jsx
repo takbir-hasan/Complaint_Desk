@@ -108,7 +108,7 @@ const StudentList = () => {
   return (
     <>
       <Helmet>
-        <title>Student Dashboard</title>
+        <title>Student List</title>
       </Helmet>
       <div className="flex flex-col min-h-screen bg-gray-100 text-black">
         <Navbar />
@@ -129,7 +129,7 @@ const StudentList = () => {
                 setSearchId(e.target.value);
                 setCurrentPage(1); // Reset to the first page when searching
               }}
-              className="border p-2 rounded w-full " style={{ borderColor: "#FEDE00" }}
+              className="border p-2 bg-gray-100 rounded w-full " style={{ borderColor: "#FEDE00" }}
             />
           </div>
           {loading ? (
