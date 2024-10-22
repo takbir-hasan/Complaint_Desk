@@ -239,11 +239,11 @@ const handleAssignCommittee = (teacherId, isAssigned) => {
                 className="w-24 h-24 rounded-full profile-image" // Centered image with rounded corners
               />
             </div>
-            <h3 className="text-xl font-bold mb-4 text-center">{selectedTeacher.name}</h3>
-            <p><strong>Department:</strong> <span className='text-lime-700'>{selectedTeacher.dept}</span></p>
-            <p><strong>Designation:</strong> {selectedTeacher.designation}</p>
-            <p><strong>Mobile:</strong> {selectedTeacher.phone}</p>
-            <p><strong>Email:</strong> {selectedTeacher.email}</p> {/* Add more fields as necessary */}
+            <h3 className="text-xl font-bold mb-4 text-center text-black">{selectedTeacher.name}</h3>
+            <p><strong>Department:</strong> <span className='text-lime-700 text-black'>{selectedTeacher.dept}</span></p>
+            <p className='text-black'><strong>Designation:</strong> {selectedTeacher.designation}</p>
+            <p className='text-black'><strong>Mobile:</strong> {selectedTeacher.phone}</p>
+            <p className='text-black'><strong>Email:</strong> {selectedTeacher.email}</p> {/* Add more fields as necessary */}
             <div className="flex justify-center mt-4"> {/* Flex container for centering the button */}
               <button
                 className="bg-red-500 text-white py-1 px-2 rounded"

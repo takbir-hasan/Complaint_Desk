@@ -221,11 +221,11 @@ const StudentList = () => {
                 className="w-24 h-24 rounded-full profile-image" // Centered image with rounded corners
               />
             </div>
-            <p className='text-center mb-3'><strong>Name:</strong> {selectedStudent.name}</p>
-            <p><strong>Student ID:</strong> {selectedStudent.id}</p>
-            <p> <strong>Session:  </strong>{selectedStudent.session} </p>
-            <p> <strong>Email:  </strong>{selectedStudent.email} </p>
-            <p> <strong>Mobile:  </strong>{selectedStudent.phone} </p>
+            <p className='text-center mb-3 text-black'><strong>Name:</strong> {selectedStudent.name}</p>
+            <p className='text-black'><strong>Student ID:</strong> {selectedStudent.id}</p>
+            <p className='text-black'> <strong>Session:  </strong>{selectedStudent.session} </p>
+            <p className='text-black'> <strong>Email:  </strong>{selectedStudent.email} </p>
+            <p className='text-black'> <strong>Mobile:  </strong>{selectedStudent.phone} </p>
             <div className="mt-4 text-center">
               <button
                 onClick={closeModal}

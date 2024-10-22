@@ -68,6 +68,18 @@ const handleDashboardClick = () => {
   }
 };
 
+const handleStudentListClick = () => {
+  
+  if (Status === 'Chairman') {
+    navigate('/StudentList');
+  }
+};
+
+const handleTeacherListClick = () => {
+  if (Status === 'Chairman') {
+    navigate('/TeacherPage');
+  }
+};
   const handleChange = (e) => {
     const { name, value, files } = e.target;
   
@@ -190,9 +202,11 @@ const handleDashboardClick = () => {
                                     You are assigned to Complaint Committee <span className="dot"></span>
                                     <br />
                                 </span>
-                                <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDashboardClick}>
-                                    Dashboard
-                                </button>
+                                <div className="flex flex-col sm:flex-row justify-center items-center mt-2 space-y-2 sm:space-y-0 sm:space-x-2">
+                                  <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDashboardClick}>
+                                      Dashboard
+                                  </button>
+                                </div>
                             </div>
                         </div>
                     )}
@@ -203,9 +217,17 @@ const handleDashboardClick = () => {
                                     You are assigned as Chairman <span className="dot"></span>
                                     <br />
                                 </span>
-                                <button className="mt-2 bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDashboardClick} >
-                                    Dashboard
-                                </button>
+                                <div className="flex flex-col sm:flex-row justify-center items-center mt-2 space-y-2 sm:space-y-0 sm:space-x-2">
+                                  <button className="bg-blue-500 text-white px-4 py-1 rounded" onClick={handleDashboardClick} >
+                                      Dashboard
+                                  </button>
+                                  <button className="bg-green-500 text-white px-4 py-1 rounded" onClick={handleStudentListClick}>
+                                        Student List
+                                  </button>
+                                  <button className="bg-purple-500 text-white px-4 py-1 rounded" onClick={handleTeacherListClick}>
+                                        Teacher List
+                                  </button>
+                                </div>
                             </div>
                         </div>
                     )}
