@@ -21,11 +21,7 @@ const StudentProfile = () => {
     const [errorComplaints, setErrorComplaints] = useState(null);
 
     useEffect(() => {
-<<<<<<< HEAD
-        const studentId = localStorage.getItem('id');
-=======
-        const studentId = localStorage.getItem('id'); // Get student ID from local storage
->>>>>>> cb1fde60a4c802cee32db6efa6977833c74e7bda
+        const studentId = localStorage.getItem('id'); 
         const fetchStudentProfile = async () => {
             try {
                 const response = await axios.get(`/student/api/getStudentByID/${studentId}`); // Use Axios to fetch data
@@ -68,11 +64,7 @@ const StudentProfile = () => {
     };
 
     const handleSubmit = async (e) => {
-<<<<<<< HEAD
-=======
-        const studentId = localStorage.getItem('id'); // Assuming this ID is hardcoded for demonstration
-    
->>>>>>> cb1fde60a4c802cee32db6efa6977833c74e7bda
+        const studentId = localStorage.getItem('id'); 
         e.preventDefault();
         setErrorMessage('');
     
@@ -93,23 +85,11 @@ const StudentProfile = () => {
                 };
     
                 try {
-<<<<<<< HEAD
                     const response = await axios.put(`/student/api/updateStudentByID/${id}`, dataToSend); // Correct usage of template literal
                     toast.success('Profile updated successfully!');
-                    window.location.reload();
-=======
-                    const response = await fetch(`/student/api/updateStudentByID/${studentId}`, { // Use backticks here
-                        method: 'PUT', // Changed to PUT
-                        body: formDataToSubmit,
-                    });
-    
-                    if (!response.ok) throw new Error('Failed to update profile');
-    
-                    const result = await response.json();
-                    toast.success('Profile updated successfully.');
-                    setStudent((prev) => ({ ...prev, phone: formData.phone, profilePhoto: base64String }));
-                    setFormData({ phone: '', profilePhoto: null }); // Reset form data after successful update
->>>>>>> cb1fde60a4c802cee32db6efa6977833c74e7bda
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
                 } catch (error) {
                     setErrorMessage('Failed to update data.');
                     toast.error('Failed to update data.');
@@ -127,18 +107,10 @@ const StudentProfile = () => {
                 const response = await axios.put(`/student/api/updateStudentByID/${id}`, {
                     phone: formData.phone,
                 });
-<<<<<<< HEAD
                 toast.success('Profile updated successfully!');
-                window.location.reload();
-=======
-    
-                if (!response.ok) throw new Error('Failed to update profile');
-    
-                const result = await response.json();
-                toast.success('Profile updated successfully.');
-                setStudent((prev) => ({ ...prev, phone: formData.phone }));
-                setFormData({ phone: '', profilePhoto: null }); // Reset form data after successful update
->>>>>>> cb1fde60a4c802cee32db6efa6977833c74e7bda
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
             } catch (error) {
                 setErrorMessage('Failed to update data.');
                 console.error('Error updating data:', error);
