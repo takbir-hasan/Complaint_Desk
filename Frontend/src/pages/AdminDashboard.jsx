@@ -252,48 +252,6 @@ useEffect(() => {
                     </div>
                 </div>
             </div>
-            {/* <div className="col-span-1">
-                <div className="mb-0">
-                    <label htmlFor="searchTeacher" className="block text-gray-700 text-sm font-semibold mb-2">Teacher</label>
-                    <div className="flex">
-                        <input
-                            type="text"
-                            placeholder="Search Teacher..."
-                            className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                            list="teacherList2"
-                            value={search2}
-                            // onChange={(e) => setSearch2(e.target.value)}
-                            onChange={(e) => {
-                                setSearch2(e.target.value);
-                                const selectedTeacher = teachers.find(teacher => teacher.name === e.target.value);
-                                if (selectedTeacher && !selectedTeachers.includes(selectedTeacher.name)) {
-                                    setSelectedTeachers([...selectedTeachers, selectedTeacher.name]);
-                                }
-                            }}
-                            onBlur={handleTeacherSelect}
-                        />
-                         <datalist id="teacherList2">
-                        {teachers.map((teacher) => (
-                        <option key={teacher._id} value={teacher.name} />
-                        ))}
-                        </datalist>
-                    </div>
-                    <div id="selectedTeachers" className="mt-2 gap-3 mb-2">
-                    {selectedTeachers.map((teacher, index) => (
-                        <span key={index} className="px-2 py-2 mb-2 bg-blue-100 rounded-md mr-2 flex items-center">
-                        {teacher}
-                        <button
-                            className="ml-2 text-red-600 hover:text-red-800 focus:outline-none"
-                            onClick={() => removeTeacher(teacher)}
-                            aria-label={`Remove ${teacher}`}
-                        >
-                            &times;
-                        </button>
-                        </span>
-                    ))}
-                    </div>
-                </div>
-            </div> */}
 
 
             <div className="col-span-1 sm:col-span-3 md:col-span-3 lg:col-span-3 flex justify-center">
@@ -327,13 +285,7 @@ useEffect(() => {
         const departmentName = teacher.assignedDept;
         const isNewDepartment = index === 0 || assignedTeachersData[index - 1].assignedDept !== departmentName;
 
-        // Get unique committee members for the current department
-        const committeeMembers = assignedTeachersData
-            .filter(t => t.assignedPosition === "Committee" && t.assignedDept === departmentName)
-            .map(committeeMember => committeeMember.name);
-
-        const uniqueCommitteeMembers = [...new Set(committeeMembers)]; // Remove duplicates
-
+      
         return isNewDepartment ? (
             <tr key={teacher.id || index} className="hover:bg-gray-100">
                 <td className="py-2 px-2 border-b text-center">
