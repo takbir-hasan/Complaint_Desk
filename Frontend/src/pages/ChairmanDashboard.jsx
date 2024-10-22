@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar';
 import { Helmet } from 'react-helmet';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const formatDate = (date) => {
   const complaintDate = new Date(date);
@@ -206,6 +207,10 @@ const ChairmanDashboard = () => {
     setSelectedComplaint(null);
   };
 
+  const handleBackClick = () => {
+    window.history.back(); 
+  };
+
   return (
     <>
     <Helmet>
@@ -216,7 +221,16 @@ const ChairmanDashboard = () => {
         <Navbar />
         <div className="container mx-auto max-w-7xl mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg sm:p-4 md:p-6 lg:p-8">
         <h1 className="text-2xl text-center font-bold mb-1">Chairman Dashboard</h1>
-          <p style={{ fontSize: "13px" }} className="mb-1 text-left font-bold">Complaints for "<span className="text-green-500">{deptname}</span>" Department</p>
+        <div className="flex items-center justify-between mb-2">
+              <p style={{ fontSize: "13px" }} className="mb-1 text-left font-bold">Complaints for "<span className="text-green-500">{deptname}</span>" Department</p>
+                <button
+                  onClick={handleBackClick}
+                  className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  <FaArrowLeft className="mr-1" /> 
+                  Back
+                </button>
+          </div>
           <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
 
           {loadingComplaints && <p>Loading complaints...</p>}

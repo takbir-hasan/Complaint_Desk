@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-
+import { FaArrowLeft } from 'react-icons/fa';
 
 function TeacherPage() {
   const [teachers, setTeachers] = useState([]);
@@ -141,6 +141,10 @@ const handleAssignCommittee = (teacherId, isAssigned) => {
     setSelectedTeacher(null); // Clear selected teacher data
   };
 
+  const handleBackClick = () => {
+    window.history.back(); 
+  };
+
   return (
     <>
       <Helmet>
@@ -155,7 +159,16 @@ const handleAssignCommittee = (teacherId, isAssigned) => {
         <div className="flex-grow flex flex-col items-center justify-center p-4">
           <div className="bg-white p-8 rounded text-center shadow-lg w-full max-w-7xl">
             <h2 className="font-bold text-2xl md:text-3xl mb-3">Teacher List</h2>
-            <p className='text-left'>Teacher List for "<span className='text-green-600 font-semibold'>{department} </span>"</p>
+            <div className="flex items-center justify-between mb-2">
+                <p className='text-left'>Teacher List for "<span className='text-green-600 font-semibold'>{department} </span>"</p>
+                <button
+                  onClick={handleBackClick}
+                  className="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  <FaArrowLeft className="mr-1" /> 
+                  Back
+                </button>
+            </div>
             <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
 
             {statusMessage && <p style={{ color: textColor }}>{statusMessage}</p>}
