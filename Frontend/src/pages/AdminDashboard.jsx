@@ -187,7 +187,7 @@ useEffect(() => {
       </div>
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
             <div className="col-span-1">
                 <div className="mb-0">
                     <label htmlFor="searchDepartment" className="block text-gray-700 text-sm font-semibold mb-2">Department</label>
@@ -198,9 +198,36 @@ useEffect(() => {
                             value={selectedDept}
                             onChange={(e) => setSelectedDept(e.target.value)}
                         >
-                            <option value="CSE">CSE</option>
-                            <option value="EEE">EEE</option>
-                            <option value="EST">EST</option>
+                             <option value="">Select Department</option>
+                             <option value="CSE">Computer Science and Engineering (CSE)</option>
+                <option value="EEE">Electrical and Electronic Engineering (EEE)</option>
+                <option value="BME">Biomedical Engineering (BME)</option>
+                <option value="PHARM">Pharmacy (PHARM)</option>
+                <option value="ChE">Chemical Engineering (ChE)</option>
+                <option value="IPE">Industrial and Production Engineering (IPE)</option>
+                <option value="PME">Petroleum and Mining Engineering (PME)</option>
+                <option value="TE">Textile Engineering (TE)</option>
+                <option value="APPT">Agro Product Processing Technology (APPT)</option>
+                <option value="CDM">Climate and Disaster Management (CDM)</option>
+                <option value="EST">Environmental Science and Technology (EST)</option>
+                <option value="NFT">Nutrition and Food Technology (NFT)</option>
+                <option value="BMB">Biochemistry and Molecular Biology (BMB)</option>
+                <option value="FMB">Fisheries and Marine Bioscience (FMB)</option>
+                <option value="GEBT">Genetic Engineering and Biotechnology (GEBT)</option>
+                <option value="MB">Microbiology (MB)</option>
+                <option value="NHS">Nursing and Health Science (NHS)</option>
+                <option value="PESS">Physical Education and Sports Science (PESS)</option>
+                <option value="PTR">Physiotherapy and Rehabilitation (PTR)</option>
+                <option value="ENGLISH">English</option>
+                <option value="STATISTICS">Applied Statistics</option>
+                <option value="CHE">Chemistry</option>
+                <option value="MATH">Mathematics</option>
+                <option value="PHY">Physics</option>
+                <option value="AIS">Accounting and Information Systems (AIS)</option>
+                <option value="FB">Finance and Banking (FB)</option>
+                <option value="MANAGEMENT">Management</option>
+                <option value="MARKETING">Marketing</option>
+
                         </select>
                     </div>
                 </div>
@@ -225,7 +252,7 @@ useEffect(() => {
                     </div>
                 </div>
             </div>
-            <div className="col-span-1">
+            {/* <div className="col-span-1">
                 <div className="mb-0">
                     <label htmlFor="searchTeacher" className="block text-gray-700 text-sm font-semibold mb-2">Teacher</label>
                     <div className="flex">
@@ -266,7 +293,7 @@ useEffect(() => {
                     ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
 
             <div className="col-span-1 sm:col-span-3 md:col-span-3 lg:col-span-3 flex justify-center">
@@ -289,7 +316,7 @@ useEffect(() => {
                     <tr className="w-full bg-gray-200 text-left">
                         <th className="py-2 px-2 border-b text-center">Dept Name</th>
                         <th className="py-2 px-2 border-b text-center">Chairman Name</th>
-                        <th className="py-2 px-2 border-b text-center">Teacher Names</th>
+                        <th className="py-2 px-2 border-b text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -310,25 +337,19 @@ useEffect(() => {
         return isNewDepartment ? (
             <tr key={teacher.id || index} className="hover:bg-gray-100">
                 <td className="py-2 px-2 border-b text-center">
-                    {departmentName} <br/>
-                    <button 
-                    onClick={() => handleCancelClick(departmentName)}
-                    className="mt-2 bg-red-500 text-white px-2 py-1 rounded"
-                    >
-                        Cancel
-                    </button>
+                    {departmentName} 
+                   
                 </td>
                 <td className="py-2 px-2 border-b text-center">
                     {assignedTeachersData.find(t => t.assignedPosition === "Chairman" && t.assignedDept === departmentName)?.name || ''}
                 </td>
                 <td className="py-2 px-2 border-b text-center">
-                    {uniqueCommitteeMembers.length > 0 && (
-                        uniqueCommitteeMembers.map((member, i) => (
-                            <span key={member}>
-                                {member}{i < uniqueCommitteeMembers.length - 1 ? <br /> : ""}
-                            </span>
-                        ))
-                    )}
+                <button 
+                    onClick={() => handleCancelClick(departmentName)}
+                    className="mt-2 bg-red-500 text-white px-2 py-1 rounded"
+                    >
+                        Cancel
+                    </button>
                 </td>
             </tr>
         ) : null;
