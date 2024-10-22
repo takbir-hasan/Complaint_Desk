@@ -290,25 +290,26 @@ export const getStudentById = async (req, res) => {
 
 // Method to update student by ID
 export const updateStudentById = async (req, res) => {
-    const { id } = req.params; // Extract the ID from the request parameters
-    const { phone, profilePhoto } = req.body; // Extract the fields to update from the request body
+  const { id } = req.params;
+  const { phone, profilePhoto } = req.body;
 
-    try {
-        // Find the student by ID and update the specified fields
-        const updatedStudent = await Student.findOneAndUpdate(
-            { id }, // Search for the student by ID
-            { phone, profilePhoto }, // Update fields
-            { new: true } // Return the updated student document
-        );
+  try {
+      const student = await Student.findOne({ id });
 
-        if (!updatedStudent) {
-            return res.status(404).json({ message: 'Student not found' });
-        }
-        res.json(updatedStudent); // Return the updated student information
-    } catch (error) {
-        console.error('Error updating student:', error);
-        res.status(500).json({ message: 'Server error' });
-    }
+      if (!student) {
+          return res.status(404).json({ message: 'Student not found' });
+      }
+
+      student.phone = phone;
+      student.profilePhoto = profilePhoto;
+
+      const updatedStudent = await student.save();
+
+      res.status(200).json(updatedStudent);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error', error: error.message });
+  }
 };
 
 

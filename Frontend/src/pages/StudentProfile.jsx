@@ -15,9 +15,13 @@ const StudentProfile = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const [error, setError] = useState(null);
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [complaints, setComplaints] = useState([]);
+    const [loadingComplaints, setLoadingComplaints] = useState(true);
+    const [errorComplaints, setErrorComplaints] = useState(null);
 
     useEffect(() => {
-        const studentId = '200152';
+        const studentId = localStorage.getItem('id');
         const fetchStudentProfile = async () => {
             try {
                 const response = await axios.get(`/student/api/getStudentByID/${studentId}`); // Use Axios to fetch data
@@ -32,18 +36,14 @@ const StudentProfile = () => {
         };
 
         fetchStudentProfile();
+        
     }, []);
 
    
     if (error) return <div>Error: {error}</div>;
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: files ? files[0] : value,
-        }));
-    };
+     
+    
 
     const handleLogoutRedirect = () => {
         // Implement your logout logic here
@@ -51,67 +51,68 @@ const StudentProfile = () => {
         navigate('/slogin'); // Redirect to login page after logout
     };
 
+
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        if (name === 'profilePhoto') {
+            setFormData({ ...formData, profilePhoto: files[0] });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
+    };
+
     const handleSubmit = async (e) => {
-        const studentId = '200152'; // Assuming this ID is hardcoded for demonstration
-    
         e.preventDefault();
         setErrorMessage('');
     
-        // Create a new FormData object to hold the form data
-        const formDataToSubmit = new FormData();
-        formDataToSubmit.append('phone', formData.phone);
-    
-        // Check if the profile photo is provided
+        const id = localStorage.getItem('id');
+        
+        // Convert the image file to base64
+        let base64ProfilePhoto = '';
         if (formData.profilePhoto) {
             const reader = new FileReader();
-    
-            // Read the file as a data URL (Base64)
             reader.readAsDataURL(formData.profilePhoto);
-    
             reader.onload = async () => {
-                const base64String = reader.result; // This contains the Base64 encoded string
-                formDataToSubmit.append('profilePhoto', base64String); // Append the Base64 string to FormData
+                base64ProfilePhoto = reader.result;
+    
+                // Prepare the data to send
+                const dataToSend = {
+                    phone: formData.phone,
+                    profilePhoto: base64ProfilePhoto,
+                };
     
                 try {
-                    const response = await fetch(`/student/api/updateStudentByID/${studentId}`, { // Use backticks here
-                        method: 'PUT', // Changed to PUT
-                        body: formDataToSubmit,
-                    });
-    
-                    if (!response.ok) throw new Error('Failed to update profile');
-    
-                    const result = await response.json();
-                    toast.success('Profile updated successfully.');
-                    setStudent((prev) => ({ ...prev, phone: formData.phone, profilePhoto: base64String }));
+                    const response = await axios.put(`/student/api/updateStudentByID/${id}`, dataToSend); // Correct usage of template literal
+                    toast.success('Profile updated successfully!');
+                    window.location.reload();
                 } catch (error) {
-                    console.error('Error updating profile:', error);
-                    setErrorMessage('Failed to update profile. Please try again.');
+                    setErrorMessage('Failed to update data.');
+                    toast.error('Failed to update data.');
+                    console.error('Error updating data:', error);
                 }
             };
     
-            reader.onerror = (error) => {
-                console.error('Error reading file:', error);
-                setErrorMessage('Failed to read profile photo. Please try again.');
+            reader.onerror = () => {
+                setErrorMessage('Error reading file');
+                toast.error('Error reading file');
             };
         } else {
-            // If no profile photo is provided, just update the phone number
+            // If no image is selected, just send the phone number
             try {
-                const response = await fetch(`/student/api/updateStudentByID/${studentId}`, { // Use backticks here
-                    method: 'PUT', // Changed to PUT
-                    body: formDataToSubmit,
+                const response = await axios.put(`/student/api/updateStudentByID/${id}`, {
+                    phone: formData.phone,
                 });
-    
-                if (!response.ok) throw new Error('Failed to update profile');
-    
-                const result = await response.json();
-                toast.success('Profile updated successfully.');
-                setStudent((prev) => ({ ...prev, phone: formData.phone }));
+                toast.success('Profile updated successfully!');
+                window.location.reload();
             } catch (error) {
-                console.error('Error updating profile:', error);
-                setErrorMessage('Failed to update profile. Please try again.');
+                setErrorMessage('Failed to update data.');
+                console.error('Error updating data:', error);
+                toast.error('Failed to update data.');
             }
         }
     };
+    
+    
     
     
 
@@ -197,6 +198,7 @@ const StudentProfile = () => {
                                             type="tel"
                                             id="phone"
                                             name="phone"
+                                            required
                                             value={formData.phone}
                                             onChange={handleChange}
                                             placeholder="Enter mobile number"
@@ -218,6 +220,7 @@ const StudentProfile = () => {
                                                 <input
                                                     type="file"
                                                     name="profilePhoto"
+                                                    required
                                                     onChange={handleChange}
                                                     className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
                                                 />
@@ -253,21 +256,34 @@ const StudentProfile = () => {
                         <p className="text-lg mb-3 font-bold">Your Complaints</p>
                     </div>
                     
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full bg-white border border-gray-300">
-                            <thead>
-                                <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th className="py-3 px-6 text-center">Token Number</th>
-                                    <th className="py-3 px-6 text-center">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody className="text-gray-700 text-sm font-dark">
-                                <tr>
-                                    <td colSpan="2" className="py-3 px-6 text-center">No complaints found</td>
-                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    {loadingComplaints ? (
+                        <div className="loader-verify"></div> // Display loader while loading complaints
+                    ) : (
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full divide-y divide-gray-200">
+                                <thead className="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Complaint ID</th>
+                                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-white divide-y divide-gray-200">
+                                    {complaints.length > 0 ? (
+                                        complaints.map((complaint) => (
+                                            <tr key={complaint._id}>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint._id}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{complaint.status}</td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="3" className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No complaints found.</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
                 </div>
             </div>
         </>

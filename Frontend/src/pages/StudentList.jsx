@@ -18,7 +18,7 @@ const StudentList = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(`/student/api/getAllstudentByDept/${deptname}`); 
+        const response = await axios.get(`/student/api/getStudentsByDept/${deptname}`); 
         if (response.data.length) {
             setStudents(response.data.reverse());
           } else {
