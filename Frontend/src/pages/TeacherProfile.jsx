@@ -153,6 +153,18 @@ const handleTeacherListClick = () => {
     window.location.href = '/login';
   }
 
+  //Refresh function
+  const [hasRefreshed, setHasRefreshed] = useState(false);
+  useEffect(() => {
+    if (!hasRefreshed) {
+        setTimeout(() => {
+            window.location.reload();
+            setHasRefreshed(true);  
+        }, 1000); 
+    }
+  }, [hasRefreshed]); 
+
+
   return (
     <>
       <Helmet>
