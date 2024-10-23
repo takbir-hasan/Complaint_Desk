@@ -503,3 +503,23 @@ export const  verifyTeacherById = async (req, res) => {
   }
 
 };
+
+
+// Get Teacher Names by Department
+export const getTeacherNamesByDepartment = async (req, res) => {
+  const { dept } = req.params; // Extract department from request parameters
+  try {
+      // Find teachers by department and only select the 'name' field
+      const teachers = await Teacher.find({ dept }, 'name');
+      
+      if (!teachers.length) {
+          return res.status(404).json({ message: 'No teachers found for this department' });
+      }
+
+      // Return the list of teacher names
+      res.status(200).json(teachers);
+  } catch (error) {
+      console.error('Error fetching teacher names:', error);
+      res.status(500).json({ message: 'An error occurred while fetching teacher names', error: error.message });
+  }
+};
