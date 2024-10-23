@@ -411,18 +411,7 @@ export const updatePosition = async (req, res) => {
       }
   }
 
-  if (teachers && teachers.length > 0) {
-      const updatePromises = teachers.map(async (teacher) => {
-          return await Teacher.findOneAndUpdate(
-              { name: teacher.name }, // Search by the teacher's name
-              { assignedPosition: teacher.assignedPosition, assignedDept: teacher.assignedDept },
-              { new: true } // Return the updated document
-          );
-      });
-
-      await Promise.all(updatePromises);
-  }
-
+  
   return res.status(200).json({ message: "Successfully Added Committe" });
    
   }
