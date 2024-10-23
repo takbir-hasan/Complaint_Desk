@@ -162,13 +162,12 @@ export const getComplaintByStudentId = async (req, res) => {
 
   try {
      
-      const complaint = await Complaint.findOne({ id }, '_id status');
+      const complaint = await Complaint.find({ id }, '_id status');
 
      
-      if (!complaint) {
-          return res.status(404).json({ message: 'Complaint not found' });
+      if (complaint.length === 0) {
+        return res.status(404).json({ message: 'No complaints found' });
       }
-
       
       res.status(200).json(complaint);
   } catch (error) {

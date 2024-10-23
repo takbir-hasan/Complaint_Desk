@@ -6,7 +6,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-
+import ComplaintsPage from './StudentComplaintList';
 
 const StudentProfile = () => {
     const [student, setStudent] = useState(null);
@@ -16,9 +16,6 @@ const StudentProfile = () => {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [isUpdating, setIsUpdating] = useState(false);
-    const [complaints, setComplaints] = useState([]);
-    const [loadingComplaints, setLoadingComplaints] = useState(true);
-    const [errorComplaints, setErrorComplaints] = useState(null);
 
     useEffect(() => {
         const studentId = localStorage.getItem('id'); 
@@ -41,6 +38,7 @@ const StudentProfile = () => {
 
    
     if (error) return <div>Error: {error}</div>;
+
 
      
     
@@ -257,7 +255,7 @@ const StudentProfile = () => {
                         </form>
                     </div>
 
-                    {/* Student Complaint List */}
+                    {/* Student Complaint List
                     <hr className="border-t-4 mt-5" style={{ borderColor: '#FEDE00' }} />
                     <div className="text-center mb-3 mt-3">
                         <p className="text-lg mb-3 font-bold">Your Complaints</p>
@@ -290,7 +288,9 @@ const StudentProfile = () => {
                                 </tbody>
                             </table>
                         </div>
-                    )}
+                    )} */}
+
+                    <ComplaintsPage/>
                 </div>
             </div>
         </>
