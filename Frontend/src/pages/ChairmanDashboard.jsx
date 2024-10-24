@@ -21,17 +21,47 @@ const Modal = ({ isOpen, onClose, complaint }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center  justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-5 ml-4 mr-4 rounded-lg shadow-lg">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 ">
+      <div className="bg-white p-5 ml-4 mr-4 rounded-lg shadow-lg w-full max-h-[100vh] sm:w-[400px] md:w-[500px] lg:w-[600px]">
         <h2 className="text-xl font-bold mb-1 text-center text-black">Complaint Details</h2>
         <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
+        <div className='max-h-[80vh] overflow-y-scroll'>
         <p style={{ fontSize: "13px" }} class="mt-2 text-black"><strong>Token Number: </strong>
         <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "13px" }}>
-          {complaint._id}
+          {complaint._id} 
         </span>
         </p>
+        <p style={{ fontSize: "13px" }} class=" text-black"><strong>Name: </strong>
+        <span className="font-semibold  rounded" style={{ color: "black", fontSize: "13px" }}>
+         
+          {complaint.name}
+         
+        </span>
+        </p>
+        <p style={{ fontSize: "13px" }} class=" text-black"><strong>Department: </strong>
+        <span className="font-semibold  rounded" style={{ color: "black", fontSize: "13px" }}>
+        
+          {complaint.dept} 
+ 
+        </span>
+        </p>
+        <p style={{ fontSize: "13px" }} class=" text-black"><strong>Student ID: </strong>
+        <span className="font-semibold  rounded" style={{ color: "black", fontSize: "13px" }}>
+          
+          {complaint.id} 
+
+        </span>
+        </p>
+        <p style={{ fontSize: "13px" }} class=" text-black"><strong>Session: </strong>
+        <span className="font-semibold  rounded" style={{ color: "black", fontSize: "13px" }}>
+        
+          {complaint.session}
+        </span>
+        </p>
+
         <p style={{ fontSize: "13px",textAlign: "justify", whiteSpace: "pre-line" }} className="text-black"><strong>Details: </strong> <br/> {complaint.complaint}</p>
         <p style={{ fontSize: "13px" }} className="mt-3 text-black"><strong>Date: </strong>{formatDate(complaint.date)}</p>
+        </div>
         <div className= "flex justify-center items-center">
         <button
           onClick={onClose}
