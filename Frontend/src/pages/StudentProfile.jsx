@@ -133,9 +133,9 @@ const StudentProfile = () => {
                 {/* Toast Notify */}
                 <ToastContainer autoClose={3000} position="top-right" />
 
-                <div className="container-fluid max-w-4xl mx-auto mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg">
-                    <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
-                        <p className="text-lg mb-3 font-bold">Student Profile</p>
+                <div className="container-fluid max-w-4xl w-full mx-auto mt-4 mb-4 bg-white p-4 sm:p-8 rounded-lg shadow-lg">
+                    <div className="flex flex-col sm:flex-row justify-between items-center sm:items-center mb-3">
+                        <p className="text-lg sm:text-xl mb-3 sm:mb-0 font-bold">Student Profile</p>
                         <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 mt-3 sm:mt-0">
                             <button
                                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
