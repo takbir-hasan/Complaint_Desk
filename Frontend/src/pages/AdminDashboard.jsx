@@ -140,17 +140,6 @@ function AdminDashboard() {
                 <ToastContainer />
 
                 <div className="container-fluid max-w-full mt-4 mb-4 mx-auto bg-white p-8 rounded-lg shadow-lg">
-                    {/* <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
-                        <p className="text-lg font-bold">Admin Dashboard</p>
-                        <div className="flex space-x-4">
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200" onClick={handleRedirect}>
-                                <FaUserCircle className="mr-2" /> Admin Profile
-                            </button>
-                            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200" onClick={handleLogoutRedirect}>
-                                <FaSignOutAlt className="mr-2" /> Logout
-                            </button>
-                        </div>
-                    </div> */}
 
                     <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
                             <div className='flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 mt-3 sm:mt-0'>
