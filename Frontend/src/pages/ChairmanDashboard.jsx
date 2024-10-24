@@ -132,7 +132,7 @@ const ChairmanDashboard = () => {
     event.preventDefault();
   
     const updatedData = {
-      status: 'Pending',
+      status: 'Solved', // Changed from Pending to Solved
     };
   
     fetch(`/complaint/pending/${complaintId}`, {
@@ -150,13 +150,13 @@ const ChairmanDashboard = () => {
       })
       .then((updatedComplaint) => {
         const updatedComplaints = complaints.map((complaint) =>
-          complaint._id === complaintId ? { ...complaint, status: 'Pending' } : complaint
+          complaint._id === complaintId ? { ...complaint, status: 'Solved' } : complaint // Changed from Pending to Solved
         );
   
         setComplaints(updatedComplaints);
   
         const updatedPendingComplaints = updatedComplaints.filter(
-          (complaint) => complaint.status === 'Pending'
+          (complaint) => complaint.status === 'Solved' // Changed from Pending to Solved
         );
         setPendingComplaints(updatedPendingComplaints);
       })
@@ -214,13 +214,13 @@ const ChairmanDashboard = () => {
   return (
     <>
     <Helmet>
-    <title> Dashboard | Chairman </title>
+    <title> Complaint Dashboard </title> {/*Title of the page has changed*/} 
     </Helmet>
 
       <div className="flex flex-col min-h-screen overflow-x-hidden bg-gray-100 text-black">
         <Navbar />
         <div className="container mx-auto max-w-7xl mt-4 mb-4 bg-white p-8 rounded-lg shadow-lg sm:p-4 md:p-6 lg:p-8">
-        <h1 className="text-2xl text-center font-bold mb-1">Chairman Dashboard</h1>
+        <h1 className="text-2xl text-center font-bold mb-1">Complaint Dashboard</h1>  {/*Title has changed*/} 
         <div className="flex items-center justify-between mb-2">
               <p style={{ fontSize: "13px" }} className="mb-1 text-left font-bold">Complaints for "<span className="text-green-500">{deptname}</span>" Department</p>
                 <button
@@ -259,17 +259,14 @@ const ChairmanDashboard = () => {
                       </span>
                     </td>
                     <td className="border px-0 py-2">
-                      <button
+                    <button
                         style={{ fontSize: '10px' }}
                         className={`${
-                          complaint.status === 'Pending' ? 'bg-yellow-300' : 'bg-green-400'
+                          complaint.status === 'Solved' ? 'bg-yellow-300' : 'bg-green-400'
                         } hover:bg-yellow-300 text-dark font-semibold py-1 px-2 rounded`}
                         onClick={(event) => handleAddsolve(complaint._id, event)}
-                        disabled={complaint.status =='Solved'}
                         >
-                      {complaint.status === 'Pending' || complaint.status === 'Solved' || complaint.status === 'Submitted' 
-                        ? complaint.status 
-                        : 'Add Solve'}
+                        {complaint.status === 'Solved' ? 'Solved' : 'Mark Solve'}
                       </button>
                     </td>
                     <td className="border px-0 py-2">

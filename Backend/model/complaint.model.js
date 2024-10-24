@@ -8,7 +8,7 @@ const ComplaintSchema = mongoose.Schema({
       cdept: {type: String, required: true},
       complaint: {type: String, required: true},
       date: { type: Date, default: Date.now },
-      status: {type: String, default:'submitted'}
+      status: {type: String, default:'Pending'}
 });
 
 const Complaint = mongoose.model("Complaint",ComplaintSchema);

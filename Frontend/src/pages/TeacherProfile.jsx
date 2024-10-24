@@ -77,7 +77,7 @@ const handleDashboardClick = () => {
   }
   if(Status === "Committee")
   {
-    navigate('/CommitteDashboard');
+    navigate('/ChairmanDashboard'); // changed from '/CommitteDashboard' to '/ChairmanDashboard'
   }
 };
 

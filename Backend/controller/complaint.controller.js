@@ -83,7 +83,7 @@ export const markComplaintAsPending = async (req, res) => {
 
     const updatedComplaint = await Complaint.findByIdAndUpdate(
       complaintId,
-      { status: 'Pending' },
+      { status: 'Solved' }, // Changed from Pending to Solved
       { new: true }
     );
 
