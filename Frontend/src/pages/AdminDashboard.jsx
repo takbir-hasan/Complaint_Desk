@@ -82,6 +82,16 @@ function AdminDashboard() {
             assignedDept: selectedDept,
         };
 
+         // Check if a chairman is already assigned for the selected department
+    const isChairmanAssigned = assignedTeachersData.some(teacher => teacher.assignedDept === selectedDept && teacher.assignedPosition === 'Chairman');
+
+    if (isChairmanAssigned) {
+        toast.error("Chairman already assigned for this department.");
+        return;
+    }
+
+
+
         const requestData = {
             chairman: chairmanData,
             teachers: assignedTeachersData,
