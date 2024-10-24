@@ -228,7 +228,7 @@ const StudentList = () => {
       {selectedStudent && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
           <div className="bg-white p-6 rounded-lg w-1/2">
-            <h2 className="text-xl font-bold mb-1 text-center">Student Details</h2>
+            <h2 className="text-xl font-bold mb-1 text-black text-center">Student Details</h2>
             <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
             <div className="flex justify-center mb-3 mt-3"> {/* Flex container for centering the image */}
               <img 

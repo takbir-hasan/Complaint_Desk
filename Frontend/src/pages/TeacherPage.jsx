@@ -243,7 +243,7 @@ const handleAssignCommittee = (teacherId, isAssigned) => {
       {isModalOpen && selectedTeacher && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
-            <h2 className="font-bold text-2xl md:text-3xl mb-1 text-center">Teacher Details</h2>
+            <h2 className="font-bold text-2xl md:text-3xl mb-1 text-black text-center">Teacher Details</h2>
             <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
             <div className="flex justify-center mb-4 mt-3"> {/* Flex container for centering the image */}
               <img 
@@ -253,7 +253,7 @@ const handleAssignCommittee = (teacherId, isAssigned) => {
               />
             </div>
             <h3 className="text-xl font-bold mb-4 text-center text-black">{selectedTeacher.name}</h3>
-            <p><strong>Department:</strong> <span className='text-lime-700 text-black'>{selectedTeacher.dept}</span></p>
+            <p className='text-black'><strong>Department:</strong> <span className='text-lime-700 text-black'>{selectedTeacher.dept}</span></p>
             <p className='text-black'><strong>Designation:</strong> {selectedTeacher.designation}</p>
             <p className='text-black'><strong>Mobile:</strong> {selectedTeacher.phone}</p>
             <p className='text-black'><strong>Email:</strong> {selectedTeacher.email}</p> {/* Add more fields as necessary */}
