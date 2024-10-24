@@ -170,11 +170,12 @@ const StudentList = () => {
                         <td className="py-2 px-4 border">{student.name}</td>
                         <td className="py-2 px-4 border">
                             <button
-                                className={`py-2 px-3 rounded ${student.status === "verified" ? "bg-gray-400" : "bg-green-600 text-white"}`}
+                                className={`py-2 px-3 rounded ${student.status === "verified" ? "bg-gray-400" : (student.status === "Email is not verified" ? "bg-red-600 text-white" : "bg-green-600 text-white")}`}
                                 onClick={() => handleVerifyClick(student.id)}
-                                disabled={student.status === "verified"} // Disable if already verified
+                                disabled={student.status === "verified" || student.status === "Email is not verified"} // Disable if already verified
                                 >
-                                {student.status === "verified" ? "Verified" : "Verify"}
+                               {student.status === "verified" ? "Verified" : (student.status === "Email is not verified" ? "Verify Email" : "Verify")}
+                              {/* Condition changed */}
                             </button>
                         </td>
                         <td className="py-2 px-4 border">

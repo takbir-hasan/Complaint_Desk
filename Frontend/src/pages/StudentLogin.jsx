@@ -27,7 +27,7 @@ const StudentLogin = () => {
         localStorage.setItem('department',data.department);
         localStorage.setItem('session',data.session);
         localStorage.setItem('id',data.id);
-      //   localStorage.setItem('status','success');
+        // localStorage.setItem('status','success');
         window.location.replace('/StudentProfile');
          
       } else {

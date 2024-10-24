@@ -10,6 +10,7 @@ const StudentSchema = mongoose.Schema({
       password:{type: String,},
       profilePhoto:{type: String},
       status: {type: String, default: "Email is not verified"},
+      date: { type: Date, default: Date.now },
 });
 
 const Student = mongoose.model("Student",StudentSchema);
