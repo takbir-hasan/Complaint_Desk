@@ -61,7 +61,7 @@ function App() {
         <Route path="/AdminDashboard" element={isLoggedIn ? <AdminDashboard/> : <Navigate to="/AdminLogin" replace />} />
         <Route path="/TeacherProfile" element={status ? <TeacherProfile/> :  <Navigate to="/Login" replace />} />
         <Route path="/CommitteDashboard" element={committee ? <CommitteDashboard/> :  <Navigate to="/Login" replace />} />
-        <Route path="/ChairmanDashboard" element={chairman ? <ChairmanDashboard/> :  <Navigate to="/Login" replace />} />
+        <Route path="/ChairmanDashboard" element={chairman || committee ? <ChairmanDashboard/> :  <Navigate to="/Login" replace />} />
         <Route path="/done/:condition" element={<DonationDone/>} />
         <Route path="/fail/:transactionId" element={<DonationDone/>} />
         <Route path="/forgetpassword" element={ <ForgetPassword/> } />
