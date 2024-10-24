@@ -272,11 +272,11 @@ const ChairmanDashboard = () => {
                     <td className="border px-0 py-2">
                       <button 
                         style={{ fontSize: "10px" }} 
-                        className={`bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded ${complaint.status === 'Pending' || complaint.status === 'Solved' ? 'opacity-50 cursor-not-allowed' : ''}`} 
+                        className={`bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-2 rounded ${complaint.status === 'Solved' ? 'opacity-50 cursor-not-allowed' : ''}`} 
                         onClick={(event) => handleDiscard(complaint._id, event)}
-                        disabled={complaint.status === 'Pending' || complaint.status === 'Solved'}  // Discard complaint
+                        disabled={complaint.status === 'Solved'}  // Discard complaint
                       >
-                        {complaint.status === 'Pending' || complaint.status === 'Solved' ? 'Disabled' : 'Discard'}
+                        {complaint.status === 'Solved' ? 'Disabled' : 'Discard'}
                       </button>
                     </td>
                     <td className="border px-0 py-2">
