@@ -39,7 +39,7 @@ function App() {
   const isAssigned = localStorage.getItem('assignedPosition') ;
   const chairman = isAssigned === "Chairman" ? true : false;
   const committee = isAssigned === "Committee" ? true : false;
-  const login  = localStorage.getItem('semail') ? true : false;
+  const login  = localStorage.getItem('login') ? true : false;
 
   return (
     <>
