@@ -1,5 +1,5 @@
 import express from 'express';
-import { verifyTeacherById,updateAssignedCommitteeTeacherById,deleteTeacherById, getAssignedTeachersByPosition, getTeacherByDepartment, getTeacherByEmail, updatePosition, updatePositionByDepartment, updateTeacherProfile, getTeacherNamesByDepartment} from '../controller/teacher.controller.js';
+import { verifyTeacherById,updateAssignedCommitteeTeacherById,deleteTeacherById, getAssignedTeachersByPosition, getTeacherByDepartment, getTeacherByEmail, updatePosition, updatePositionByDepartment, updateTeacherProfile, getTeacherNamesByDepartment, getAllTeacherNames} from '../controller/teacher.controller.js';
 const router = express.Router();
 
 // Route to get a specific teacher by email
@@ -13,4 +13,5 @@ router.delete('/api/teacherDeleteById/:id',deleteTeacherById);
 router.put('/api/updateAssignedCommitteeTeacherById/:id', updateAssignedCommitteeTeacherById);
 router.put('/api/verifyTeacherById/:teacherId', verifyTeacherById);
 router.get('/names/:dept', getTeacherNamesByDepartment);
+router.get('/api/getAllteacher',getAllTeacherNames);
 export default router;

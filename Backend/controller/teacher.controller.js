@@ -512,3 +512,21 @@ export const getTeacherNamesByDepartment = async (req, res) => {
       res.status(500).json({ message: 'An error occurred while fetching teacher names', error: error.message });
   }
 };
+
+// Get All Teacher Names
+export const getAllTeacherNames = async (req, res) => {
+  try {
+    // Find all teachers and only select the 'name' field
+    const teachers = await Teacher.find({}, 'name');
+
+    if (!teachers.length) {
+      return res.status(404).json({ message: 'No teachers found' });
+    }
+
+    // Return the list of teacher names
+    res.status(200).json(teachers);
+  } catch (error) {
+    console.error('Error fetching teacher names:', error);
+    res.status(500).json({ message: 'An error occurred while fetching teacher names', error: error.message });
+  }
+};

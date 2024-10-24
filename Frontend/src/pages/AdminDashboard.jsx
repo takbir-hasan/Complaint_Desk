@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Navbar from '../components/navbar';
-import { FaSignOutAlt, FaTrash, FaUserCircle } from 'react-icons/fa';
+import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 function AdminDashboard() {
     const [selectedDept, setSelectedDept] = useState('');
-    // const [teachers, setTeachers] = useState([]);
     const [search1, setSearch1] = useState('');
-    // const [assignedTeachersData, setAssignedTeachersData] = useState([]);
     const [teachers, setTeachers] = useState([]); // Initialize as an empty array
     const [assignedTeachersData, setAssignedTeachersData] = useState([]); // Initialize as an empty array
 
-    
+    const [Allteachers, setAllTeachers] = useState([]);
+    const [filteredTeachers, setFilteredTeachers] = useState([]);
 
     const navigate = useNavigate();
 
@@ -32,6 +32,31 @@ function AdminDashboard() {
         };
         fetchTeachers();
     }, [selectedDept]);
+
+
+    // Fetch all teachers when the component mounts
+    useEffect(() => {
+        const fetchAllTeachers = async () => {
+            try {
+                const response = await axios.get('/teacher/api/getAllteacher');
+                setAllTeachers(response.data);
+            } catch (error) {
+                console.error('Error fetching teachers:', error);
+            }
+        };
+
+        fetchAllTeachers();
+    }, []);
+
+    // Filter teachers based on search input
+    useEffect(() => {
+        setFilteredTeachers(
+            Allteachers.filter((teacher) =>
+                teacher.name.toLowerCase().includes(search1.toLowerCase())
+            )
+        );
+    }, [search1, Allteachers]);
+
 
     useEffect(() => {
         const fetchAssignedTeachers = async () => {
@@ -51,9 +76,8 @@ function AdminDashboard() {
         fetchAssignedTeachers();
     }, []);
     
-    const filteredTeachers = (teachers).filter(teacher => teacher.dept === selectedDept); // Ensure teachers is an array
 
-    console.log('Filtered Teachers:', filteredTeachers); // Check if this shows expected data
+    // console.log('Filtered Teachers:', filteredTeachers); // Check if this shows expected data
 
 
     const handleRedirect = () => navigate('/AdminProfile');
@@ -158,23 +182,24 @@ function AdminDashboard() {
                         </div>
 
                         <div>
-            <label htmlFor="searchChairman" className="block text-gray-700 text-sm font-semibold mb-2">Chairman</label>
-            <input
-                type="text"
-                placeholder="Search Chairman..."
-                className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                value={search1}
-                onChange={(e) => setSearch1(e.target.value)}
-                list="teacherList1"
-            />
-            <datalist id="teacherList1">
-                {filteredTeachers.map((teacher) => (
-                    <option key={teacher._id} value={teacher.name} />
-                ))}
-            </datalist>
-        </div>
+                            <label htmlFor="searchChairman" className="block text-gray-700 text-sm font-semibold mb-2">Chairman</label>
+                            <input
+                                type="text"
+                                placeholder="Search Chairman..."
+                                className="w-full px-3 bg-gray-100 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                value={search1}
+                                onChange={(e) => setSearch1(e.target.value)}
+                                list="teacherList1"
+                            />
+                            <datalist id="teacherList1">
+                                {filteredTeachers.map((teacher) => (
+                                    <option key={teacher._id} value={teacher.name} />
+                                ))}
+                            </datalist>
+                        </div>
 
-                        <div className="flex justify-center">
+
+                        <div className="flex justify-center items-center">
                             <button className="button px-4 py-2 text-dark font-semibold rounded-md" onClick={handleAddClick}>
                                 Add
                             </button>
