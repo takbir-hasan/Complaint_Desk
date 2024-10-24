@@ -280,7 +280,7 @@ const ChairmanDashboard = () => {
                 {currentComplaints.map((complaint) => (
                   <tr key={complaint._id}>
                     <td className="border px-0 py-2 mb-0">
-                      <span className="font-semibold bg-gray-300 rounded text-xs sm:text-sm md:text-base responsive-font" style={{ color: "blue", overflowWrap: "break-word"}} >
+                    <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "10px", overflowWrap: "break-word" }}>
                         {complaint._id}
                       </span>
                       <br />
@@ -344,7 +344,7 @@ const ChairmanDashboard = () => {
           {errorDiscarded && <p className="text-red-500">{errorDiscarded.message}</p>} */}
 
         <p style={{ fontSize: "13px" }} className="mb-1 mt-5 text-center font-bold">
-          Complaints Results
+          Discarded Complaints
         </p>
         <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
 
@@ -365,7 +365,7 @@ const ChairmanDashboard = () => {
               {currentItems.map((complaint) => (
                 <tr key={complaint._id}>
                   <td className="border px-0 py-2 mb-0">
-                    <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "8px" }}>
+                    <span className="font-semibold bg-gray-300 rounded" style={{ color: "blue", fontSize: "10px", overflowWrap: "break-word" }}>
                       {complaint._id}
                     </span>
                     <br />
@@ -378,15 +378,11 @@ const ChairmanDashboard = () => {
                         {complaint.status}
                       </button>
                     </td>
-                  <td className="border px-0 py-2">
-                    <button
-                      style={{ fontSize: "10px" }}
-                      onClick={() => openModal(complaint)}
-                      className="button text-dark font-semibold py-1 mt-2 px-2 rounded"
-                    >
-                      See Details
-                    </button>
-                  </td>
+                    <td className="border px-0 py-2">
+                      <button style={{ fontSize: "10px", padding: "4px 8px" }} onClick={() => openModal(complaint)} className="button text-dark font-semibold py-1 mt-2 px-2 rounded">
+                        See Details
+                      </button>
+                    </td>
                 </tr>
               ))}
             </tbody>
