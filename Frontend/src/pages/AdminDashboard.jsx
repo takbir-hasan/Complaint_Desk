@@ -88,6 +88,12 @@ function AdminDashboard() {
     };
 
     const handleAddClick = async () => {
+        
+        if (!selectedDept || !search1) {
+            toast.error("Please select a department and enter a chairman's name.");
+            return; 
+        }
+
         const chairmanData = {
             name: search1,
             assignedPosition: "Chairman",
