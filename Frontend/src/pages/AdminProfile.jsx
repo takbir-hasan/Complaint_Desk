@@ -105,14 +105,6 @@ function AdminProfile() {
   };
 
 
-  
-  // const departments = ['CSE', 'EEE', 'BME', 'PHARM'];
-  // const chairmen = ['John Doe', 'Jane Smith', 'Michael Brown', 'Lisa Johnson'];
-  // const teachers = ['John Doe', 'Jane Smith', 'Galib', 'Michael Brown', 'Lisa Johnson'];
-
-  // const filterList = (input, list) => {
-  //   return list.filter(item => item.toLowerCase().includes(input.toLowerCase()));
-  // };
 
   return (
     <>
@@ -131,7 +123,7 @@ function AdminProfile() {
           <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
               onClick={handleRedirect}
           >
-          <span className="flex items-center">
+          <span className="flex items-center justify-center">
             <MdDashboard className="mr-2" />
             Admin Dashboard
           </span>
@@ -139,13 +131,12 @@ function AdminProfile() {
           <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
               onClick={handleLogoutRedirect}
           >
-          <span className="flex items-center">
+          <span className="flex items-center justify-center">
             <FaSignOutAlt className="mr-2" />
              Logout
           </span>
           </button>
        </div>
-
       </div>
 
       <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />

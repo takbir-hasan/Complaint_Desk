@@ -12,8 +12,6 @@ function AdminDashboard() {
     const [search1, setSearch1] = useState('');
     const [teachers, setTeachers] = useState([]); // Initialize as an empty array
     const [assignedTeachersData, setAssignedTeachersData] = useState([]); // Initialize as an empty array
-
-    // const [Allteachers, setAllTeachers] = useState([]);
     const [filteredTeachers, setFilteredTeachers] = useState([]);
 
     const navigate = useNavigate();
@@ -34,20 +32,7 @@ function AdminDashboard() {
     }, [selectedDept]);
 
 
-    // Fetch all teachers when the component mounts
-    // useEffect(() => {
-    //     const fetchAllTeachers = async () => {
-    //         try {
-    //             const response = await axios.get('/teacher/api/getAllteacher');
-    //             setAllTeachers(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching teachers:', error);
-    //         }
-    //     };
-
-    //     fetchAllTeachers();
-    // }, []);
-
+   
     // Filter teachers based on search input
     useEffect(() => {
         setFilteredTeachers(
@@ -76,9 +61,6 @@ function AdminDashboard() {
         fetchAssignedTeachers();
     }, []);
     
-
-    // console.log('Filtered Teachers:', filteredTeachers); // Check if this shows expected data
-
 
     const handleRedirect = () => navigate('/AdminProfile');
     
@@ -158,7 +140,7 @@ function AdminDashboard() {
                 <ToastContainer />
 
                 <div className="container-fluid max-w-full mt-4 mb-4 mx-auto bg-white p-8 rounded-lg shadow-lg">
-                    <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
+                    {/* <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
                         <p className="text-lg font-bold">Admin Dashboard</p>
                         <div className="flex space-x-4">
                             <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200" onClick={handleRedirect}>
@@ -168,7 +150,31 @@ function AdminDashboard() {
                                 <FaSignOutAlt className="mr-2" /> Logout
                             </button>
                         </div>
-                    </div>
+                    </div> */}
+
+                    <div className="flex flex-col sm:flex-row justify-between items-center mb-3">
+                            <div className='flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 mt-3 sm:mt-0'>
+                            <p className="text-lg font-bold">Admin Dashboard</p>
+                            </div>
+                            <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4 mt-3 sm:mt-0">
+                            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+                                onClick={handleRedirect}
+                            >
+                            <span className="flex items-center justify-center">
+                                <FaUserCircle className="mr-2" />
+                                Admin Profile
+                            </span>
+                            </button>
+                            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-200"
+                                onClick={handleLogoutRedirect}
+                            >
+                            <span className="flex items-center justify-center">
+                                <FaSignOutAlt className="mr-2" />
+                                Logout
+                            </span>
+                            </button>
+                        </div>
+                        </div>
 
                     <hr className="border-t-4" style={{ borderColor: '#FEDE00' }} />
 
@@ -230,14 +236,14 @@ function AdminDashboard() {
                                 ))}
                             </datalist>
                         </div>
+    
+                    </div>
 
-
-                        <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center mt-4">
                             <button className="button px-4 py-2 text-dark font-semibold rounded-md" onClick={handleAddClick}>
                                 Add
                             </button>
                         </div>
-                    </div>
 
                     <hr className="border-t-4 mt-5" style={{ borderColor: '#FEDE00' }} />
 
