@@ -86,7 +86,7 @@ const StudentRegister = () => {
         
       } else {
         localStorage.setItem('name', formData.name);
-        localStorage.setItem('semail', formData.email);
+        // localStorage.setItem('semail', formData.email);
         window.location.href = '/sverification'; 
         
         console.log('Signup is pending!');

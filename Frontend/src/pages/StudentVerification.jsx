@@ -24,7 +24,6 @@ const StudentVerification = () => {
         const data = await response.json();
         
         // localStorage.setItem('status','success');
-        localStorage.clear();
 
         setStatus('Mail verification successful. Please, Contact with the chairman of the department for account confirmation.');
         setTextColor('green');

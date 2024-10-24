@@ -194,18 +194,21 @@ const handleAssignCommittee = (teacherId, isAssigned) => {
                             <td className="py-2 px-4 border-b">{teacher.name}</td>
                             <td className="py-2 px-4 border-b">
                               <button 
-                                  className={`py-2 px-3 rounded text-white ${teacher.status === 'verified' ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'}`}
+                                  className={`py-2 px-3 rounded text-white ${teacher.status === "verified" ? "bg-gray-400" : (teacher.status === "Email is not verified" ? "bg-red-600 text-white" : "bg-green-600 text-white")}`}
                                   onClick={() => handleVerifyTeacher(teacher._id, teacher.status)}
-                                  disabled={teacher.status === 'verified'}
+                                  disabled={teacher.status === 'verified' || teacher.status === "Email is not verified"}
                                     >
-                                  {teacher.status === 'verified' ? 'Verified' : 'Verify'}
+                                {teacher.status === "verified" ? "Verified" : (teacher.status === "Email is not verified" ? "Verify Email" : "Verify")}
                               </button>
                             </td>
                             <td className="py-2 px-4 border-b">
                               <button 
-                                  className={`py-2 px-3 rounded text-white ${teacher.assignedPosition === 'Committee' ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'}`}
-                                  onClick={() => handleAssignCommittee(teacher._id, teacher.assignedPosition === 'Committee')}>
+                                  className={`py-2 px-3 rounded text-white ${teacher.assignedPosition === 'Committee' ? 'bg-red-600 hover:bg-red-700' : (teacher.status === "Email is not verified" ? "bg-gray-400" : 'bg-blue-600 hover:bg-blue-700') }`}
+                                  onClick={() => handleAssignCommittee(teacher._id, teacher.assignedPosition === 'Committee')}
+                                  disabled={teacher.status === "Email is not verified"}
+                                  >
                                   {teacher.assignedPosition === 'Committee' ? 'Cancel' : 'Assign'}
+
                               </button>
 
                             </td>
