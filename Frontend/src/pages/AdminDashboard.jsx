@@ -13,7 +13,7 @@ function AdminDashboard() {
     const [teachers, setTeachers] = useState([]); // Initialize as an empty array
     const [assignedTeachersData, setAssignedTeachersData] = useState([]); // Initialize as an empty array
 
-    const [Allteachers, setAllTeachers] = useState([]);
+    // const [Allteachers, setAllTeachers] = useState([]);
     const [filteredTeachers, setFilteredTeachers] = useState([]);
 
     const navigate = useNavigate();
@@ -22,9 +22,9 @@ function AdminDashboard() {
         const fetchTeachers = async () => {
             if (selectedDept) {
                 try {
-                    const response = await fetch(`/teacher/names/${selectedDept}`);
-                    const result = await response.json();
-                    setTeachers(result.teachers || []); // Ensure it defaults to an empty array
+                    const response = await axios.get(`/teacher/names/${selectedDept}`);
+                    // const result = await response.json();
+                    setTeachers(response.data); // Ensure it defaults to an empty array
                 } catch (error) {
                     console.error('Error fetching teachers:', error);
                 }
@@ -35,27 +35,27 @@ function AdminDashboard() {
 
 
     // Fetch all teachers when the component mounts
-    useEffect(() => {
-        const fetchAllTeachers = async () => {
-            try {
-                const response = await axios.get('/teacher/api/getAllteacher');
-                setAllTeachers(response.data);
-            } catch (error) {
-                console.error('Error fetching teachers:', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchAllTeachers = async () => {
+    //         try {
+    //             const response = await axios.get('/teacher/api/getAllteacher');
+    //             setAllTeachers(response.data);
+    //         } catch (error) {
+    //             console.error('Error fetching teachers:', error);
+    //         }
+    //     };
 
-        fetchAllTeachers();
-    }, []);
+    //     fetchAllTeachers();
+    // }, []);
 
     // Filter teachers based on search input
     useEffect(() => {
         setFilteredTeachers(
-            Allteachers.filter((teacher) =>
+            teachers.filter((teacher) =>
                 teacher.name.toLowerCase().includes(search1.toLowerCase())
             )
         );
-    }, [search1, Allteachers]);
+    }, [search1]);
 
 
     useEffect(() => {
@@ -88,6 +88,12 @@ function AdminDashboard() {
     };
 
     const handleAddClick = async () => {
+       
+        if (!selectedDept || !search1) {
+            toast.error("Please select a department and enter a chairman's name.");
+            return; 
+        }
+
         const chairmanData = {
             name: search1,
             assignedPosition: "Chairman",
@@ -98,6 +104,8 @@ function AdminDashboard() {
             chairman: chairmanData,
             teachers: assignedTeachersData,
         };
+
+
 
         try {
             const response = await fetch('/teacher/api/updatePosition', {
@@ -167,17 +175,41 @@ function AdminDashboard() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                         <div>
                             <label htmlFor="searchDepartment" className="block text-gray-700 text-sm font-semibold mb-2">Department</label>
-                            <select
+                            <select required
                                 className="w-full bg-gray-100 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
                                 value={selectedDept}
                                 onChange={(e) => setSelectedDept(e.target.value)}
                             >
-                                <option value="">Select Department</option>
-                                {/* Add more departments here */}
+                                <option value="" disabled>Select Department</option>
                                 <option value="CSE">Computer Science and Engineering (CSE)</option>
                                 <option value="EEE">Electrical and Electronic Engineering (EEE)</option>
-                                <option value="EST">(EST)</option>
-                                {/* Add other departments... */}
+                                <option value="BME">Biomedical Engineering (BME)</option>
+                                <option value="PHARM">Pharmacy (PHARM)</option>
+                                <option value="ChE">Chemical Engineering (ChE)</option>
+                                <option value="IPE">Industrial and Production Engineering (IPE)</option>
+                                <option value="PME">Petroleum and Mining Engineering (PME)</option>
+                                <option value="TE">Textile Engineering (TE)</option>
+                                <option value="APPT">Agro Product Processing Technology (APPT)</option>
+                                <option value="CDM">Climate and Disaster Management (CDM)</option>
+                                <option value="EST">Environmental Science and Technology (EST)</option>
+                                <option value="NFT">Nutrition and Food Technology (NFT)</option>
+                                <option value="BMB">Biochemistry and Molecular Biology (BMB)</option>
+                                <option value="FMB">Fisheries and Marine Bioscience (FMB)</option>
+                                <option value="GEBT">Genetic Engineering and Biotechnology (GEBT)</option>
+                                <option value="MB">Microbiology (MB)</option>
+                                <option value="NHS">Nursing and Health Science (NHS)</option>
+                                <option value="PESS">Physical Education and Sports Science (PESS)</option>
+                                <option value="PTR">Physiotherapy and Rehabilitation (PTR)</option>
+                                <option value="ENGLISH">English</option>
+                                <option value="STATISTICS">Applied Statistics</option>
+                                <option value="CHE">Chemistry</option>
+                                <option value="MATH">Mathematics</option>
+                                <option value="PHY">Physics</option>
+                                <option value="AIS">Accounting and Information Systems (AIS)</option>
+                                <option value="FB">Finance and Banking (FB)</option>
+                                <option value="MANAGEMENT">Management</option>
+                                <option value="MARKETING">Marketing</option>
+                
                             </select>
                         </div>
 
@@ -190,6 +222,7 @@ function AdminDashboard() {
                                 value={search1}
                                 onChange={(e) => setSearch1(e.target.value)}
                                 list="teacherList1"
+                                required
                             />
                             <datalist id="teacherList1">
                                 {filteredTeachers.map((teacher) => (
