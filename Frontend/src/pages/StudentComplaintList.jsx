@@ -46,25 +46,25 @@ const ComplaintsPage = () => {
             ) : error ? (
                 <div className="text-red-500">{error}</div> // Display error message
             ) : (
-                <div className="overflow-x-auto">
-                    <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
+                <div className="overflow-hidden">
+                    <table className="table-auto min-w-full bg-white border border-gray-200 rounded-lg shadow-lg">
                         <thead style={{ background: '#FEDE00' }}>
                             <tr>
-                                <th scope="col" className="border border-gray-300 px-6 py-3 text-center text-xs font-semibold text-black uppercase tracking-wider">Token Number</th>
-                                <th scope="col" className="border border-gray-300 px-6 py-3 text-center text-xs font-semibold text-black uppercase tracking-wider">Status</th>
+                                <th scope="col" className="border border-gray-300 px-2 sm:px-3 py-3 text-center text-warp text-xs font-semibold text-black uppercase tracking-wider">Token Number</th>
+                                <th scope="col" className="border border-gray-300 px-2 sm:px-3 py-3 text-center text-xs font-semibold text-black uppercase tracking-wider">Status</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                             {complaints.length > 0 ? (
                                 complaints.map((complaint) => (
                                     <tr key={complaint._id} className="hover:bg-gray-100 transition-colors duration-200">
-                                        <td className="border border-gray-300 px-6 py-4 whitespace-nowrap text-sm text-gray-600 border-b text-center">{complaint._id}</td>
-                                        <td className=" border border-gray-300 px-6 py-4 whitespace-nowrap text-sm text-gray-600 border-b text-center">{complaint.status}</td>
+                                        <td className="border border-gray-300 px-2 sm:px-3 py-4 whitespace-normal break-all text-sm text-gray-600 border-b text-center">{complaint._id}</td>
+                                        <td className=" border border-gray-300 px-2 sm:px-3 py-4 whitespace-normal text-sm text-gray-600 border-b text-center">{complaint.status}</td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="2" className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">No complaints found.</td>
+                                    <td colSpan="2" className="px-6 py-4 whitespace-normal text-sm text-gray-500 text-center">No complaints found.</td>
                                 </tr>
                             )}
                         </tbody>
