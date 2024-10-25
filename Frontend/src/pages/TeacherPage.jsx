@@ -29,6 +29,7 @@ function TeacherPage() {
             'Authorization': `Bearer ${token}`, // Add Authorization header
         },
         }); // Corrected URL
+        
         if(response.ok){
          if(response.data.length === 0)
           setStatusMessage('No teachers found for this department');
