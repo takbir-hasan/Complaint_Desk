@@ -30,16 +30,8 @@ function TeacherPage() {
         },
         }); // Corrected URL
         
-         // Check if the response is successful
-        if (response.status === 200) {
-          if (response.data.length === 0) {
-            setStatusMessage('No teachers found for this department');
-          } else {
-            setTeachers(response.data); // Ensure this matches API response structure
-          }
-      } else {
-        setError('Error fetching teacher data');
-      }
+         setStatusMessage(response.data);
+      
       } catch (err) {
         setError('Error fetching teacher data');
       } finally {

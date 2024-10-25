@@ -337,9 +337,9 @@ export const getTeacherByDepartment = async (req, res) => {
       const teachers = await Teacher.find({ dept, assignedPosition: { $ne: "Chairman" } });
         // console.log(`Found teachers:`, teachers);
 
-        if (!teachers.length) {
-            return res.status(200).json({ message: 'No teachers found for this department' });
-        }
+        // if (!teachers.length) {
+        //     return res.status(200).json({ message: 'No teachers found for this department' });
+        // }
 
         res.status(200).json(teachers);
     } catch (error) {
