@@ -112,7 +112,7 @@ export const login = async (req, res) => {
 
 
         if (!checkMail) {
-          return res.status(401).json({ message: 'Authentication failed' });
+          return res.status(401).json({ message: 'Incorrect email or password.' });
         }
 
         if (checkMail) {

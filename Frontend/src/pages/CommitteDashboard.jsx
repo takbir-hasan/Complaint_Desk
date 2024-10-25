@@ -62,11 +62,15 @@ const ChairmanDashboard = () => {
   const [selectedComplaint, setSelectedComplaint] = useState(null);
   const deptname = localStorage.getItem('assignedDept');
   // const deptname = "EST";
-
+  const token = localStorage.getItem('teacherToken');
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/complaint/pendingsolve/${deptname}`)
+    fetch(`/complaint/pendingsolve/${deptname}`,{
+      headers: {
+        'Authorization': `Bearer ${token}`, // Add Authorization header
+      },
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -95,6 +99,7 @@ const ChairmanDashboard = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Add Authorization header
       },
       body: JSON.stringify(updatedData),
     })

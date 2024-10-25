@@ -10,9 +10,14 @@ const ComplaintsPage = () => {
     useEffect(() => {
         // const studentId = "200103";
         const studentId = localStorage.getItem('id');
+        const token = localStorage.getItem('token');
         const fetchComplaints = async () => {
             try {
-                const response = await axios.get(`/complaint/complaintByStudentId/${studentId}`);
+                const response = await axios.get(`/complaint/complaintByStudentId/${studentId}`,{
+                    headers: {
+                        'Authorization': `Bearer ${token}`, // Add Authorization header
+                    },
+                });
                 // console.log(response.data);
                 if (Array.isArray(response.data)) {
                     const sortedComplaints = response.data.sort((a, b) => {

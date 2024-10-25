@@ -21,11 +21,17 @@ const TeacherProfile = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
+  const token = localStorage.getItem('teacherToken');
+
   useEffect(() => {
     const fetchData = async () => {
       const email = localStorage.getItem('temail');
         try {
-          const response = await fetch(`/teacher/${email}`);
+          const response = await fetch(`/teacher/${email}`, {
+            headers: {
+              'Authorization': `Bearer ${token}`, // Add Authorization header
+          },
+          });
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
             // console.log(data); 
@@ -133,7 +139,10 @@ const handleTeacherListClick = () => {
 
       const response = await fetch(`/teacher/api/updateTeacherProfile/${email}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}`, // Add Authorization header
+         },
         body: JSON.stringify({ ...formData, profilePhoto: base64Photo }),
       });
 

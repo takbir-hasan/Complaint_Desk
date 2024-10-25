@@ -114,6 +114,9 @@ const StudentProfile = () => {
             try {
                 const response = await axios.put(`/student/api/updateStudentByID/${id}`, {
                     phone: formData.phone,
+                    headers: {
+                        'Authorization': `Bearer ${token}`, // Add Authorization header
+                    },
                 });
                 toast.success('Profile updated successfully!');
                 setTimeout(() => {

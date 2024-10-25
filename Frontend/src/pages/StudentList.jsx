@@ -15,11 +15,16 @@ const StudentList = () => {
   const [searchId, setSearchId] = useState('');
   
   const deptname = localStorage.getItem('assignedDept'); 
-
+  const token = localStorage.getItem('teacherToken');
+  
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(`/student/api/getStudentsByDept/${deptname}`); 
+        const response = await axios.get(`/student/api/getStudentsByDept/${deptname}`,{
+          headers: {
+            'Authorization': `Bearer ${token}`, // Add Authorization header
+        },
+        }); 
         if (response.data.length) {
             setStudents(response.data.reverse());
           } else {
@@ -76,7 +81,11 @@ const StudentList = () => {
   //Handle verify
   const handleVerifyClick = async (studentId) => {
     try {
-      const response = await axios.put(`/student/api/updateStudentStatusById/${studentId}`);
+      const response = await axios.put(`/student/api/updateStudentStatusById/${studentId}`,{
+        headers: {
+          'Authorization': `Bearer ${token}`, // Add Authorization header
+      },
+      });
       if (response.status === 200) {
         toast.success("Student verified successfully");
         // Update students state to reflect the change
@@ -98,7 +107,11 @@ const StudentList = () => {
   // Handle delete
   const handleDeleteClick = async (studentId) => {
     try {
-      await axios.delete(`/student/api/deleteStudentById/${studentId}`);
+      await axios.delete(`/student/api/deleteStudentById/${studentId}`,{
+        headers: {
+          'Authorization': `Bearer ${token}`, // Add Authorization header
+      },
+      });
       setStudents((prevStudents) => prevStudents.filter(student => student.id !== studentId)); // Remove deleted student from state
       toast.success("Student deleted successfully");
     } catch (error) {

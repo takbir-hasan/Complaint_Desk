@@ -16,7 +16,7 @@ import Donation from './model/donation.model.js';
 import admin from './route/admin.login.route.js';
 import teacherRoutes from './route/teacher.route.js';
 import StudentRoutes from './route/student.route.js';
-import checkLogin from './middlewares/checkLogin.js';
+// import {checkLogin, AdminLogin, TeacherLogin} from './middlewares/checkLogin.js';
 
 import { adminforgetpass, resetPassword, updatePass } from './controller/admin.login.controller.js';
 import { register, login, forgetPass, resetPass, verification, getTeacherByEmail} from './controller/teacher.controller.js';

@@ -13,7 +13,15 @@ export const admin = async (req, res) => { //login
   
           if (checkMail) {
               if (await bcrypt.compare(password, checkMail.password)) {
-                  res.json({ });
+                 //Generate JWT Token
+                 const token = jwt.sign(
+                  { id: checkMail.id, email: checkMail.email }, // Payload
+                  process.env.SECRET_KEY, // Secret key
+                  { expiresIn: '1h' } // Token expiration time
+                );
+
+                return res.status(201).json({ "access_token": token,
+                });
               } else {
                   return res.status(401).json({ message: 'Incorrect email or password.' });
               }

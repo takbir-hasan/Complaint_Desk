@@ -108,11 +108,24 @@ export const login = async (req, res) => {
 
         const { email, password } = req.body;
         const checkMail = await Teacher.findOne({ email });
+        
+        if (!checkMail) {
+          return res.status(401).json({ message: 'Incorrect email or password.' });
+        }
 
         if (checkMail) {
             if (await bcrypt.compare(password, checkMail.password)) {
               if (checkMail.status === 'verified') {
-                res.json({ });
+                 //Generate JWT Token
+                 const token = jwt.sign(
+                  { id: checkMail.id, email: checkMail.email }, // Payload
+                  process.env.SECRET_KEY, // Secret key
+                  { expiresIn: '1h' } // Token expiration time
+                );
+
+                return res.status(201).json({"access_token": token,
+                        
+                });
             } else {
                 return res.status(401).json({ message: 'Your Account is not verified completely. Please contact with the chairman of the department.'});
             }
@@ -514,19 +527,19 @@ export const getTeacherNamesByDepartment = async (req, res) => {
 };
 
 // Get All Teacher Names
-export const getAllTeacherNames = async (req, res) => {
-  try {
-    // Find all teachers and only select the 'name' field
-    const teachers = await Teacher.find({}, 'name');
+// export const getAllTeacherNames = async (req, res) => {
+//   try {
+//     // Find all teachers and only select the 'name' field
+//     const teachers = await Teacher.find({}, 'name');
 
-    if (!teachers.length) {
-      return res.status(404).json({ message: 'No teachers found' });
-    }
+//     if (!teachers.length) {
+//       return res.status(404).json({ message: 'No teachers found' });
+//     }
 
-    // Return the list of teacher names
-    res.status(200).json(teachers);
-  } catch (error) {
-    console.error('Error fetching teacher names:', error);
-    res.status(500).json({ message: 'An error occurred while fetching teacher names', error: error.message });
-  }
-};
+//     // Return the list of teacher names
+//     res.status(200).json(teachers);
+//   } catch (error) {
+//     console.error('Error fetching teacher names:', error);
+//     res.status(500).json({ message: 'An error occurred while fetching teacher names', error: error.message });
+//   }
+// };

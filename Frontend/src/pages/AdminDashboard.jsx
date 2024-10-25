@@ -15,12 +15,17 @@ function AdminDashboard() {
     const [filteredTeachers, setFilteredTeachers] = useState([]);
 
     const navigate = useNavigate();
+    const token = localStorage.getItem('teacherToken');
 
     useEffect(() => {
         const fetchTeachers = async () => {
             if (selectedDept) {
                 try {
-                    const response = await axios.get(`/teacher/names/${selectedDept}`);
+                    const response = await axios.get(`/teacher/names/${selectedDept}`,{
+                        headers: {
+                            'Authorization': `Bearer ${token}`, // Add Authorization header
+                        },
+                    });
                     // const result = await response.json();
                     setTeachers(response.data); // Ensure it defaults to an empty array
                 } catch (error) {
@@ -46,7 +51,11 @@ function AdminDashboard() {
     useEffect(() => {
         const fetchAssignedTeachers = async () => {
             try {
-                const response = await fetch('/teacher/api/getAssignedTeachers');
+                const response = await fetch('/teacher/api/getAssignedTeachers',{
+                    headers: {
+                        'Authorization': `Bearer ${token}`, // Add Authorization header
+                    },
+                });
                 const data = await response.json();
                 if (data.success) {
                     setAssignedTeachersData(data.assignedTeachers || []); // Ensure it defaults to an empty array
@@ -104,6 +113,7 @@ function AdminDashboard() {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Add Authorization header
                 },
                 body: JSON.stringify(requestData),
             });
@@ -125,7 +135,11 @@ function AdminDashboard() {
         try {
             const response = await fetch('/teacher/api/updatePositionByDepartment', {
                 method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
+                headers: 
+                {   
+                    'Content-Type': 'application/json' ,
+                    'Authorization': `Bearer ${token}`, // Add Authorization header
+                },
                 body: JSON.stringify({ dept: departmentName }),
             });
 

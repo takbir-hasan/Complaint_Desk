@@ -1,16 +1,16 @@
 import express from 'express';
 
 import { complaint, getComplaintsByDept,discardComplaint, getDiscardedComplaintsByDept, markComplaintAsPending, markComplaintAsSolved, getPendingComplaintBycdept, getComplaintByStudentId} from "../controller/complaint.controller.js"; 
-
+import {checkLogin, TeacherLogin} from '../middlewares/checkLogin.js';
 const router = express.Router();
 
-router.post("/",complaint)
-router.get('/:cdept', getComplaintsByDept);
-router.get('/discarded/:cdept', getDiscardedComplaintsByDept);
-router.put('/:id', discardComplaint);
-router.put('/pending/:id', markComplaintAsPending);
-router.get('/pendingsolve/:cdept', getPendingComplaintBycdept);
-router.put('/solved/:id',markComplaintAsSolved);
-router.get('/complaintByStudentId/:id', getComplaintByStudentId);
+router.post("/", checkLogin, complaint)
+router.get('/:cdept',TeacherLogin, getComplaintsByDept);
+router.get('/discarded/:cdept',TeacherLogin, getDiscardedComplaintsByDept);
+router.put('/:id',TeacherLogin, discardComplaint);
+router.put('/pending/:id',TeacherLogin, markComplaintAsPending);
+router.get('/pendingsolve/:cdept',TeacherLogin, getPendingComplaintBycdept);
+router.put('/solved/:id',TeacherLogin, markComplaintAsSolved);
+router.get('/complaintByStudentId/:id',checkLogin,  getComplaintByStudentId);
 
 export default router;

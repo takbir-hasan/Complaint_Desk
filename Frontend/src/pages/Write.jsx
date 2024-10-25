@@ -15,6 +15,7 @@ function Write() {
  const department = localStorage.getItem('department');
  const session = localStorage.getItem('session');
  const id = localStorage.getItem('id');
+ const token = localStorage.getItem('token');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,6 +26,7 @@ function Write() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Add Authorization header
         },
         body: JSON.stringify({ name, dept: department, id, session, cdept: complaintDept, complaint: complaintText }),
       });

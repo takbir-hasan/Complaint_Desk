@@ -86,10 +86,17 @@ const ChairmanDashboard = () => {
   const [selectedComplaint, setSelectedComplaint] = useState(null);
   // const deptname = "EST";
   const deptname = localStorage.getItem('assignedDept');
+  const token = localStorage.getItem('teacherToken');
 
   useEffect(() => {
+    
+
     setLoadingComplaints(true);
-    fetch(`/complaint/${deptname}`)
+    fetch(`/complaint/${deptname}`,{
+      headers: {
+        'Authorization': `Bearer ${token}`, // Add Authorization header
+    },
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('No complaints found.');
@@ -109,7 +116,11 @@ const ChairmanDashboard = () => {
   
   useEffect(() => {
     setLoadingDiscarded(true);
-    fetch(`/complaint/discarded/${deptname}`)
+    fetch(`/complaint/discarded/${deptname}`,{
+      headers: {
+        'Authorization': `Bearer ${token}`, // Add Authorization header
+    },
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('No complaints found.');
@@ -140,6 +151,7 @@ const ChairmanDashboard = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Add Authorization header
       },
       body: JSON.stringify(updatedData),
     })
@@ -169,6 +181,7 @@ const ChairmanDashboard = () => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Add Authorization header
       },
       body: JSON.stringify(updatedData),
     })

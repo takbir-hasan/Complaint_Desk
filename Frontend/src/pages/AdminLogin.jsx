@@ -23,8 +23,13 @@ const AdminLogin = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
         localStorage.setItem('email', email); 
         window.location.replace('/AdminDashboard')
+        
+         // Save the token in local storage
+         localStorage.setItem('adminToken', data.access_token);
+        
          
       } else {
           const errorData = await response.json();

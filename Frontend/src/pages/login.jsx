@@ -21,9 +21,14 @@ const Login = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
         localStorage.setItem('temail', email); 
         localStorage.setItem('status','success');
         window.location.replace('/TeacherProfile')
+
+          // Save the token in local storage
+          localStorage.setItem('teacherToken', data.access_token);
+        
          
       } else {
           const errorData = await response.json();

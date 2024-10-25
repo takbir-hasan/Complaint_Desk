@@ -17,12 +17,18 @@ function TeacherPage() {
   const [error, setError] = useState(null);
   const department = localStorage.getItem('assignedDept');
 
+  const token = localStorage.getItem('teacherToken');  
+
   useEffect(() => {
     const department = localStorage.getItem('assignedDept');
     const fetchTeachers = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`/teacher/api/getAllteacherByDeparment/${department}`); // Corrected URL
+        const response = await axios.get(`/teacher/api/getAllteacherByDeparment/${department}`,{
+          headers: {
+            'Authorization': `Bearer ${token}`, // Add Authorization header
+        },
+        }); // Corrected URL
         setTeachers(response.data); // Ensure this matches  API response structure
       } catch (err) {
         setError('Error fetching teacher data');
@@ -49,6 +55,11 @@ function TeacherPage() {
 
     // Update the status to 'verified'
     axios.put(`/teacher/api/verifyTeacherById/${teacherId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`, // Add Authorization header
+    },
+    }, 
+    {
         status: 'verified'
     })
     .then((response) => {
@@ -81,6 +92,11 @@ const handleAssignCommittee = (teacherId, isAssigned) => {
   const assignedPosition = isAssigned ? 'NotAssigned' : 'Committee'; // Set the assigned position based on current state
 
   axios.put(`/teacher/api/updateAssignedCommitteeTeacherById/${teacherId}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`, // Add Authorization header
+  },
+  },
+   {
       assignedPosition,
       assignedDept: isAssigned ? 'NotAssigned' : assignedDept, // Update department accordingly
   })
@@ -114,7 +130,11 @@ const handleAssignCommittee = (teacherId, isAssigned) => {
   const handleDelete = async (teacherId) => {
     try {
       // Send the delete request with the teacherId in the URL
-      const response = await axios.delete(`/teacher/api/teacherDeleteById/${teacherId}`);
+      const response = await axios.delete(`/teacher/api/teacherDeleteById/${teacherId}`,{
+        headers: {
+          'Authorization': `Bearer ${token}`, // Add Authorization header
+      },
+      });
   
       // Check if the deletion was successful
       if (response.status === 200) {

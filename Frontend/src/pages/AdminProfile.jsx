@@ -62,12 +62,17 @@ function AdminProfile() {
   }
   };
 
+  const token = localStorage.getItem('adminToken');
 
   // Fetch feedback data from the API
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await fetch('/feedback/getFeedback');
+        const response = await fetch('/feedback/getFeedback',{
+          headers: {
+            'Authorization': `Bearer ${token}`, // Add Authorization header
+        },
+        });
         const data = await response.json();
         const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
             

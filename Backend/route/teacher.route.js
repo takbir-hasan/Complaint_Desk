@@ -1,17 +1,18 @@
 import express from 'express';
-import { verifyTeacherById,updateAssignedCommitteeTeacherById,deleteTeacherById, getAssignedTeachersByPosition, getTeacherByDepartment, getTeacherByEmail, updatePosition, updatePositionByDepartment, updateTeacherProfile, getTeacherNamesByDepartment, getAllTeacherNames} from '../controller/teacher.controller.js';
+import { verifyTeacherById,updateAssignedCommitteeTeacherById,deleteTeacherById, getAssignedTeachersByPosition, getTeacherByDepartment, getTeacherByEmail, updatePosition, updatePositionByDepartment, updateTeacherProfile, getTeacherNamesByDepartment} from '../controller/teacher.controller.js';
 const router = express.Router();
+import { AdminLogin, TeacherLogin } from '../middlewares/checkLogin.js';
 
 // Route to get a specific teacher by email
-router.get('/:email', getTeacherByEmail);
-router.put('/api/updateTeacherProfile/:email',updateTeacherProfile);
-router.get('/api/getAllteacherByDeparment/:dept',getTeacherByDepartment);
-router.put('/api/updatePosition', updatePosition);
-router.get('/api/getAssignedTeachers',getAssignedTeachersByPosition);
-router.patch('/api/updatePositionByDepartment',updatePositionByDepartment);
-router.delete('/api/teacherDeleteById/:id',deleteTeacherById);
-router.put('/api/updateAssignedCommitteeTeacherById/:id', updateAssignedCommitteeTeacherById);
-router.put('/api/verifyTeacherById/:teacherId', verifyTeacherById);
-router.get('/names/:dept', getTeacherNamesByDepartment);
-router.get('/api/getAllteacher',getAllTeacherNames);
+router.get('/:email', TeacherLogin, getTeacherByEmail);
+router.put('/api/updateTeacherProfile/:email', TeacherLogin, updateTeacherProfile);
+router.get('/api/getAllteacherByDeparment/:dept', TeacherLogin, getTeacherByDepartment);
+router.put('/api/updatePosition', AdminLogin, updatePosition);
+router.get('/api/getAssignedTeachers',AdminLogin, getAssignedTeachersByPosition);
+router.patch('/api/updatePositionByDepartment', AdminLogin, updatePositionByDepartment);
+router.delete('/api/teacherDeleteById/:id', TeacherLogin, deleteTeacherById);
+router.put('/api/updateAssignedCommitteeTeacherById/:id', TeacherLogin,  updateAssignedCommitteeTeacherById);
+router.put('/api/verifyTeacherById/:teacherId', TeacherLogin, verifyTeacherById);
+router.get('/names/:dept', AdminLogin, getTeacherNamesByDepartment);
+// router.get('/api/getAllteacher', AdminLogin, getAllTeacherNames);
 export default router;
