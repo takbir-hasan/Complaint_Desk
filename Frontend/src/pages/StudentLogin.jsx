@@ -28,6 +28,9 @@ const StudentLogin = () => {
         localStorage.setItem('session',data.session);
         localStorage.setItem('id',data.id);
         
+         // Save the token in local storage
+         localStorage.setItem('token', data.access_token);
+
         localStorage.setItem('login',"login");
         // localStorage.setItem('status','success');
         window.location.replace('/StudentProfile');

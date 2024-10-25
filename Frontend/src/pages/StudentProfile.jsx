@@ -19,9 +19,14 @@ const StudentProfile = () => {
 
     useEffect(() => {
         const studentId = localStorage.getItem('id'); 
+        const token = localStorage.getItem('token');
         const fetchStudentProfile = async () => {
             try {
-                const response = await axios.get(`/student/api/getStudentByID/${studentId}`); // Use Axios to fetch data
+                const response = await axios.get(`/student/api/getStudentByID/${studentId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`, // Add Authorization header
+                    },
+                }); // Use Axios to fetch data
                 setStudent(response.data); // Set student data from response
             } catch (error) {
                 console.error('Error fetching student profile:', error);
@@ -67,7 +72,7 @@ const StudentProfile = () => {
         setErrorMessage('');
     
         const id = localStorage.getItem('id');
-        
+        const token = localStorage.getItem('token');
         // Convert the image file to base64
         let base64ProfilePhoto = '';
         if (formData.profilePhoto) {
@@ -83,7 +88,12 @@ const StudentProfile = () => {
                 };
     
                 try {
-                    const response = await axios.put(`/student/api/updateStudentByID/${id}`, dataToSend); // Correct usage of template literal
+                    // const response = await axios.put(`/student/api/updateStudentByID/${id}`, dataToSend); // Correct usage of template literal
+                    const response = await axios.put(`/student/api/updateStudentByID/${id}`, dataToSend, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`, // Add Authorization header
+                        },
+                    });
                     toast.success('Profile updated successfully!');
                     setTimeout(() => {
                         window.location.reload();

@@ -110,12 +110,24 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
         const checkMail = await Student.findOne({ email });
 
+
+        if (!checkMail) {
+          return res.status(401).json({ message: 'Authentication failed' });
+        }
+
         if (checkMail) {
             if (await bcrypt.compare(password, checkMail.password)) {
               if (checkMail.status === 'verified') {
-                  return res.status(201).json({
-                        name: checkMail.name, department: checkMail.dept, session: checkMail.session, id: checkMail.id
-                      });
+                //Generate JWT Token
+                const token = jwt.sign(
+                  { id: checkMail.id, email: checkMail.email }, // Payload
+                  process.env.SECRET_KEY, // Secret key
+                  { expiresIn: '1h' } // Token expiration time
+                );
+
+                  return res.status(201).json({name: checkMail.name, department: checkMail.dept, session: checkMail.session, id: checkMail.id, "access_token": token,
+                        
+                  });
             } else {
                 return res.status(401).json({ message: 'Your Account is not verified completely. Please contact with the chairman of the department.'});
             }

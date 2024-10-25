@@ -16,6 +16,7 @@ import Donation from './model/donation.model.js';
 import admin from './route/admin.login.route.js';
 import teacherRoutes from './route/teacher.route.js';
 import StudentRoutes from './route/student.route.js';
+import checkLogin from './middlewares/checkLogin.js';
 
 import { adminforgetpass, resetPassword, updatePass } from './controller/admin.login.controller.js';
 import { register, login, forgetPass, resetPass, verification, getTeacherByEmail} from './controller/teacher.controller.js';
@@ -68,6 +69,24 @@ app.post('/reset-pass',resetPass);
 app.post('/verify',verification);
 app.use('/teacher',teacherRoutes);
 app.use('/student',StudentRoutes);
+
+
+// Default Error Handler
+const errorHandler = (err, req, res, next) => {
+  console.error('Error:', err); // Log the error for debugging
+
+  // Set default status code if not already set
+  res.status(err.status || 500);
+
+  // Send a structured error response
+  res.json({
+    success: false,
+    message: err.message || 'Internal Server Error',
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined, // Include stack trace in development mode
+  });
+};
+// Use the error handler middleware
+app.use(errorHandler);
 
 
 // donation
