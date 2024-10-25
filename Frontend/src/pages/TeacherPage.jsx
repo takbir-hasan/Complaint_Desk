@@ -29,7 +29,12 @@ function TeacherPage() {
             'Authorization': `Bearer ${token}`, // Add Authorization header
         },
         }); // Corrected URL
-        setTeachers(response.data); // Ensure this matches  API response structure
+        if(response.ok){
+         if(response.data.length === 0)
+          setStatusMessage('No teachers found for this department');
+          else setTeachers(response.data); // Ensure this matches  API response structure
+        }
+        
       } catch (err) {
         setError('Error fetching teacher data');
       } finally {

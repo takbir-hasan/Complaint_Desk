@@ -15,7 +15,7 @@ function AdminDashboard() {
     const [filteredTeachers, setFilteredTeachers] = useState([]);
 
     const navigate = useNavigate();
-    const token = localStorage.getItem('teacherToken');
+    const token = localStorage.getItem('adminToken');
 
     useEffect(() => {
         const fetchTeachers = async () => {
