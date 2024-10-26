@@ -4,7 +4,7 @@ export const checkLogin = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: 'Authentication failed. No token provided.' });
+    return res.status(401).json({ message: 'Authentication failed. You Can`t Hack!🕵️‍♂️' });
   }
 
   try {
@@ -24,7 +24,7 @@ export const checkLogin = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: 'Authentication failed. No token provided.' });
+    return res.status(401).json({ message: 'Authentication failed. You Can`t Hack!🕵️‍♂️' });
   }
 
   try {
@@ -45,7 +45,7 @@ export const TeacherLogin = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: 'Authentication failed. No token provided.' });
+    return res.status(401).json({ message: 'Authentication failed. You Can`t Hack!🕵️‍♂️' });
   }
 
   try {
