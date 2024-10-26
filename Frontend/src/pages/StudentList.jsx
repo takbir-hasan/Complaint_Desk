@@ -81,7 +81,9 @@ const StudentList = () => {
   //Handle verify
   const handleVerifyClick = async (studentId) => {
     try {
-      const response = await axios.put(`/student/api/updateStudentStatusById/${studentId}`,{
+      const response = await axios.put(`/student/api/updateStudentStatusById/${studentId}`, {
+        status: "verified",
+      },{
         headers: {
           'Authorization': `Bearer ${token}`, // Add Authorization header
       },

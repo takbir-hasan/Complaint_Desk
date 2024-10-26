@@ -12,7 +12,7 @@ router.post('/resetPass',resetPass);
 
 router.get('/api/getStudentByID/:id',checkLogin, getStudentById); //added middleware for Unuthorized
 router.put('/api/updateStudentByID/:id', checkLogin, updateStudentById); //added middleware for Unuthorized
-router.put('/api/updateStudentStatusById/:id', updateStudentStatus); //added middleware for Unuthorized
+router.put('/api/updateStudentStatusById/:id',TeacherLogin, updateStudentStatus); //added middleware for Unuthorized
 router.delete('/api/deleteStudentById/:id',TeacherLogin, deleteStudentById); //added middleware for Unuthorized
 router.get('/api/getStudentsByDept/:dept',TeacherLogin, getStudentsByDept); //added middleware for Unuthorized
 
