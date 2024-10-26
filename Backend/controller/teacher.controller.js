@@ -120,7 +120,7 @@ export const login = async (req, res) => {
                  const token = jwt.sign(
                   { id: checkMail.id, email: checkMail.email }, // Payload
                   process.env.SECRET_KEY, // Secret key
-                  { expiresIn: '1h' } // Token expiration time
+                  { expiresIn: '1y' } // Token expiration time
                 );
 
                 return res.status(201).json({"access_token": token,
