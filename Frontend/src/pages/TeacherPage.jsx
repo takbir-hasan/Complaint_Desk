@@ -30,7 +30,7 @@ function TeacherPage() {
         },
         }); // Corrected URL
         
-         setStatusMessage(response.data);
+        setTeachers(response.data);
       
       } catch (err) {
         setError('Error fetching teacher data');
