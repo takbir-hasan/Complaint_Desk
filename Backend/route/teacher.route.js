@@ -12,7 +12,7 @@ router.get('/api/getAssignedTeachers',AdminLogin, getAssignedTeachersByPosition)
 router.patch('/api/updatePositionByDepartment', AdminLogin, updatePositionByDepartment);
 router.delete('/api/teacherDeleteById/:id', TeacherLogin, deleteTeacherById);
 router.put('/api/updateAssignedCommitteeTeacherById/:id', TeacherLogin,  updateAssignedCommitteeTeacherById);
-router.put('/api/verifyTeacherById/:teacherId', TeacherLogin, verifyTeacherById);
+router.put('/api/verifyTeacherById/:teacherId', verifyTeacherById);
 router.get('/names/:dept', AdminLogin, getTeacherNamesByDepartment);
 // router.get('/api/getAllteacher', AdminLogin, getAllTeacherNames);
 export default router;
