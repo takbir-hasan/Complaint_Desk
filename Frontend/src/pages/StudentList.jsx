@@ -89,14 +89,14 @@ const StudentList = () => {
       },
       });
       if (response.status === 200) {
-        toast.success("Student verified successfully");
         // Update students state to reflect the change
         setStudents((prevStudents) => 
           prevStudents.map(student => 
             student.id === studentId ? { ...student, status: "verified" } : student
           )
         );
-        window.location.reload();
+        // window.location.reload();
+        toast.success('Student verified successfully');
       } else {
         toast.error("Failed to verify student.");
       }

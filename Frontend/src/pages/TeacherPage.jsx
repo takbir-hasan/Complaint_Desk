@@ -47,42 +47,82 @@ function TeacherPage() {
   
 
 
-  //Handle Verify Teacher
-  const handleVerifyTeacher = (teacherId, currentStatus) => {
-    // Check if the current status is already 'verified'
-    if (currentStatus === 'verified') {
-        toast.info('This teacher is already verified.');
-        return;
-    }
+//   //Handle Verify Teacher
+//   const handleVerifyTeacher = (teacherId, currentStatus) => {
+//     // Check if the current status is already 'verified'
+//     if (currentStatus === 'verified') {
+//         toast.info('This teacher is already verified.');
+//         return;
+//     }
 
-    // Update the status to 'verified'
-    axios.put(`/teacher/api/verifyTeacherById/${teacherId}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`, // Add Authorization header
-    },
-    }, 
-    {
-        status: 'verified'
-    })
-    .then((response) => {
-        console.log(response.data);
-        const updatedTeachers = teachers.map((teacher) => {
-            if (teacher._id === teacherId) {
-                return { 
-                    ...teacher, 
-                    status: 'verified' // Update the status to 'verified'
-                };
-            }
-            return teacher;
-        });
+//     // Update the status to 'verified'
+//     axios.put(`/teacher/api/verifyTeacherById/${teacherId}`,
+//       {
+//         status: "verified",
+//     }, {
+//       headers: {
+//         'Authorization': `Bearer ${token}`, // Add Authorization header
+//     },
+//     }, 
+//     )
+//     .then((response) => {
+//         console.log(response.data);
+//         const updatedTeachers = teachers.map((teacher) => {
+//             if (teacher._id === teacherId) {
+//                 return { 
+//                     ...teacher, 
+//                     status: 'verified' // Update the status to 'verified'
+//                 };
+//             }
+//             return teacher;
+//         });
 
-        setTeachers(updatedTeachers); // Update the state with the new list of teachers
-        toast.success('Teacher verified successfully');
-    })
-    .catch((error) => {
-        console.error('Error verifying teacher:', error);
-        toast.error('Failed to verify teacher');
-    });
+//         setTeachers(updatedTeachers); // Update the state with the new list of teachers
+//         toast.success('Teacher verified successfully');
+//     })
+//     .catch((error) => {
+//         console.error('Error verifying teacher:', error);
+//         toast.error('Failed to verify teacher');
+//     });
+// };
+
+
+const handleVerifyTeacher = async (teacherId, currentStatus) => {
+  // Check if the current status is already 'verified'
+  if (currentStatus === 'verified') {
+      toast.info('This teacher is already verified.');
+      return;
+  }
+
+  try {
+      // Update the status to 'verified'
+      const response = await axios.put(`/teacher/api/verifyTeacherById/${teacherId}`, {
+          status: "verified",
+      }, {
+          headers: {
+              'Authorization': `Bearer ${token}`, // Add Authorization header
+          },
+      });
+
+      // console.log(response.data);
+
+      // Update the teachers list with the new status
+      const updatedTeachers = teachers.map((teacher) => {
+          if (teacher._id === teacherId) {
+              return { 
+                  ...teacher, 
+                  status: 'verified' // Update the status to 'verified'
+              };
+          }
+          return teacher;
+      });
+
+      setTeachers(updatedTeachers); // Update the state with the new list of teachers
+      toast.success('Teacher verified successfully');
+  } catch (error) {
+      console.error('Error verifying teacher:', error);
+      toast.error('Failed to verify teacher');
+  }
 };
 
 

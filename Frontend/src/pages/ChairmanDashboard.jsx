@@ -277,7 +277,7 @@ const ChairmanDashboard = () => {
           <hr className="border-t-4" style={{ borderColor: "#FEDE00" }} />
 
           {loadingComplaints && <p>Loading complaints...</p>}
-          {errorComplaints && <p className="text-red-500">{errorComplaints.message}</p>}
+          {errorComplaints && <p className="text-red-500 text-center">{errorComplaints.message}</p>}
 
           {!loadingComplaints && !errorComplaints && (
             <table className="table-fixed w-full text-sm mt-4 text-center">
