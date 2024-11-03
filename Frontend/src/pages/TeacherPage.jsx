@@ -127,42 +127,82 @@ const handleVerifyTeacher = async (teacherId, currentStatus) => {
 
 
 
-//Handel AssignPostion
-const handleAssignCommittee = (teacherId, isAssigned) => {
-  const assignedDept = localStorage.getItem('assignedDept'); // This can be dynamically set if needed
+// //Handel AssignPostion
+// const handleAssignCommittee = (teacherId, isAssigned) => {
+//   const assignedDept = localStorage.getItem('assignedDept'); // This can be dynamically set if needed
 
+//   const assignedPosition = isAssigned ? 'NotAssigned' : 'Committee'; // Set the assigned position based on current state
+
+//   axios.put(`/teacher/api/updateAssignedCommitteeTeacherById/${teacherId}`, {
+//     headers: {
+//       'Authorization': `Bearer ${token}`, // Add Authorization header
+//   },
+//   },
+//    {
+//       assignedPosition,
+//       assignedDept: isAssigned ? 'NotAssigned' : assignedDept, // Update department accordingly
+//   })
+//   .then((response) => {
+//       console.log(response.data);
+//       const updatedTeachers = teachers.map((teacher) => {
+//           if (teacher._id === teacherId) {
+//               return { 
+//                   ...teacher, 
+//                   assigned: !isAssigned, // Toggle assigned state
+//                   assignedPosition  // Update assignedPosition here
+//               };
+//           }
+//           return teacher;
+//       });
+
+//       setTeachers(updatedTeachers); // Update the state with the new list of teachers
+//       toast.success(`Teacher ${isAssigned ? 'unassigned' : 'assigned'} from committee successfully`);
+//   })
+//   .catch((error) => {
+//       console.error('Error updating teacher:', error);
+//       toast.error(`Failed to ${isAssigned ? 'unassign' : 'assign'} teacher to committee`);
+//   });
+// };
+
+const handleAssignCommittee = async (teacherId, isAssigned) => {
+  const assignedDept = localStorage.getItem('assignedDept'); // This can be dynamically set if needed
   const assignedPosition = isAssigned ? 'NotAssigned' : 'Committee'; // Set the assigned position based on current state
 
-  axios.put(`/teacher/api/updateAssignedCommitteeTeacherById/${teacherId}`, {
-    headers: {
-      'Authorization': `Bearer ${token}`, // Add Authorization header
-  },
-  },
-   {
-      assignedPosition,
-      assignedDept: isAssigned ? 'NotAssigned' : assignedDept, // Update department accordingly
-  })
-  .then((response) => {
-      console.log(response.data);
-      const updatedTeachers = teachers.map((teacher) => {
-          if (teacher._id === teacherId) {
-              return { 
-                  ...teacher, 
-                  assigned: !isAssigned, // Toggle assigned state
-                  assignedPosition  // Update assignedPosition here
-              };
-          }
-          return teacher;
-      });
+  try {
+    const response = await axios.put(
+      `/teacher/api/updateAssignedCommitteeTeacherById/${teacherId}`,
+      {
+        assignedPosition,
+        assignedDept: isAssigned ? 'NotAssigned' : assignedDept, // Update department accordingly
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`, // Add Authorization header
+        },
+      }
+    );
 
-      setTeachers(updatedTeachers); // Update the state with the new list of teachers
-      toast.success(`Teacher ${isAssigned ? 'unassigned' : 'assigned'} from committee successfully`);
-  })
-  .catch((error) => {
-      console.error('Error updating teacher:', error);
-      toast.error(`Failed to ${isAssigned ? 'unassign' : 'assign'} teacher to committee`);
-  });
+    console.log(response.data);
+
+    const updatedTeachers = teachers.map((teacher) => {
+      if (teacher._id === teacherId) {
+        return { 
+          ...teacher, 
+          assigned: !isAssigned, // Toggle assigned state
+          assignedPosition, // Update assignedPosition here
+        };
+      }
+      return teacher;
+    });
+
+    setTeachers(updatedTeachers); // Update the state with the new list of teachers
+    toast.success(`Teacher ${isAssigned ? 'unassigned' : 'assigned'} from committee successfully`);
+  } catch (error) {
+    console.error('Error updating teacher:', error);
+    toast.error(`Failed to ${isAssigned ? 'unassign' : 'assign'} teacher to committee`);
+  }
 };
+
 
 
 
