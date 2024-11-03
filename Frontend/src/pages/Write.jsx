@@ -36,7 +36,7 @@ function Write() {
         const data = await response.json();
         const token = data.token;
 
-        localStorage.setItem('token', token);
+        localStorage.setItem('complaintToken', token);
         window.location.replace('/complaint');
       } else {
 

@@ -34,7 +34,7 @@ import StudentList from './pages/StudentList.jsx';
 function App() {
   const isLoggedIn = localStorage.getItem('email') ? true : false;
   const status = localStorage.getItem('status') ? true : false;
-  const token = localStorage.getItem('token') ? true : false;
+  const token = localStorage.getItem('complaintToken') ? true : false;
   const isAuthentic = localStorage.getItem('name') ? true : false;
   const isAssigned = localStorage.getItem('assignedPosition') ;
   const chairman = isAssigned === "Chairman" ? true : false;
