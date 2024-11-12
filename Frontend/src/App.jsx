@@ -29,6 +29,7 @@ import StudentForgotPass from './pages/StudentForgotPass.jsx';
 import StudentResetPass from './pages/StudentResetPass.jsx';
 import StudentProfile from './pages/StudentProfile.jsx';
 import StudentList from './pages/StudentList.jsx';
+import Team from './components/ContactUs.jsx';
 
 
 function App() {
@@ -77,7 +78,8 @@ function App() {
         <Route path="/sresetPass/:token" element={<StudentResetPass/>} />
         <Route path="/StudentProfile" element={login ? <StudentProfile/> : <Navigate to="/slogin" replace />} />
         <Route path="/StudentList" element={chairman ? <StudentList/> :  <Navigate to="/Login" replace />} />
-        
+        <Route path="/contact" element={<Team/>} />
+
      
 
         {/* ... other routes ... */}
