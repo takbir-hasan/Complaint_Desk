@@ -12,7 +12,7 @@ function Navbar() {
 
   return (
     <>
-      <div className='max-w-screen-2xl container mx-auto md:px-20 px-0 bg-yellow-300'>
+      <div className='max-w-screen-2xl container text-black mx-auto md:px-20 px-0 bg-yellow-300'>
         <div className="navbar bg-yellow-300">
           <div className="navbar-start">
             <div className="dropdown">

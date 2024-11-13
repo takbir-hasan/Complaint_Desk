@@ -29,7 +29,7 @@ import StudentForgotPass from './pages/StudentForgotPass.jsx';
 import StudentResetPass from './pages/StudentResetPass.jsx';
 import StudentProfile from './pages/StudentProfile.jsx';
 import StudentList from './pages/StudentList.jsx';
-import Team from './components/ContactUs.jsx';
+import Team from './pages/ContactUs.jsx';
 
 
 function App() {
