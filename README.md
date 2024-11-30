@@ -29,17 +29,26 @@ ComplaintDesk is a web application built with the MERN stack (MongoDB, Express.j
 **Student Features**
 
 * **File Complaints:** Easily submit concerns, categorized by department for targeted resolution.
+  To submit complaints, students must create an account and be verified by the Chairman.
+* **Profile:** Each student will have their own profile.
 * **Track Status:** Stay updated on the progress of your complaints with clear status updates.
-* **Provide Feedback:** Share your experience with the complaint resolution process after it's been addressed, helping improve procedures.
+* **Provide Feedback:** Share experience with the complaint resolution process after it's been addressed, helping improve procedures.
 
-**Teacher Features (Complaint Committee Members)**
+**Teacher (Committee Member) Dashboard**
 
-* **Verify Email and Register:** Securely create an account to join the complaint resolution committee.
-* **Access Complaint Dashboard:** View and manage student complaints efficiently, ensuring timely resolutions.
+* **Verify Email and Register:** Teachers can securely create an account using their university or personal email to join the complaint resolution committee.
+* **Access Complaint Dashboard:** Once registered and verified, teachers can access a personalized dashboard to view and manage student complaints. They can track the status, resolve issues, and ensure timely resolutions.
+* **Resolve Complaints:** Teachers can take action on complaints by providing updates or resolutions. They can communicate directly with the concerned student, ensuring the progress of each complaint.
 
 **Admin Features**
+  * Admin can easily assign and manage the Chairman for each department's committee.
+  * Admin has the ability to remove or replace the Chairman.
+  * Only members of the committee will have access to the dashboard.
 
-* **Add Committee Members:** Expand the complaint resolution team by onboarding new members to handle a growing number of complaints.
+**Teacher Account Creation**
+  * Teachers can create accounts using their university email or personal email.
+  * Email verification is required to create a teacher account.
+  * The teacher account must also be verified by the Chairman.
 
 **Additional Features**
 
