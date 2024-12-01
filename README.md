@@ -59,13 +59,13 @@ ComplaintDesk is a web application built with the MERN stack (MongoDB, Express.j
 ## Screenshots
 Here are some screenshots of the application:
 
-**Home Page** ![Home Page](https://github.com/takbir-hasan/Complaint_Desk/blob/475a51ef83d797f67d49e46e4c7098e8a42a3daa/ScreenShorts/Home%20Page.png)
+**Home Page** ![Home Page](./ScreenShorts/HomePage.png)
 
-**Write Complaint** ![Write Complaint](https://github.com/takbir-hasan/Complaint_Desk/blob/f9f6cb89183bd953d870d8bada3e7d3c9f3871c6/ScreenShorts/Write%20%20Complaint.png)
+**Write Complaint** ![Write Complaint](./ScreenShorts/WriteComplaint.png)
 
 **Check Complaint Status** ![Check Status](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/check.png?raw=true)
 
-**Student Profile** ![StudentProfile](https://github.com/takbir-hasan/Complaint_Desk/blob/7b5acac3d47d5bfb2cba3dcfeaea927096f91f36/ScreenShorts/StudentProfile.png)
+**Student Profile** ![StudentProfile](./ScreenShorts/StudentProfile.png)
 
 **Student Login** ![Student Login](https://github.com/takbir-hasan/Complaint_Desk/blob/7b5acac3d47d5bfb2cba3dcfeaea927096f91f36/ScreenShorts/StudentLogin.png)
 
