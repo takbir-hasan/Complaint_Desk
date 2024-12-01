@@ -90,7 +90,7 @@ Here are some screenshots of the application:
 ![Admin Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/496bdb7e3990a3c21564616a15fca00359218df3/ScreenShorts/AdminProfile.png)
 
 **Admin Dashboard**
-![Admin Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20dashboard.png?raw=true)
+![Admin Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/67646cad48f49169422509a818372dcca1e3b5d7/ScreenShorts/AdminDashboard.png)
 
 **Donate**
 ![Donate](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Donate.png?raw=true)![SSLCOMMERZ](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/sslcommerz.png?raw=true)
