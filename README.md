@@ -77,9 +77,6 @@ Here are some screenshots of the application:
 **Teacher SignUp**
 ![Teacher SignUp](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/teacher%20Signup.png?raw=true)
 
-**Update Teacher Profile**
-![Update Teacher Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/update%20Teacher%20%20Profile.png?raw=true)
-
 **Teacher Profile**
 ![Teacher Com. Dash.](https://github.com/takbir-hasan/Complaint_Desk/blob/b7465bdb393a09409d85d204ca5fb19c60e5c19c/ScreenShorts/TeacherProfile.png)
 
