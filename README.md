@@ -80,8 +80,8 @@ Here are some screenshots of the application:
 **Teacher Profile**
 ![Teacher Com. Dash.](https://github.com/takbir-hasan/Complaint_Desk/blob/b7465bdb393a09409d85d204ca5fb19c60e5c19c/ScreenShorts/TeacherProfile.png)
 
-**Committee Dashboard**
-![Committee Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/Committe%20Dashboard.png?raw=true)
+**Complaint Dashboard**
+![Committee Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/2de05d1c70ab8dba9646606f62a6f753bb422bf8/ScreenShorts/ComplaintDashboard.png)
 
 **Admin Login**
 ![Admin Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20login.png?raw=true)
