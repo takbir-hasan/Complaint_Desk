@@ -87,7 +87,7 @@ Here are some screenshots of the application:
 ![Admin Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20login.png?raw=true)
 
 **Admin Profile**
-![Admin Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/AdminProfile.png?raw=true)
+![Admin Profile](https://github.com/takbir-hasan/Complaint_Desk/blob/496bdb7e3990a3c21564616a15fca00359218df3/ScreenShorts/AdminProfile.png)
 
 **Admin Dashboard**
 ![Admin Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20dashboard.png?raw=true)
