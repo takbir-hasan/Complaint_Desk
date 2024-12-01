@@ -59,7 +59,7 @@ ComplaintDesk is a web application built with the MERN stack (MongoDB, Express.j
 ## Screenshots
 Here are some screenshots of the application:
 
-**Home Page** ![Home Page](https://github.com/takbir-hasan/Complaint_Desk/blob/59f17936b7f71d277dcc6cf6c12b092aaddb645d/ScreenShorts/HomePage.png)
+**Home Page** ![Home Page](https://github.com/takbir-hasan/Complaint_Desk/blob/475a51ef83d797f67d49e46e4c7098e8a42a3daa/ScreenShorts/Home%20Page.png)
 
 **Write Complaint** ![Write Complaint](https://github.com/takbir-hasan/Complaint_Desk/blob/92e0bec2964ce8ec6b709ddd32768ed0f6602378/ScreenShorts/Write%20Complaint.png)
 
