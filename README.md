@@ -68,6 +68,12 @@ Here are some screenshots of the application:
 **Check Complaint Status**
 ![Check Status](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/check.png?raw=true)
 
+**Student Profile** ![StudentProfile](https://github.com/takbir-hasan/Complaint_Desk/blob/7b5acac3d47d5bfb2cba3dcfeaea927096f91f36/ScreenShorts/StudentProfile.png)
+
+**Student Login** ![Student Login](https://github.com/takbir-hasan/Complaint_Desk/blob/7b5acac3d47d5bfb2cba3dcfeaea927096f91f36/ScreenShorts/StudentLogin.png)
+
+**Student Signup** ![Student Signup](https://github.com/takbir-hasan/Complaint_Desk/blob/7b5acac3d47d5bfb2cba3dcfeaea927096f91f36/ScreenShorts/StudentSignup.png)
+
 **Teacher Login**
 ![Teacher Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/login.png?raw=true)
 
@@ -82,6 +88,12 @@ Here are some screenshots of the application:
 
 **Complaint Dashboard**
 ![Committee Dashboard](https://github.com/takbir-hasan/Complaint_Desk/blob/2de05d1c70ab8dba9646606f62a6f753bb422bf8/ScreenShorts/ComplaintDashboard.png)
+
+**Teacher List** 
+![Teacher List](https://github.com/takbir-hasan/Complaint_Desk/blob/7b5acac3d47d5bfb2cba3dcfeaea927096f91f36/ScreenShorts/TeacherListPage.png)
+
+**Student List**
+![Student List](https://github.com/takbir-hasan/Complaint_Desk/blob/7b5acac3d47d5bfb2cba3dcfeaea927096f91f36/ScreenShorts/StudentListPage.png)
 
 **Admin Login**
 ![Admin Login](https://github.com/takbir-hasan/Complaint_Desk/blob/main/ScreenShorts/admin%20login.png?raw=true)
